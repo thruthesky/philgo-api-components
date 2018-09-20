@@ -72,22 +72,23 @@
             </div>
           </div>
 
-          <div class="pl-3 pt-1">
+          <div class="pl-3 pt-1" *ngIf=" ! comment['edit'] ">
             <div [innerHTML]="comment.content"></div>
-            <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "></app-display-files>
+            <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "
+              [showWhenContentHasNoImage]=" true "></app-display-files>
           </div>
-
-          <div class="buttons d-block">
+          <div class="buttons d-block" *ngIf=" ! comment['edit'] ">
             <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" onVote(comment, 'good') ">
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
             </button>
-
             <button color="medium" (click)=" onVote(comment, 'bad') ">
               <i class="material-icons">thumb_down</i>
               <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
             </button>
-
+            <button (click)=" comment['edit'] = true ">Edit</button>
+            <button (click)=" onDelete( comment ) ">Delete</button>
+            <button (click)=" onReport( comment ) ">Report</button>
             <button color="medium" (click)=" comment['reply'] = true ">
               <i class="material-icons">reply</i>
               <i>Reply</i>
@@ -95,7 +96,7 @@
 
           </div>
 
-          <app-forum-basic-reply [root]=" post " [post]=" comment " *ngIf=" comment['reply'] == true "></app-forum-basic-reply>
+          <app-forum-basic-reply [root]=" post " [post]=" comment " *ngIf=" comment['edit'] == true || comment['reply'] == true "></app-forum-basic-reply>
         </div>
       </div>
     </div>

@@ -25,43 +25,59 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.form.idx_parent = this.post.idx;
+    setTimeout(() => {
+      if (this.post['edit']) {
+        this.form = this.post;
+      } else {
+        this.form.idx_parent = this.post.idx;
+      }
+    }, 10);
   }
 
   onSubmit() {
     console.log('this.form: ', this.form);
-    this.philgo.postCreate(this.form).subscribe(res => {
-      console.log('created: ', res);
 
+    /**
+     * Edit
+     */
+    if (this.post['edit']) {
+      this.form.idx = this.post.idx;
+      this.philgo.postEdit(this.form).subscribe(res => {
+        console.log('edited: ', res);
+        Object.assign(this.post, res);
+        this.post['edit'] = false;
+      }, e => this.componentService.alert(e));
+    } else {
 
+      console.log('create');
       /**
-       * Or post create?
+       * Reply
        */
-      if (this.root.comments && this.root.comments.length) {
+      this.philgo.postCreate(this.form).subscribe(res => {
+        console.log('created: ', res);
 
-      } else {
-        this.root.comments = [];
-      }
+        if (this.root.comments && this.root.comments.length) {
 
-      console.log('post, root, res', this.post, this.root, res);
+        } else {
+          this.root.comments = [];
+        }
+        console.log('post, root, res', this.post, this.root, res);
 
-      /**
-       * Find parent position
-       */
-      const pos = this.root.comments.findIndex(comment => comment.idx === this.post.idx);
-
-      if (pos !== -1) { // if found
-        this.root.comments.splice(pos + 1, 0, <any>res);
-      } else { // if not found
-        this.root.comments.push(<any>res);
-      }
-
-      // clear
-      this.post['reply'] = false;
-      this.form.content = '';
-      this.form.files = [];
-
-    }, e => this.componentService.alert(e));
+        /**
+         * Find parent position
+         */
+        const pos = this.root.comments.findIndex(comment => comment.idx === this.post.idx);
+        if (pos !== -1) { // if found
+          this.root.comments.splice(pos + 1, 0, <any>res);
+        } else { // if not found
+          this.root.comments.push(<any>res);
+        }
+        // clear
+        this.post['reply'] = false;
+        this.form.content = '';
+        this.form.files = [];
+      }, e => this.componentService.alert(e));
+    }
   }
 
 

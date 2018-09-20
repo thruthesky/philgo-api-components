@@ -20,9 +20,6 @@ export class DisplayFilesComponent implements OnInit, OnChanges {
    */
   contentHasImage = false;
 
-  photos: Array<ApiFile> = [];
-  attachments: Array<ApiFile> = [];
-
   constructor(
     public philgo: PhilGoApiService
   ) { }
@@ -36,13 +33,25 @@ export class DisplayFilesComponent implements OnInit, OnChanges {
   }
 
   initFiles() {
-
     if (this.post && this.post.content) {
       this.contentHasImage = this.post.content.indexOf('editor-image') !== -1;
     }
+
+  }
+
+
+  get photos(): Array<ApiFile> {
     if (this.post && this.post.files && this.post.files.length) {
-      this.photos = this.post.files.filter(file => file.type.indexOf('image') === 0);
-      this.attachments = this.post.files.filter(file => file.type.indexOf('image') !== 0);
+      return this.post.files.filter(file => file.type.indexOf('image') === 0);
+    } else {
+      return [];
+    }
+  }
+  get attachments(): Array<ApiFile> {
+    if (this.post && this.post.files && this.post.files.length) {
+      return this.post.files.filter(file => file.type.indexOf('image') !== 0);
+    } else {
+      return [];
     }
   }
 
