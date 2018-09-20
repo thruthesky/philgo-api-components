@@ -1,0 +1,91 @@
+<div class="w-100">
+  <div class="border row" (click)=" onView.emit( post ) ">
+    <div class="of-hidden p-3">
+      <img class="size-32px" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
+    </div>
+    <div class="px-1 py-2 text-center">
+      <div class="fs-md">{{ post[ N.name ] }}</div>
+      <div class="fs-md">#{{ post.idx }}</div>
+      <div class="fs-sm py-1 text-muted">( {{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) :
+        post[ N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }} / {{ _.getAge(post[ N.birthday ])
+        }} )
+      </div>
+    </div>
+  </div>
+
+  <div class="" *ngIf=" show( post ) ">
+
+    <div class="view-post-content py-5">
+      <div class="flex-center justify-content-around">
+        <div class="img-resizable mr-1">
+          <img class="w-100" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
+        </div>
+        <div class="img-resizable mx-1">
+          <img class="w-100" src="{{ philgo.getSrc( post.files, N.bodyPhoto ) }}">
+        </div>
+        <div class="img-resizable ml-1">
+          <img class="w-100" src="{{ philgo.getSrc( post.files, N.idPhoto ) }}">
+        </div>
+      </div>
+
+
+      <div class="meta">
+        <div class="container-fluid">
+          <div class="row no-gutters">
+            <div class="col-4">Name:</div>
+            <div class="col">{{ post[ N.name ] }}</div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-4">Gender:</div>
+            <div class="col">{{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) : post[
+              N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }}
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-4">Age:</div>
+            <div class="col"> {{ _.getAge(post[ N.birthday ]) }}</div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-4">Mobile:</div>
+            <div class="col"> {{ post[ N.mobile ] }}</div>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="row no-gutters">
+            <div class="col-4">Email:</div>
+            <div class="col">{{ post[ N.email ] }}</div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-4">Province:</div>
+            <div class="col">{{ post[ N.province ] }}</div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-4">City:</div>
+            <div class="col"> {{ post[ N.city ] }}</div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-4">Link:</div>
+            <div class="col"><a href="{{post[ N.link ]}}" (click)="onClickLink($event)">{{
+              post[ N.link ] }}</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-light p-3">{{ post[ N.intro ] }}</div>
+
+    </div>
+    <div>
+      <button mat-flat-button (click)=" onEdit.emit( post ) " *ngIf="philgo.isMyPost( post )">
+        <i class="d-none d-md-block material-icons">create</i>
+        Edit
+      </button>
+      <button mat-flat-button (click)=" onDelete.emit( post ) " *ngIf="philgo.isMyPost( post )">
+        <i class="d-none d-md-block material-icons">trash</i>
+        Delete
+      </button>
+    </div>
+  </div>
+
+
+</div>

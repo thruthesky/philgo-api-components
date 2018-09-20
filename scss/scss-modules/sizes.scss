@@ -1,0 +1,65 @@
+@import './../mixins';
+.size-32px {
+    @include size-px(32, 32);
+}
+.size-64px {
+    @include size-px(64, 64);
+}
+.size-100px {
+    @include size-px(100, 100);
+}
+
+.size-120px {
+    @include size-px(120, 120);
+}
+.size-200px {
+    @include size-px(200, 200);
+}
+
+.size-180px {
+    @include size-px(180, 180);
+}
+
+.size-300px {
+    @include size-px(300, 300);
+}
+
+.w-100px {
+    width: 100px !important;
+}
+
+.w-200px {
+    width: 200px !important;
+}
+
+.w-300px {
+    width: 300px !important;
+}
+
+.h-150px{
+    height: 150px!important;
+}
+
+
+.mw-100px {
+    max-width: 100px !important;
+}
+
+.mw-200px {
+    max-width: 200px !important;
+}
+
+.mw-md-200px {
+    @media (min-width: $md) {
+        max-width: 200px !important;
+    }
+}
+
+.mw-300px {
+    max-width: 300px !important;
+}
+
+.icon-size {
+    width: 24px;
+    height: 24px;
+}

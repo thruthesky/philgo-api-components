@@ -135,32 +135,32 @@ export class ComponentService {
   //   return '';
   // }
 
-  // async deletePostWithMemberLogin(post: ApiPost) {
+  async deletePostWithMemberLogin(post: ApiPost) {
+    console.log('deletePostWithMemberLogin::', post);
+    const data: ModalData = {
+      title: 'Delete Post #' + post.idx,
+      content: 'Are you sure you want to delete this post?',
+      yes: this.philgo.t({ en: 'Yes', ko: '확인' }),
+      no: this.philgo.t({ en: 'Cancel', ko: '취소' }),
+      type: 'confirm'
+    };
 
-  //   const dialogRef = this.dialog.open(DialogComponent, {
-  //       header: 'Delete Post #' . post.idx,
-  //       message: 'Are you sure you want to delete this post?',
-  //       yes: this.philgo.t({ en: 'Yes', ko: '확인' }),
-  //       no: this.philgo.t({ en: 'Cancel', ko: '취소' }),
-  //       type: 'confirm'
-  //   });
-
-  //   const re = await dialogRef.afterClosed().toPromise().then( result => result ).catch( e => this.alert(e));
-
-  //   if (re.role === 'yes') {
-  //     return await this.philgo.postDelete({ idx: post.idx }).toPromise().then(res => {
-  //       console.log('delete success: ', res);
-  //       post.subject = this.philgo.textDeleted();
-  //       post.content = this.philgo.textDeleted();
-  //       return 'success';
-  //     }).catch(async e => {
-  //       this.alert(e);
-  //       return 'failed';
-  //     });
-  //   } else {
-  //     return 'failed';
-  //   }
-  // }
+    // const re = await this.alert(data).toPromise().then( result => result ).catch( e => console.log(e));
+    // if (re.role === 'yes') {
+    //   return this.philgo.postDelete({ idx: post.idx }).
+    //   toPromise().then(res => {
+    //     console.log('delete success: ', res);
+    //     post.subject = this.philgo.textDeleted();
+    //     post.content = this.philgo.textDeleted();
+    //     return 'success';
+    //   }).catch(async e => {
+    //     this.alert(e);
+    //     return 'failed';
+    //   });
+    // } else {
+    //   return 'failed';
+    // }
+  }
 
   // async deletePostWithPassword(post: ApiPost) {
 
