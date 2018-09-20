@@ -63,6 +63,12 @@ export class ComponentService {
  *      true will be returned after close.
  */
   alert(data: ModalData): Observable<boolean> {
+    /**
+     * Is error object?
+     */
+    if ( data && data['code'] ) {
+      data.content = data['message'];
+    }
     this.sanitizeData(data);
     this.dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,

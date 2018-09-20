@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
     ApiErrorResponse, ApiProfileUpdateRequest,
-    ApiRegisterResponse, ApiProfileResponse, ApiErrorFileNotSelected, ApiErrorFileUploadError, PhilGoApiService
+    ApiRegisterResponse, ApiProfileResponse, ApiErrorFileNotSelected, ApiErrorFileUploadError, PhilGoApiService, URL_PROFILE_PHOTO
 } from '../../../philgo-api/philgo-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -42,9 +42,8 @@ export class RegisterComponent implements OnInit {
             this.philgo.profile().subscribe(user => {
                 this.loader.profile = false;
                 this.form = user;
-                // console.log('user: ', user);
-            }, e => {
-            });
+                console.log('user: ', user);
+            }, e => this.componentService.alert(e));
         } else {
             this.resetForm();
         }
@@ -111,9 +110,13 @@ export class RegisterComponent implements OnInit {
             } else if (re['code'] && re['idx'] === void 0) {
                 // console.log('error: ', re);
             } else if (re['idx'] !== void 0 && re['idx']) {
+                /**
+                 * Success. Profile photo has changed already.
+                 */
                 console.log('file upload success: ', re);
                 // this.photo = re;
                 this.form.url_profile_photo = re['src'];
+                this.philgo.loginUser(URL_PROFILE_PHOTO, re['src']);
                 this.percentage = 0;
             }
         }, (e: HttpErrorResponse) => {
