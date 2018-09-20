@@ -1,0 +1,11 @@
+<h1 mat-dialog-title *ngIf="data?.header">{{ data.header }} </h1>
+<div mat-dialog-content>
+  <p>{{data.message}}</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="input">
+  </mat-form-field>
+</div>
+<mat-dialog-actions align="end">
+        <button data-button="ok" mat-button cdkFocusInitial [mat-dialog-close]=" { input: input, role: 'ok'} ">{{ data.ok }}</button>
+        <button data-button="no" mat-button [mat-dialog-close]=" { role: 'no' } ">{{ data.no }}</button>
+</mat-dialog-actions>

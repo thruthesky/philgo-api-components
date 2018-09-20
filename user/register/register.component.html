@@ -1,0 +1,57 @@
+<section class="flex-center flex-column" *ngIf=" philgo.isLoggedIn() ">
+
+  <div class="d-flex flex-column align-items-center  of-hidden py-3 w-200px">
+    <div class="position-relative">
+
+      <input class="transparent-cover w-200px pointer" type="file" name="file" (change)="onChangePrimaryPhoto($event)">
+      <div class="size-120px of-hidden">
+        <img class="d-block w-100" src="{{ philgo.profilePhotoUrl(form.url_profile_photo) }}">
+      </div>
+
+      <i class="photo-delete-icon top-right m-2 p-2 bg-white black circle pointer material-icons" (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
+
+      <button mat-flat-button class="mt-2">
+        {{ philgo.t({ko: '사진 업로드', en: 'Upload Photo' }) }}
+      </button>
+    </div>
+  </div>
+
+  <i *ngIf="percentage">{{ percentage }}%</i>
+
+</section>
+
+<form class="form-content" (ngSubmit)="onSubmit( $event )">
+
+  <mat-list>
+    <mat-list-item *ngIf=" philgo.isLoggedIn() ">
+      {{ _.t({ko: '닉네임', en: 'Nickname' }) }} : {{ form.nickname }}
+    </mat-list-item>
+    <mat-list-item *ngIf=" philgo.isLoggedIn() ">
+      {{ _.t({ko: '이메일', en: 'Email' }) }} : {{ form.email }}
+    </mat-list-item>
+  </mat-list>
+  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
+    <input [(ngModel)]=" form.email " name="email" type="email" matInput placeholder="{{ _.t({ko: '이메일', en: 'Email' }) }}"
+      (keyup.enter)="onSubmit()">
+  </mat-form-field>
+  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
+    <input [(ngModel)]=" form.password " name="password" type="password" matInput placeholder="{{ _.t({ko: '비밀번호', en: 'Password' }) }}"
+      (keyup.enter)="onSubmit()">
+  </mat-form-field>
+  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
+    <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput placeholder="{{ _.t({ko: '닉네임', en: 'Nickname' }) }}">
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <input [(ngModel)]=" form.name " name="name" type="text" matInput placeholder="{{ _.t({ko: '이름', en: 'Name' }) }}"
+      (keyup.enter)="onSubmit()">
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <input [(ngModel)]=" form.mobile " name="mobile" type="text" matInput placeholder="{{ _.t({ko: '전화번호', en: 'Phone Number' }) }}"
+      (keyup.enter)="onSubmit()">
+  </mat-form-field>
+
+
+  <button class="w-100" type="submit" mat-flat-button>
+    {{ philgo.isLoggedIn() ? _.t({ko: '회원 정보 수정', en: 'Update Profile' }) : _.t({ko: '회원 가입 하기', en: 'Register' }) }}
+  </button>
+</form>

@@ -1,0 +1,18 @@
+.login{
+  margin: 2rem 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(125,125,125,0.25);
+  border-radius: 2px;
+  text-align: center;
+  .form-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3f51b5;
+
+    .material-icons{
+      margin-right: .25rem;
+      font-size: 2rem;
+    }
+  }
+}

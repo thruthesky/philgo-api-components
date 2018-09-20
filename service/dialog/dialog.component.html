@@ -1,0 +1,10 @@
+<h1 mat-dialog-title *ngIf="data?.title">{{ data.title }} </h1>
+<div class="dialog-content" mat-dialog-content>
+    <p [innerHTML]=" data.content "></p>
+</div>
+
+<mat-dialog-actions align="end">
+        <button data-button="ok" mat-button cdkFocusInitial [mat-dialog-close]=" { role: 'ok' } " *ngIf=" data.type == 'alert' ">{{ data.ok }}</button>
+        <button data-button="yes" mat-button cdkFocusInitial [mat-dialog-close]=" { role: 'yes' } " *ngIf=" data.type == 'confirm' " >{{ data.yes }}</button>
+        <button data-button="no" mat-button [mat-dialog-close]=" { role: 'no'} " *ngIf=" data.type == 'confirm' " >{{ data.no }}</button>
+</mat-dialog-actions>
