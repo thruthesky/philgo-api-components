@@ -26,12 +26,18 @@ export class ComponentService {
   dialogRef: MatDialogRef<DialogComponent> = null;
 
   constructor(
-    private sanitizer: DomSanitizer,
+    private domSanitizer: DomSanitizer,
     private readonly philgo: PhilGoApiService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) { }
 
+
+  safeHtml(html) {
+
+    return this.domSanitizer.bypassSecurityTrustHtml(html);
+
+  }
 
   sanitizeData(data: ModalData) {
     if (!data.ok) {
@@ -44,7 +50,7 @@ export class ComponentService {
       data.no = 'NO';
     }
     if (data.content) {
-      data.content = <any>this.sanitizer.bypassSecurityTrustHtml(data.content);
+      data.content = <any>this.domSanitizer.bypassSecurityTrustHtml(data.content);
     }
     if (!data.maxWidth) {
       data.maxWidth = '800px';
@@ -66,7 +72,7 @@ export class ComponentService {
     /**
      * Is error object?
      */
-    if ( data && data['code'] ) {
+    if (data && data['code']) {
       data.content = data['message'];
     }
     this.sanitizeData(data);

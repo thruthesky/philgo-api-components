@@ -5,12 +5,16 @@ import { DisplayFilesModule } from '../../../display-files/display-files.module'
 import { ForumBasicViewComponent } from '../forum-basic-view/forum-basic-view.component';
 import { ForumBasicReplyComponent } from '../forum-basic-reply/forum-basic-reply.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ComponentServiceModule } from '../../../service/component.service.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    DisplayFilesModule
+    RouterModule,
+    DisplayFilesModule,
+    ComponentServiceModule
   ],
   declarations: [
     ForumBasicListComponent,

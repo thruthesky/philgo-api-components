@@ -1,49 +1,51 @@
-<div class="mb-0" *ngIf=" post ">
+<div class="mt-3" *ngIf=" post ">
 
-  <div class="post-header" (click)="view.emit( post ) ">
+  <div class="post-header d-flex" (click)="view.emit( post ) ">
     <div>
-      <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
+      <img class="d-block size-32px" [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
     </div>
 
-    <div class="d-md-flex align-items-center justify-content-between my-1">
-      <h2 class="flex-1">{{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span></h2>
-      <p class="fs-sm my-md-0 ml-md-2">
+    <div class="ml-2">
+      <h2 class="m-0 p-0">
+        {{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
+      </h2>
+      <div class="fs-sm">
         <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
         <span>Date: {{ philgo.shortDate(post.stamp ) }}</span>
-      </p>
+      </div>
     </div>
   </div>
 
   <div class="post-content" *ngIf=" show(post) ">
     <div>
-      <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post "></app-display-files>
-      <div class="post-text-content mt-1" [innerHTML]="post?.content"></div>
+      <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post "
+        [showWhenContentHasNoImage]=" true "></app-display-files>
+      <div class="post-text-content mt-1" [innerHTML]=" componentService.safeHtml( post?.content ) "></div>
+      <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post " [showWhenContentHasImage]=" true "></app-display-files>
     </div>
   </div>
+
 
 
   <div *ngIf=" show( post ) ">
 
     <div class="buttons d-block">
 
-      <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" vote.emit([ post, 'good' ]) ">
+      <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" onVote(post, 'good') ">
         <i class="material-icons">thumb_up</i>
         <i> {{ post.good == '0' ? '' : ' ' + post.good }}</i>
       </button>
 
-      <button color="medium" (click)=" vote.emit([ post, 'bad' ]) ">
+      <button color="medium" (click)=" onVote(post, 'bad') ">
         <i class="material-icons">thumb_down</i>
         <i> {{ post.bad == '0' ? '' : ' ' + post.bad }}</i>
       </button>
 
-      <!-- <button color="medium">
-        <i class="material-icons">reply</i>
-        <i>Reply</i>
-      </button> -->
+      <button (click)=" edit.emit( post ) ">Edit</button>
 
-      <button (click)=" menu.emit([ $event, post ]) ">
-        <i class="material-icons">more...</i>
-      </button>
+      <button (click)=" onDelete( post ) ">Delete</button>
+
+      <button (click)=" onReport( post ) ">Report</button>
 
     </div>
 
@@ -76,12 +78,12 @@
           </div>
 
           <div class="buttons d-block">
-            <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" vote.emit([ comment, 'good' ]) ">
+            <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" onVote(comment, 'good') ">
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
             </button>
 
-            <button color="medium" (click)=" vote.emit([ comment, 'bad' ]) ">
+            <button color="medium" (click)=" onVote(comment, 'bad') ">
               <i class="material-icons">thumb_down</i>
               <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
             </button>
@@ -89,10 +91,6 @@
             <button color="medium" (click)=" comment['reply'] = true ">
               <i class="material-icons">reply</i>
               <i>Reply</i>
-            </button>
-
-            <button (click)=" menu.emit([ $event, comment ]) ">
-              <i class="material-icons">more...</i>
             </button>
 
           </div>

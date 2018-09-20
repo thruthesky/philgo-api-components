@@ -3,13 +3,13 @@
 </p>
 
 <div class="view bg-gray">
-    <app-forum-basic-view *ngIf=" postView " [post]=" postView " (vote)=" onVote( $event[0], $event[1] ) " (reply)=" onReply( $event[0], $event[1] ) "
-    (menu)=" onClickMenu( $event[0], $event[1] ) "></app-forum-basic-view>
+    <app-forum-basic-view *ngIf=" postView " [post]=" postView "
+    (edit)=" edit.emit( $event ) "></app-forum-basic-view>
 </div>
 
 <ng-container *ngFor="let post of posts; even as isEven; odd as isOdd ">
   <app-forum-basic-view [class.even]=" isEven " [class.odd]=" isOdd " [post]=" post " (view)=" onView( $event ) "
-    (vote)=" onVote( $event[0], $event[1] ) " (reply)=" onReply( $event[0], $event[1] ) " (menu)=" onClickMenu( $event[0], $event[1] ) "></app-forum-basic-view>
+  (edit)=" edit.emit( $event ) "  ></app-forum-basic-view>
 </ng-container>
 
 <div class="text-center py-3 text-muted" *ngIf=" noMorePosts ">

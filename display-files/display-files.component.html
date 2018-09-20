@@ -1,19 +1,18 @@
 <div class="files" *ngIf=" post?.files?.length ">
 
-  <div class="photos clearfix" [attr.no]=" photos().length " *ngIf=" photos().length ">
+  
+  <div class="photos clearfix" [attr.no]=" photos.length " *ngIf=" display() && photos.length ">
 
-    <div class="photo" *ngIf=" edit == false && photos().length == 1">
-      <img class="w-100" src="{{ photos()[0].src }}">
+    <div class="photo 1-photo-only" *ngIf=" edit == false && photos.length == 1">
+      <img class="w-100" src="{{ photos[0].src }}">
     </div>
-
-    <div class="photo row no-gutters" *ngIf=" edit == false && photos().length == 2">
-      <div class="col" *ngFor=" let photo of photos() ">
+    <div class="photo 2-photos row no-gutters" *ngIf=" edit == false && photos.length == 2">
+      <div class="col" *ngFor=" let photo of photos ">
         <img class="d-block w-100 pr-2" src="{{ philgo.thumbnailUrl({ width: 320, height: 160, idx: photo.idx }) }}">
       </div>
     </div>
-
-    <ng-container *ngIf=" edit || photos().length > 2 ">
-      <div class="photo position-relative float-left py-1 pr-2 mw-100px mw-md-200px" [class.edit]=" edit " *ngFor=" let photo of photos() ">
+    <ng-container *ngIf=" edit || photos.length > 2 ">
+      <div class="photo many-photos position-relative float-left py-1 pr-2 mw-100px mw-md-200px" [class.edit]=" edit " *ngFor=" let photo of photos ">
         <img class="w-100" src="{{ photo.src_thumbnail }}">
         <i *ngIf=" edit " class="material-icons photo-delete-icon" (click)=" onClickDeleteButton( photo ) ">delete</i>
       </div>
@@ -21,8 +20,8 @@
 
   </div>
 
-  <div class="attachments pt-2">
-    <div class="file" *ngFor=" let file of attachments() ">
+  <div class="attachments pt-2" *ngIf=" attachments.length ">
+    <div class="file" *ngFor=" let file of attachments ">
       <a class="w-100" href="{{ file.url_download }}">
         {{ file.name }}
       </a>
@@ -30,6 +29,7 @@
     </div>
   </div>
 </div>
+
 <div class="upload-bar text-center" *ngIf=" percentage ">
   <div class="progress w-200px">
     <div class="progress-bar" [style.width]=" percentage + '%' ">{{percentage}}%</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { PhilGoApiService, ApiFile, ApiPost } from '../../philgo-api/philgo-api.service';
 
 @Component({
@@ -6,27 +6,57 @@ import { PhilGoApiService, ApiFile, ApiPost } from '../../philgo-api/philgo-api.
   templateUrl: './display-files.component.html',
   styleUrls: ['../scss/index.scss', './display-files.component.scss']
 })
-export class DisplayFilesComponent implements OnInit {
+export class DisplayFilesComponent implements OnInit, OnChanges {
 
   @Input() edit = false;
   @Input() post: ApiPost;
   @Input() percentage = 0;
+  @Input() showWhenContentHasImage = false;
+  @Input() showWhenContentHasNoImage = false;
+
+
+  /**
+   * If it is true, then, images are inserted into editor(view content).
+   */
+  contentHasImage = false;
+
+  photos: Array<ApiFile> = [];
+  attachments: Array<ApiFile> = [];
 
   constructor(
     public philgo: PhilGoApiService
   ) { }
 
   ngOnInit() {
+    this.initFiles();
   }
 
-
-  photos(): Array<ApiFile> {
-    return this.post.files.filter(file => file.type.indexOf('image') === 0);
+  ngOnChanges() {
+    this.initFiles();
   }
 
-  attachments(): Array<ApiFile> {
-    return this.post.files.filter(file => file.type.indexOf('image') !== 0);
+  initFiles() {
+
+    if (this.post && this.post.content) {
+      this.contentHasImage = this.post.content.indexOf('editor-image') !== -1;
+    }
+    if (this.post && this.post.files && this.post.files.length) {
+      this.photos = this.post.files.filter(file => file.type.indexOf('image') === 0);
+      this.attachments = this.post.files.filter(file => file.type.indexOf('image') !== 0);
+    }
   }
+
+  display(): boolean {
+    if (this.edit) {
+      return true;
+    }
+    if (this.contentHasImage) {
+      return this.showWhenContentHasImage;
+    } else {
+      return this.showWhenContentHasNoImage;
+    }
+  }
+
 
   onClickDeleteButton(file: ApiFile) {
     const req = { idx: file.idx, gid: this.post.gid, user_password: this.post.user_password };
