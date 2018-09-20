@@ -1,2 +1,7 @@
-# philgo-api-components
-PhilGo Api Components
+# PhilgoApi Components
+
+## Installation
+
+### Dependencies
+
+* Angular Material

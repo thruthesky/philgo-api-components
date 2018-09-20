@@ -1,0 +1,12 @@
+<form  class="form-content" (ngSubmit)="onSubmit( $event )">
+    <mat-form-field class="w-100">
+      <input [(ngModel)]=" form.email " name="email" type="email" matInput placeholder="Email">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input [(ngModel)]=" form.password " name="password" type="password" matInput placeholder="Password">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput placeholder="Nickname">
+    </mat-form-field>
+    <button class="w-100" type="submit" mat-flat-button>SUBMIT</button>
+  </form>
