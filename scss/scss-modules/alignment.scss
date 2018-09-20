@@ -1,0 +1,21 @@
+.position-top-right {
+    @include position-top-right();
+}
+.flex-center {
+    @include flex-center();
+}
+
+.flex-column-center{
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center
+}
+
+.flex-1{
+    flex:1;
+}
+.align-icon {
+    position: relative;
+    top: .125em;
+}
