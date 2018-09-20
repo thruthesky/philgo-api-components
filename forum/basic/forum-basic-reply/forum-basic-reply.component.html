@@ -1,0 +1,18 @@
+<form (ngSubmit)=" onSubmit() ">
+
+  <textarea name="content" [(ngModel)]="form.content"></textarea>
+
+  <app-display-files [post]=" form "></app-display-files>
+
+
+  <button mat-flat-button class="transparent-cover-wrapper">
+    <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
+    <div>Photo Upload</div>
+  </button>
+
+
+  <button>Submit</button>
+
+</form>
+
+

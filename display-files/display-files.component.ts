@@ -4,7 +4,7 @@ import { PhilGoApiService, ApiFile, ApiPost } from '../../philgo-api/philgo-api.
 @Component({
   selector: 'app-display-files',
   templateUrl: './display-files.component.html',
-  styleUrls: ['./display-files.component.scss']
+  styleUrls: ['../scss/index.scss', './display-files.component.scss']
 })
 export class DisplayFilesComponent implements OnInit {
 

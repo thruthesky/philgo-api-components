@@ -1,0 +1,106 @@
+<div class="mb-0" *ngIf=" post ">
+
+  <div class="post-header" (click)="view.emit( post ) ">
+    <div>
+      <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
+    </div>
+
+    <div class="d-md-flex align-items-center justify-content-between my-1">
+      <h2 class="flex-1">{{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span></h2>
+      <p class="fs-sm my-md-0 ml-md-2">
+        <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
+        <span>Date: {{ philgo.shortDate(post.stamp ) }}</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="post-content" *ngIf=" show(post) ">
+    <div>
+      <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post "></app-display-files>
+      <div class="post-text-content mt-1" [innerHTML]="post?.content"></div>
+    </div>
+  </div>
+
+
+  <div *ngIf=" show( post ) ">
+
+    <div class="buttons d-block">
+
+      <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" vote.emit([ post, 'good' ]) ">
+        <i class="material-icons">thumb_up</i>
+        <i> {{ post.good == '0' ? '' : ' ' + post.good }}</i>
+      </button>
+
+      <button color="medium" (click)=" vote.emit([ post, 'bad' ]) ">
+        <i class="material-icons">thumb_down</i>
+        <i> {{ post.bad == '0' ? '' : ' ' + post.bad }}</i>
+      </button>
+
+      <!-- <button color="medium">
+        <i class="material-icons">reply</i>
+        <i>Reply</i>
+      </button> -->
+
+      <button (click)=" menu.emit([ $event, post ]) ">
+        <i class="material-icons">more...</i>
+      </button>
+
+    </div>
+
+
+    <app-forum-basic-reply [root]=" post " [post]=" post "></app-forum-basic-reply>
+
+
+
+    <div class="comments comments-depth bg-light pt-2" *ngIf=" post?.comments?.length ">
+      <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
+
+        <div class="ml-1 w-100  bg-green">
+
+          <div>
+            <div>
+              <img [src]="philgo.primaryPhotoUrl( comment?.member?.idx_primary_photo )">
+            </div>
+            <div class="ml-2">
+              <div class="fs-sm mb-1">{{ comment.member?.nickname }}</div>
+              <div class="d-flex align-items-center">
+                <div class="fs-sm">No. {{ comment.idx }}</div>
+                <div class="ml-2 fs-sm">Date: {{ philgo.shortDate(post.stamp ) }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pl-3 pt-1">
+            <div [innerHTML]="comment.content"></div>
+            <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "></app-display-files>
+          </div>
+
+          <div class="buttons d-block">
+            <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" vote.emit([ comment, 'good' ]) ">
+              <i class="material-icons">thumb_up</i>
+              <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
+            </button>
+
+            <button color="medium" (click)=" vote.emit([ comment, 'bad' ]) ">
+              <i class="material-icons">thumb_down</i>
+              <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
+            </button>
+
+            <button color="medium" (click)=" comment['reply'] = true ">
+              <i class="material-icons">reply</i>
+              <i>Reply</i>
+            </button>
+
+            <button (click)=" menu.emit([ $event, comment ]) ">
+              <i class="material-icons">more...</i>
+            </button>
+
+          </div>
+
+          <app-forum-basic-reply [root]=" post " [post]=" comment " *ngIf=" comment['reply'] == true "></app-forum-basic-reply>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
