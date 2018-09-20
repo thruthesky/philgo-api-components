@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {
     ApiErrorResponse, ApiProfileUpdateRequest,
     ApiRegisterResponse, ApiProfileResponse, ApiErrorFileNotSelected, ApiErrorFileUploadError, PhilGoApiService, URL_PROFILE_PHOTO
@@ -16,6 +16,7 @@ import { ComponentService } from '../../service/component.service';
     styleUrls: ['../../scss/index.scss', './register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+    @Input() domain = 'sonub';
     @Output() error = new EventEmitter<ApiErrorResponse>();
     @Output() register = new EventEmitter<ApiRegisterResponse>();
     @Output() update = new EventEmitter<ApiProfileResponse>();
@@ -83,6 +84,7 @@ export class RegisterComponent implements OnInit {
                 this.componentService.alert(e);
             });
         } else {
+            this.form['domain'] = this.domain;
             this.philgo.register(this.form).subscribe(user => {
                 this.loader.submit = false;
                 this.register.emit(user);
