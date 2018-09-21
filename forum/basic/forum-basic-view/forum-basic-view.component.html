@@ -1,12 +1,13 @@
-<div class="mt-3" *ngIf=" post ">
+<div *ngIf=" post ">
 
-  <div class="post-header d-flex" (click)="view.emit( post ) ">
-    <div>
-      <img class="d-block size-32px" [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
+  <div class="post-header" (click)="view.emit( post ) ">
+
+    <div class="post-header-thumbnail">
+      <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
     </div>
 
-    <div class="ml-2">
-      <h2 class="m-0 p-0">
+    <div class="post-header-text">
+      <h2 class="m-0 p-0 flex-1">
         {{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
       </h2>
       <div class="fs-sm">
@@ -14,6 +15,7 @@
         <span>Date: {{ philgo.shortDate(post.stamp ) }}</span>
       </div>
     </div>
+    
   </div>
 
   <div class="post-content" *ngIf=" show(post) ">
@@ -57,7 +59,7 @@
     <div class="comments comments-depth bg-light pt-2" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
 
-        <div class="ml-1 w-100  bg-green">
+        <div class="ml-1 w-100">
 
           <div>
             <div>
