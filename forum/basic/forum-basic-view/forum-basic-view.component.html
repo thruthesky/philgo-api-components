@@ -26,16 +26,16 @@
       <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post " [showWhenContentHasImage]=" true "></app-display-files>
     </div>
 
-    <div class="buttons d-block">
+    <div class="buttons">
 
       <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" onVote(post, 'good') ">
         <i class="material-icons">thumb_up</i>
-        <i> {{ post.good == '0' ? '' : ' ' + post.good }}</i>
+        <span> {{ post.good == '0' ? '' : ' ' + post.good }}</span>
       </button>
 
       <button color="medium" (click)=" onVote(post, 'bad') ">
         <i class="material-icons">thumb_down</i>
-        <i> {{ post.bad == '0' ? '' : ' ' + post.bad }}</i>
+        <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
 
       <button (click)=" edit.emit( post ) ">Edit</button>
@@ -79,7 +79,7 @@
             <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "
               [showWhenContentHasNoImage]=" true "></app-display-files>
           </div>
-          <div class="buttons d-block" *ngIf=" ! comment['edit'] ">
+          <div class="buttons" *ngIf=" ! comment['edit'] ">
             <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" onVote(comment, 'good') ">
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
