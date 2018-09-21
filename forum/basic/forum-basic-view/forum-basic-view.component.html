@@ -25,11 +25,6 @@
       <div class="post-text-content" [innerHTML]=" componentService.safeHtml( post?.content ) "></div>
       <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post " [showWhenContentHasImage]=" true "></app-display-files>
     </div>
-  </div>
-
-
-
-  <div *ngIf=" show( post ) ">
 
     <div class="buttons d-block">
 
@@ -50,6 +45,11 @@
       <button (click)=" onReport( post ) ">Report</button>
 
     </div>
+  </div>
+
+
+
+  <div *ngIf=" show( post ) ">
 
 
     <app-forum-basic-reply [root]=" post " [post]=" post "></app-forum-basic-reply>
