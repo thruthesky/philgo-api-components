@@ -1,7 +1,7 @@
 <form (ngSubmit)=" onSubmit() ">
 
 <div class="comment-box">
-    <textarea [(ngModel)]="form.content"></textarea>
+    <textarea name="content" [(ngModel)]="form.content"></textarea>
 </div>
 
   <app-display-files [post]=" form " [edit]=" true "></app-display-files>

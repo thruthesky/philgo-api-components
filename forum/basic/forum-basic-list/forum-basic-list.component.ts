@@ -71,6 +71,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
 
   loadPage(options: { view: string } = <any>{}) {
     if ( this.loading || this.noMorePosts ) {
+      console.log('in loading. or no more post just return');
       return;
     }
     this.loading = true;
@@ -92,7 +93,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
         this.postView = search.view;
         this.postView.show = true;
       }
-      if (!search.posts || !search.posts.length) {
+      if (!search.posts || !search.posts.length || search.posts.length < this.limit) {
         this.noMorePosts = true;
         return;
       }
