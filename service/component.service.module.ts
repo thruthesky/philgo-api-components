@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ComponentService } from './component.service';
 import { MatDialogModule, MatSnackBarModule, MatButtonModule } from '@angular/material';
 import { DialogComponent } from './dialog/dialog.component';
+// export { DialogComponent };
+
 
 @NgModule({
   imports: [

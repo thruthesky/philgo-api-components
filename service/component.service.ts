@@ -6,6 +6,7 @@ import { DialogComponent } from './dialog/dialog.component';
 // import { PromptComponent } from './prompt/prompt.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
+// import { DialogComponent } from './component.service.module';
 
 
 export interface ModalData {
