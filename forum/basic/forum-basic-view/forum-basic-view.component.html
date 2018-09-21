@@ -7,7 +7,7 @@
     </div>
 
     <div class="post-header-text">
-      <h2 class="m-0 p-0 flex-1">
+      <h2>
         {{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
       </h2>
       <div class="fs-sm">
@@ -18,7 +18,7 @@
     
   </div>
 
-  <div class="post-content" *ngIf=" show(post) ">
+  <div class="post-content bg-white" *ngIf=" show(post) ">
     <div>
       <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post "
         [showWhenContentHasNoImage]=" true "></app-display-files>

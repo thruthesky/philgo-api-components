@@ -1,9 +1,9 @@
+@import './../../../scss/vars.scss';
 .post-header{
     display: flex;
     padding: .5rem 1rem;
-    border-bottom: 1px solid #dddfe2;
+    border-bottom: 1px solid #ebedf0;
     background: #fff;
-    transition: .2s background-color ease-in-out;
     cursor: pointer;
     &:hover{
         background-color: #f5f6f7;
@@ -18,14 +18,19 @@
         }
     }
     .post-header-text{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
+        @media (min-width:$md) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         margin-left: 1rem;
         flex:1;
         h2{
-            font-size: .85rem!important;
+            flex: 1;
+            margin: 0 .0 .1rem 0;
+            font-size: .8rem!important;
+            font-weight: 600;
+            color: #365899;
         }
     }
 }
