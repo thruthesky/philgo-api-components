@@ -1,6 +1,8 @@
 <form (ngSubmit)=" onSubmit() ">
 
-  <textarea class="w-100" name="content" [(ngModel)]="form.content"></textarea>
+<div class="comment-box">
+    <textarea [(ngModel)]="form.content"></textarea>
+</div>
 
   <app-display-files [post]=" form " [edit]=" true "></app-display-files>
 

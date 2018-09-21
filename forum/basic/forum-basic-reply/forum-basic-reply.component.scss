@@ -1,0 +1,15 @@
+.comment-box{
+    margin: .5rem 1rem;
+    padding: .5rem .75rem 0 .75rem;
+    border: 1px solid #ccd0d5;
+    border-radius: 15px;
+    background-color: #f2f3f5;
+    textarea{
+        border: 0;
+        background: transparent;
+        width: 100%;
+        outline: 0;
+        resize: vertical;
+        font-size: .8rem;
+    }
+}
