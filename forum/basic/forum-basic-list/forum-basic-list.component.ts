@@ -1,14 +1,15 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit, OnDestroy } from '@angular/core';
 import { ApiPostSearch, ApiForum, ApiPost, PhilGoApiService } from '../../../../philgo-api/philgo-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentService } from '../../../service/component.service';
+import { InfiniteScrollService } from '../../../../philgo-api/infinite-scroll';
 
 @Component({
   selector: 'app-forum-basic-list',
   templateUrl: './forum-basic-list.component.html',
   styleUrls: ['../../../scss/index.scss', './forum-basic-list.component.scss']
 })
-export class ForumBasicListComponent implements OnInit {
+export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() autoViewContent = false;
   @Output() load = new EventEmitter<ApiPostSearch>();
@@ -36,15 +37,21 @@ export class ForumBasicListComponent implements OnInit {
   /**
    *
    */
-  show = {
-    firstPageLoader: true
-  };
+  forumLoaded = false;
+  loading = false;
+
+  /**
+   *
+   */
+  infiniteScrollSubscription;
 
 
+  //
   constructor(
     activatedRoute: ActivatedRoute,
     public readonly philgo: PhilGoApiService,
-    private componentService: ComponentService
+    private componentService: ComponentService,
+    private scroll: InfiniteScrollService
   ) {
     activatedRoute.paramMap.subscribe(params => {
       this.post_id = params.get('post_id');
@@ -55,16 +62,27 @@ export class ForumBasicListComponent implements OnInit {
 
   ngOnInit() {
   }
+  ngAfterViewInit() {
+    this.infiniteScrollSubscription = this.scroll.watch('section.forum-basic-list', 300).subscribe(e => this.loadPage());
+  }
+  ngOnDestroy() {
+    this.infiniteScrollSubscription.unsubscribe();
+  }
 
   loadPage(options: { view: string } = <any>{}) {
+    if ( this.loading || this.noMorePosts ) {
+      return;
+    }
+    this.loading = true;
     const req: ApiPostSearch = { post_id: this.post_id, page_no: this.page_no, limit: this.limit };
     if (options.view) {
       req.view = options.view;
     }
     this.philgo.postSearch(req).subscribe(search => {
+      this.loading = false;
       this.load.emit(search);
       console.log('search: ', search);
-      this.show.firstPageLoader = false;
+      this.forumLoaded = true;
       this.page_no++;
       this.forum = search;
       /**
@@ -79,7 +97,6 @@ export class ForumBasicListComponent implements OnInit {
         return;
       }
 
-
       /**
        * Don't show the post of view (on top) in the post-list.
        */
@@ -92,7 +109,8 @@ export class ForumBasicListComponent implements OnInit {
 
       this.posts = this.posts.concat(search.posts);
     }, e => {
-      this.show.firstPageLoader = false;
+      this.forumLoaded = true;
+      this.loading = false;
       this.componentService.alert(e);
     });
   }
