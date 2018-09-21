@@ -1,4 +1,14 @@
 @import './../../../scss/vars.scss';
+.thumbnail{
+    height: 32px;
+    width: 32px;
+    overflow: hidden;
+    border-radius: 4px;
+    img{
+        width: 100%;
+    }
+}
+
 .post-header{
     display: flex;
     padding: .5rem 1rem;
@@ -7,15 +17,6 @@
     cursor: pointer;
     &:hover{
         background-color: #f5f6f7;
-    }
-    .post-header-thumbnail{
-        height: 32px;
-        width: 32px;
-        overflow: hidden;
-        border-radius: 4px;
-        img{
-            width: 100%;
-        }
     }
     .post-header-text{
         @media (min-width:$md) {

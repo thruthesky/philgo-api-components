@@ -1,11 +1,9 @@
 <div *ngIf=" post ">
 
   <div class="post-header" (click)="view.emit( post ) ">
-
-    <div class="post-header-thumbnail">
+    <div class="thumbnail">
       <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
     </div>
-
     <div class="post-header-text">
       <h2>
         {{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
@@ -15,7 +13,6 @@
         <span>Date: {{ philgo.shortDate(post.stamp ) }}</span>
       </div>
     </div>
-    
   </div>
 
   <div class="post-content" *ngIf=" show(post) ">
@@ -27,34 +24,24 @@
     </div>
 
     <div class="buttons">
-
       <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" onVote(post, 'good') ">
         <i class="material-icons">thumb_up</i>
         <span> {{ post.good == '0' ? '' : ' ' + post.good }}</span>
       </button>
-
       <button color="medium" (click)=" onVote(post, 'bad') ">
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
-
       <button (click)=" edit.emit( post ) ">Edit</button>
-
       <button (click)=" onDelete( post ) ">Delete</button>
-
       <button (click)=" onReport( post ) ">Report</button>
-
     </div>
   </div>
 
 
 
   <div *ngIf=" show( post ) ">
-
-
     <app-forum-basic-reply [root]=" post " [post]=" post "></app-forum-basic-reply>
-
-
 
     <div class="comments comments-depth bg-light pt-2" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
@@ -62,7 +49,7 @@
         <div class="ml-1 w-100">
 
           <div>
-            <div>
+            <div class="thumbnail">
               <img [src]="philgo.primaryPhotoUrl( comment?.member?.idx_primary_photo )">
             </div>
             <div class="ml-2">
