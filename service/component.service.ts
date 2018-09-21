@@ -3,7 +3,7 @@ import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/
 
 import { PhilGoApiService, ApiPost } from '../../philgo-api/philgo-api.service';
 import { DialogComponent } from './dialog/dialog.component';
-import { PromptComponent } from './prompt/prompt.component';
+// import { PromptComponent } from './prompt/prompt.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 

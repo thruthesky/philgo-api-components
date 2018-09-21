@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PhilGoApiService, ApiForum, ApiPost, ApiPostSearch } from '../../../../philgo-api/philgo-api.service';
 // import { JobEditService } from '../edit/job-edit.component.service';
@@ -6,6 +6,8 @@ import { PhilGoApiService, ApiForum, ApiPost, ApiPostSearch } from '../../../../
 import * as N from '../job.defines';
 import { ComponentService } from '../../../service/component.service';
 import { SimpleLibrary as _ } from 'ng-simple-library';
+import { Subscription } from 'rxjs';
+import { InfiniteScrollService } from '../../../../philgo-api/infinite-scroll';
 
 
 @Component({
@@ -14,10 +16,10 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
     styleUrls: ['../../../scss/index.scss', './job-list.component.scss']
 })
 
-export class JobListComponent implements OnInit, AfterViewInit {
+export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
-  @Input() category;
+    @Input() category;
 
     showSearch = false;
     forum: ApiForum = null;
@@ -46,23 +48,25 @@ export class JobListComponent implements OnInit, AfterViewInit {
     page_no = 1;
     limit = 12;
     noMorePosts = false;
+    loading = false;
+    // inifite scroll subscription
+    infiniteScrollSubscription: Subscription = null;
 
 
+
+    /**
+     *
+     */
     N = N;
 
     _ = _;
 
-    /**
-     * this will display a loader on initial visit.
-     */
-    show = {
-        firstPageLoader: true
-    };
+
 
     mostSearch = {
-        'Metro Manila': {province: 'Metro Manila', city: 'Metro Manila'},
-        'Baguio': {province: 'Benguet', city: 'Benguet - Baguio'},
-        'Cebu': {province: 'Cebu', city: 'Cebu'},
+        'Metro Manila': { province: 'Metro Manila', city: 'Metro Manila' },
+        'Baguio': { province: 'Benguet', city: 'Benguet - Baguio' },
+        'Cebu': { province: 'Cebu', city: 'Cebu' },
         // 'Pampanga': {province: 'Pampanga', city: 'Pampanga'},
         // 'Angeles': {province: 'Pampanga', city: 'Pampanga - Angeles'},
         // 'Manila': {province: 'Metro Manila', city: 'Metro Manila - Manila'},
@@ -77,6 +81,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
         private readonly componentService: ComponentService,
         public philgo: PhilGoApiService,
         // public edit: JobEditService
+        public scroll: InfiniteScrollService
     ) {
 
     }
@@ -86,7 +91,9 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
         this.activatedRoute.paramMap.subscribe(params => {
             const idx = params.get('idx');
-            this.loadPage(null, { view: idx });
+            setTimeout(() => {
+                this.loadPage({ view: idx });
+            });
         });
 
         this.philgo.provinces().subscribe(provinces => {
@@ -96,7 +103,17 @@ export class JobListComponent implements OnInit, AfterViewInit {
         }, e => {
             this.componentService.alert(e);
         });
+
+        // Which element do you want to watch for scroll?
+        // update `section.post-list` as you need.
+        this.infiniteScrollSubscription = this.scroll.watch('section.job-list', 400).subscribe(e => this.loadPage());
     }
+
+    // Un-subscription or you may get multiple events.
+    ngOnDestroy() {
+        this.infiniteScrollSubscription.unsubscribe();
+    }
+
 
     // onSearch() {
     //     this.page_no = 1;
@@ -105,12 +122,12 @@ export class JobListComponent implements OnInit, AfterViewInit {
     // }
     //
 
-    loadPage(event?: Event, options: { view: string } = <any>{}) {
-        // let infiniteScroll: InfiniteScroll;
-        // if (event) {
-        //     infiniteScroll = <any>event.target;
-        // }
-
+    loadPage(options: { view: string } = <any>{}) {
+        console.log('loading', this.loading, 'nomoreposst', this.noMorePosts);
+        if (this.loading || this.noMorePosts) {
+            console.log('You are in the middle of loading or no more posts . just return');
+            return;
+        }
         const and = [];
         if (this.form[N.gender]) {
             and.push(`${N.gender}='${this.form[N.gender]}'`);
@@ -131,9 +148,13 @@ export class JobListComponent implements OnInit, AfterViewInit {
         if (options.view) {
             req.view = options.view;
         }
-        console.log('re: ', req);
+        // console.log('re: ', req);
+
+        // setTimeout(() => this.loading = true);
+        this.loading = true;
+
         this.philgo.postSearch(req).subscribe(search => {
-            this.show.firstPageLoader = false;
+            this.loading = false;
             console.log('search: ', search);
             this.page_no++;
             this.forum = search;
@@ -142,15 +163,12 @@ export class JobListComponent implements OnInit, AfterViewInit {
                 this.postView['show'] = true;
             }
 
-            if (!search.posts || !search.posts.length) {
-                // if (event) {
-                //     infiniteScroll.disabled = true;
-                // }
+            if (!search.posts || !search.posts.length || search.posts.length < this.limit ) {
                 this.noMorePosts = true;
                 return;
             }
 
-            if ( this.postView && this.postView.idx ) {
+            if (this.postView && this.postView.idx) {
                 const pos = search.posts.findIndex(v => v.idx === this.postView.idx);
                 if (pos !== -1) {
                     search.posts.splice(pos, 1);
@@ -158,15 +176,14 @@ export class JobListComponent implements OnInit, AfterViewInit {
             }
 
             this.posts = this.posts.concat(search.posts);
-            // if (event) {
-            //     infiniteScroll.complete();
-            // }
+
 
         }, e => {
-            this.show.firstPageLoader = false;
+            this.loading = false;
             this.componentService.alert(e);
         });
     }
+
     //
     // async onClickPost() {
     //
