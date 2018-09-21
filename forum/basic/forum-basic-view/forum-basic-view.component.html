@@ -75,13 +75,13 @@
               <i class="material-icons">thumb_down</i>
               <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
             </button>
+            <button color="medium" (click)=" comment['reply'] = true ">
+              <i class="material-icons">reply</i>
+              <span>Reply</span>
+            </button>
             <button (click)=" comment['edit'] = true ">Edit</button>
             <button (click)=" onDelete( comment ) ">Delete</button>
             <button (click)=" onReport( comment ) ">Report</button>
-            <button color="medium" (click)=" comment['reply'] = true ">
-              <i class="material-icons">reply</i>
-              <i>Reply</i>
-            </button>
 
           </div>
 
