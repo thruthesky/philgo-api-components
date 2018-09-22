@@ -73,12 +73,15 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
     if ( this.loading || this.noMorePosts ) {
       console.log('in loading. or no more post just return');
       return;
+    } else {
+      console.log('Going to list post page');
     }
     this.loading = true;
     const req: ApiPostSearch = { post_id: this.post_id, page_no: this.page_no, limit: this.limit };
     if (options.view) {
       req.view = options.view;
     }
+    console.log('req: ', req);
     this.philgo.postSearch(req).subscribe(search => {
       this.loading = false;
       this.load.emit(search);
