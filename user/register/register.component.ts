@@ -77,6 +77,9 @@ export class RegisterComponent implements OnInit {
                 console.log('user profile has been updated: ', user);
                 this.loader.submit = false;
                 this.update.emit(user);
+                // this.componentService.alert({
+                //     content: this.philgo.t({ en: 'Your profile has been updated!', ko: '회원 정보가 수정되었습니다.' })
+                // });
             }, e => {
                 this.loader.submit = false;
                 this.error.emit(e);
@@ -118,7 +121,10 @@ export class RegisterComponent implements OnInit {
                 console.log('file upload success: ', re);
                 // this.photo = re;
                 this.form.url_profile_photo = re['src'];
-                this.philgo.loginUser(URL_PROFILE_PHOTO, re['src']);
+
+                // @todo photo realtime update
+
+                // this.philgo.loginUser(URL_PROFILE_PHOTO, re['src']);
                 this.percentage = 0;
             }
         }, (e: HttpErrorResponse) => {
