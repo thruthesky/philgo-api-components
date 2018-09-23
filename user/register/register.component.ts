@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
             this.philgo.profile().subscribe(user => {
                 this.loader.profile = false;
                 this.form = user;
-                console.log('user: ', user);
+                console.log('=> RegisterComponent::loaduserProfile() => philgo.profile() => user: ', user);
             }, e => this.componentService.alert(e));
         } else {
             this.resetForm();
@@ -74,8 +74,7 @@ export class RegisterComponent implements OnInit {
             };
             console.log(data);
             this.philgo.profileUpdate(data).subscribe(user => {
-                console.log('updaet: ', user);
-
+                console.log('user profile has been updated: ', user);
                 this.loader.submit = false;
                 this.update.emit(user);
             }, e => {
@@ -86,6 +85,7 @@ export class RegisterComponent implements OnInit {
         } else {
             this.form['domain'] = this.domain;
             this.philgo.register(this.form).subscribe(user => {
+                console.log('user account created:', user);
                 this.loader.submit = false;
                 this.register.emit(user);
             }, e => {
