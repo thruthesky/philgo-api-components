@@ -53,6 +53,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
     private componentService: ComponentService,
     private scroll: InfiniteScrollService
   ) {
+    window['ForumBasicListComponent'] = this;
     activatedRoute.paramMap.subscribe(params => {
       this.post_id = params.get('post_id');
       const idx = params.get('idx');
@@ -70,7 +71,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   loadPage(options: { view: string } = <any>{}) {
-    if ( this.loading || this.noMorePosts ) {
+    if (this.loading || this.noMorePosts) {
       console.log('in loading. or no more post just return');
       return;
     } else {
@@ -85,7 +86,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
     this.philgo.postSearch(req).subscribe(search => {
       this.loading = false;
       this.load.emit(search);
-      console.log('search: ', search);
+      console.log('ForumBasicListComponent::loadPage() => search: ', search);
       this.forumLoaded = true;
       this.page_no++;
       this.forum = search;
@@ -96,7 +97,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
         this.postView = search.view;
         this.postView.show = true;
       }
-      if (!search.posts || !search.posts.length || search.posts.length < this.limit) {
+      if (!search.posts || !search.posts.length) {
         this.noMorePosts = true;
         return;
       }
@@ -112,6 +113,11 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
       }
 
       this.posts = this.posts.concat(search.posts);
+
+      if (search.posts.length < this.limit) {
+        this.noMorePosts = true;
+        return;
+      }
     }, e => {
       this.forumLoaded = true;
       this.loading = false;
