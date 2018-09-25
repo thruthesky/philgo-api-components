@@ -53,7 +53,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
     private componentService: ComponentService,
     private scroll: InfiniteScrollService
   ) {
-    window['ForumBasicListComponent'] = this;
+    window['comp'] = this;
     activatedRoute.paramMap.subscribe(params => {
       this.post_id = params.get('post_id');
       const idx = params.get('idx');
@@ -108,7 +108,10 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
       if (this.postView && this.postView.idx) {
         const pos = search.posts.findIndex(v => v.idx === this.postView.idx);
         if (pos !== -1) {
-          search.posts.splice(pos, 1);
+          /**
+           * bug fix. Length of array is important to check if no-more-posts
+           */
+          search.posts.splice(pos, 1, <any>{});
         }
       }
 
