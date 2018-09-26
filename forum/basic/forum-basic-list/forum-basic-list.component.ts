@@ -15,8 +15,8 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
   @Output() load = new EventEmitter<ApiPostSearch>();
   @Output() edit = new EventEmitter<ApiPost>();
 
-  forum: ApiForum = null;
-  posts: Array<ApiPost> = [];
+  forum: ApiForum;
+  posts: Array<ApiPost>;
 
 
   /**
@@ -27,18 +27,18 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
   /**
    * Page navigation
    */
-  post_id = '';
-  page_no = 1;
-  limit = 20;
-  noMorePosts = false;
+  post_id: string;
+  page_no: number;
+  limit: number;
+  noMorePosts: boolean;
 
 
 
   /**
    *
    */
-  forumLoaded = false;
-  loading = false;
+  forumLoaded: boolean;
+  loading: boolean;
 
   /**
    *
@@ -55,6 +55,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
   ) {
     window['comp'] = this;
     activatedRoute.paramMap.subscribe(params => {
+      this.initLoadPage();
       this.post_id = params.get('post_id');
       const idx = params.get('idx');
       this.loadPage({ view: idx });
@@ -64,10 +65,27 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnInit() {
   }
   ngAfterViewInit() {
-    this.infiniteScrollSubscription = this.scroll.watch('section.forum-basic-list', 300).subscribe(e => this.loadPage());
+    this.infiniteScrollSubscription = this.scroll.watch('section.forum-basic-list', 300).subscribe(e => {
+      if (this.page_no >= 2) {
+        this.loadPage();
+      }
+    });
   }
   ngOnDestroy() {
     this.infiniteScrollSubscription.unsubscribe();
+  }
+
+  initLoadPage() {
+    this.forum = null;
+    this.posts = [];
+
+    this.post_id = '';
+    this.page_no = 1;
+    this.limit = 20;
+    this.noMorePosts = false;
+
+    this.forumLoaded = false;
+    this.loading = false;
   }
 
   loadPage(options: { view: string } = <any>{}) {
