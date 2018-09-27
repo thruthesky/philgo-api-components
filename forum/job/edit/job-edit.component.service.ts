@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-// import { JobEditComponent } from './job-edit.component';
+import { JobEditComponent } from './job-edit.component';
+import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 @Injectable()
 export class JobEditService {
   constructor(
-    // public modalController: ModalController
+    public dialog: MatDialog
   ) { }
-  // async present(data): Promise<{ data?: any, role: 'success' | 'delete' | 'close' }> {
-  //   const modal = await this.modalController.create({
-  //     component: JobEditComponent,
-  //     componentProps: {
-  //       controller: this.modalController,
-  //       data: data
-  //     }
-  //   });
-  //   await modal.present();
-  //   return await <any>modal.onDidDismiss();
-  // }
+
+  present(post): Observable<{ data?: any, role: 'success' | 'delete' | 'close' }> {
+
+    const dialogRef = this.dialog.open(JobEditComponent, {
+      data: post
+    });
+
+    return dialogRef.afterClosed();
+  }
 }

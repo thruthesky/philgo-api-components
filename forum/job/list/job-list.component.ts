@@ -8,6 +8,7 @@ import { ComponentService } from '../../../service/component.service';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 import { Subscription } from 'rxjs';
 import { InfiniteScrollService } from '../../../../philgo-api/infinite-scroll';
+import { JobEditComponent } from '../edit/job-edit.component';
 
 
 @Component({
@@ -213,22 +214,40 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    // /**
-    //  * Opens Job edit box.
-    //  * @param post  job post
-    //  */
-    // async onEdit(post: ApiPost) {
-    //
-    //     // /**
-    //     //  * Make a copy from job post. So, it will not be referenced.
-    //     //  */
-    //     // const data = Object.assign({}, post);
-    //     // const res = await this.edit.present(data);
-    //     // if (res.role === 'success') {
-    //     //     Object.assign(post, res.data);
-    //     // }
-    // }
-    //
+    /**
+     * Opens Job edit box.
+     * @param post  job post
+     */
+    async onEdit(post: ApiPost) {
+      console.log('onEdit', post);
+
+
+      // const dialogRef = this.dialog.open(JobEditComponent, {
+      //   data: post
+      // });
+      //
+      // dialogRef.afterClosed().subscribe(result => {
+      //   console.log('afterClosed::', result);
+      //   if (result.role === 'success') {
+      //       Object.assign(post, res.data);
+      //   }
+      // }, e => {
+      //   this.componentService.alert(e);
+      // });
+
+
+
+
+        // /**
+        //  * Make a copy from job post. So, it will not be referenced.
+        //  */
+        // const data = Object.assign({}, post);
+        // const res = await this.edit.present(data);
+        // if (res.role === 'success') {
+        //     Object.assign(post, res.data);
+        // }
+    }
+
     async onDelete(post: ApiPost) {
         console.log(post);
         // const re = await this.componentService.deletePostWithMemberLogin(post);

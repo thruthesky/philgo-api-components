@@ -12,9 +12,9 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 export class JobViewComponent implements OnInit {
 
     @Input() post: ApiPost;
-    @Output() onView = new EventEmitter();
-    @Output() onEdit = new EventEmitter();
-    @Output() onDelete = new EventEmitter();
+    @Output() View = new EventEmitter();
+    @Output() Edit = new EventEmitter();
+    @Output() Delete = new EventEmitter();
 
 
 

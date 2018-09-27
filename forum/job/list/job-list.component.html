@@ -51,12 +51,12 @@
 <section class="job-list">
 
   <div *ngIf=" postView?.idx ">
-    <app-job-view [post]=" postView " (onView)=" onView( $event ) " (onDelete)=" onDelete( $event ) "></app-job-view>
+    <app-job-view [post]=" postView " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
   </div>
 
   <div class="p-2">
     <div class="px-2 pb-2" *ngFor="let post of posts">
-      <app-job-view [post]=" post " (onView)=" onView( $event ) " (onDelete)=" onDelete( $event ) "></app-job-view>
+      <app-job-view [post]=" post " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
     </div>
   </div>
 

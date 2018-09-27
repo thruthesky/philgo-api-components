@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { PhilGoApiService, ApiPost, ApiFile } from '../../../../philgo-api/philgo-api.service';
 import { ComponentService } from '../../../service/component.service';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 
 import * as N from './../job.defines';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-job-edit',
@@ -11,7 +12,7 @@ import * as N from './../job.defines';
   styleUrls: ['../../../scss/index.scss', './job-edit.component.scss']
 })
 export class JobEditComponent implements OnInit, AfterViewInit {
-  data;
+
   form: ApiPost = <ApiPost>{};
 
   month = null;
@@ -41,7 +42,9 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
   constructor(
     public philgo: PhilGoApiService,
-    public readonly componentService: ComponentService
+    public readonly componentService: ComponentService,
+    public dialogRef: MatDialogRef<JobEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ApiPost
   ) {
     this.philgo.provinces().subscribe(provinces => {
       // console.log('provinces:: ', provinces);
