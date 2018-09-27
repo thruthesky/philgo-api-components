@@ -9,9 +9,6 @@
   </div>
 </ng-template>
 
-<h1 mat-dialog-title>{{ pageTitle }}
-  <button mat-button (click)="onClose()"><i class="material-icons">close</i></button>
-</h1>
 <div mat-dialog-content>
   <div>
     Reminder - post your job inquiry only if you need it.
@@ -163,5 +160,5 @@
 <div mat-dialog-actions>
   <button mat-button cdkFocusInitial (click)=" onSubmit() ">Submit</button>
   <button mat-button (click)=" onDelete() " *ngIf=" form?.idx ">Delete</button>
-  <button mat-button (click)=" onClose() ">Close</button>
+  <button mat-button (click)=" 1 ">Cancel</button>
 </div>

@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { PhilGoApiService, ApiPost, ApiFile } from '../../../../philgo-api/philgo-api.service';
 import { ComponentService } from '../../../service/component.service';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 
 import * as N from './../job.defines';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-edit',
@@ -13,6 +13,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class JobEditComponent implements OnInit, AfterViewInit {
 
+  @Input() data: ApiPost = <any>{};
+  @Input() group_id = '';
   form: ApiPost = <ApiPost>{};
 
   month = null;
@@ -39,10 +41,9 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
 
   constructor(
+    private router: Router,
     public philgo: PhilGoApiService,
-    public readonly componentService: ComponentService,
-    public dialogRef: MatDialogRef<JobEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ApiPost
+    public readonly componentService: ComponentService
   ) {
     console.log('editComponent');
     this.philgo.provinces().subscribe(provinces => {
@@ -54,8 +55,7 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     if (this.data && this.data.idx === void 0) {
-      this.form.post_id = this.data.post_id;
-      this.form.group_id = this.data.group_id;
+      this.form.post_id = 'wanted';
       this.form[N.name] = this.philgo.myName();
       this.form[N.gender] = this.philgo.myGender();
       this.year = this.philgo.myBirthYear();
@@ -158,12 +158,13 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     this.form[N.province] = this.province;
     this.form[N.city] = this.city;
 
+    this.form.group_id = this.group_id;
     /**
      * Edit
      */
     if (this.form.idx) {
       this.philgo.postEdit(this.form).subscribe(res => {
-        this.dialogRef.close({data: res, role: 'success'});
+        this.router.navigateByUrl(`/job/${this.form.category}/${this.form.idx}`);
       }, e => {
         this.componentService.alert(e);
       });
@@ -173,7 +174,7 @@ export class JobEditComponent implements OnInit, AfterViewInit {
        */
       this.philgo.postCreate(this.form).subscribe(res => {
         console.log('create res: ', res);
-        this.dialogRef.close({data: res, role: 'success'});
+        this.router.navigateByUrl(`/job/${this.form.category}/${this.form.idx}`);
       }, e => {
         this.componentService.alert(e);
       });
@@ -184,7 +185,7 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   onDelete() {
     this.philgo.postDelete({ idx: this.form.idx }).subscribe(res => {
       console.log('delete: res', res);
-      this.dialogRef.close({data: res, role: 'delete'});
+      alert('delete ok');
     }, e => this.componentService.alert(e));
   }
 
@@ -280,10 +281,6 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     const keys = Object.keys(this.cities);
     keys.splice(0, 1);
     return keys;
-  }
-
-  onClose() {
-    this.dialogRef.close({role: 'close'});
   }
 
 
