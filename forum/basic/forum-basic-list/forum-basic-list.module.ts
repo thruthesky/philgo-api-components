@@ -7,6 +7,7 @@ import { ForumBasicReplyComponent } from '../forum-basic-reply/forum-basic-reply
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ComponentServiceModule } from '../../../service/component.service.module';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -14,15 +15,16 @@ import { ComponentServiceModule } from '../../../service/component.service.modul
     FormsModule,
     RouterModule,
     DisplayFilesModule,
-    ComponentServiceModule
+    ComponentServiceModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     ForumBasicListComponent,
     ForumBasicViewComponent,
-    ForumBasicReplyComponent
+    ForumBasicReplyComponent,
   ],
   exports: [
-    ForumBasicListComponent
+    ForumBasicListComponent,
   ]
 })
 export class ForumBasicListModule { }
