@@ -1,5 +1,5 @@
 <div class="w-100">
-  <div class="border row" (click)=" onView.emit( post ) ">
+  <div class="border row" (click)=" View.emit( post ) ">
     <div class="of-hidden p-3">
       <img class="size-32px" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
     </div>
@@ -76,11 +76,11 @@
 
     </div>
     <div>
-      <button mat-flat-button (click)=" onEdit.emit( post ) " *ngIf="philgo.isMyPost( post )">
+      <button mat-flat-button (click)=" Edit.emit( post ) " *ngIf="philgo.isMyPost( post )">
         <i class="d-none d-md-block material-icons">create</i>
         Edit
       </button>
-      <button mat-flat-button (click)=" onDelete.emit( post ) " *ngIf="philgo.isMyPost( post )">
+      <button mat-flat-button (click)=" Delete.emit( post ) " *ngIf="philgo.isMyPost( post )">
         <i class="d-none d-md-block material-icons">trash</i>
         Delete
       </button>

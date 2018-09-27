@@ -11,7 +11,7 @@
       </div>
     </div>
     <ng-container *ngIf=" edit || photos.length > 2 ">
-      <div class="photo many-photos position-relative float-left py-1 pr-2 mw-100px mw-md-200px" [class.edit]=" edit " *ngFor=" let photo of photos ">
+      <div class="photo many-photos position-relative float-left my-1 mr-2 mw-100px mw-md-200px" [class.edit]=" edit " *ngFor=" let photo of photos ">
         <img class="w-100" src="{{ photo.src_thumbnail }}">
         <i *ngIf=" edit " class="material-icons photo-delete-icon" (click)=" onClickDeleteButton( photo ) ">delete</i>
       </div>
