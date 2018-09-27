@@ -148,7 +148,7 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     /**
    * Pass job category
    */
-    this.form.category = this.data.category;
+    // this.form.category = this.data.category;
 
     //
 
