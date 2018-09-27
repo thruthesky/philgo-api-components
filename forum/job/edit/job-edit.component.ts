@@ -54,30 +54,30 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     });
   }
   ngOnInit() {
-    // if (this.data && this.data.idx === void 0) {
-    //   this.form.post_id = this.data.post_id;
-    //   const forumName = this.philgo.forumName(this.data.post_id);
-    //   const categoryName = this.philgo.forumName(this.data.post_id, this.data.category);
-    //   this.pageTitle = `${forumName} >> ${categoryName}`;
-    // } else {
-    //   this.form = this.data;
-    //   this.pageTitle = this.philgo.t({ en: `Job Editing ##no`, ko: `구인구직 수정 ##no` }, { no: this.data['idx'] });
-    // }
-    //
-    //
-    // if (this.data[N.province]) {
-    //   this.province = this.data[N.province];
-    //   this.city = this.data[N.city];
-    //   this.getCities();
-    // }
-    //
-    // console.log('this.data[N.birthday]', this.data[N.birthday]);
-    // if (this.data[N.birthday]) {
-    //   const b = '' + this.data[N.birthday];
-    //   this.year = b.substr(0, 4);
-    //   this.month = b.substr(4, 2);
-    //   this.day = b.substr(6, 2);
-    // }
+    if (this.data && this.data.idx === void 0) {
+      this.form.post_id = this.data.post_id;
+      const forumName = this.philgo.forumName(this.data.post_id);
+      const categoryName = this.philgo.forumName(this.data.post_id, this.data.category);
+      this.pageTitle = `${forumName} >> ${categoryName}`;
+    } else {
+      this.form = this.data;
+      this.pageTitle = this.philgo.t({ en: `Job Editing ##no`, ko: `구인구직 수정 ##no` }, { no: this.data['idx'] });
+    }
+
+
+    if (this.data[N.province]) {
+      this.province = this.data[N.province];
+      this.city = this.data[N.city];
+      this.getCities();
+    }
+
+    console.log('this.data[N.birthday]', this.data[N.birthday]);
+    if (this.data[N.birthday]) {
+      const b = '' + this.data[N.birthday];
+      this.year = b.substr(0, 4);
+      this.month = b.substr(4, 2);
+      this.day = b.substr(6, 2);
+    }
   }
 
   ngAfterViewInit() {
@@ -164,34 +164,34 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   //   /**
   //    * Edit
   //    */
-  //   // if (this.form.idx) {
-  //   //   this.philgo.postEdit(this.form).subscribe(res => {
-  //   //     this.controller.dismiss(res, 'success');
-  //   //   }, e => {
-  //   //     this.componentService.alert(e);
-  //   //   });
-  //   // } else {
-  //   //   /**
-  //   //    * Create
-  //   //    */
-  //   //   this.philgo.postCreate(this.form).subscribe(res => {
-  //   //     console.log('create res: ', res);
-  //   //     this.controller.dismiss(res, 'success');
-  //   //   }, e => {
-  //   //     this.componentService.alert(e);
-  //   //   });
-  //   // }
+    // if (this.form.idx) {
+    //   this.philgo.postEdit(this.form).subscribe(res => {
+    //     this.controller.dismiss(res, 'success');
+    //   }, e => {
+    //     this.componentService.alert(e);
+    //   });
+    // } else {
+    //   /**
+    //    * Create
+    //    */
+    //   this.philgo.postCreate(this.form).subscribe(res => {
+    //     console.log('create res: ', res);
+    //     this.controller.dismiss(res, 'success');
+    //   }, e => {
+    //     this.componentService.alert(e);
+    //   });
+    // }
   // }
-  //
-  // onDelete() {
-  //   // this.philgo.postDelete({ idx: this.form.idx }).subscribe(res => {
-  //   //   console.log('delete: res', res);
-  //   //   this.controller.dismiss(res, 'delete');
-  //   // }, e => this.componentService.alert(e));
-  // }
-  //
-  //
-  //
+
+
+  onDelete() {
+    this.philgo.postDelete({ idx: this.form.idx }).subscribe(res => {
+      console.log('delete: res', res);
+      this.dialogRef.close({data: res, role: 'delete'});
+    }, e => this.componentService.alert(e));
+  }
+
+
   // onChangeFile(event: Event, code: string) {
   //   const files = <any>event.target['files'];
   //   this.onUpload(files, code);
@@ -257,33 +257,33 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   //     return this.philgo.anonymousPhotoURL;
   //   }
   // }
-  //
-  //
-  // onClickProvince() {
-  //   console.log('onClickProvince:: ', this.province);
-  //   if (this.province) {
-  //     // this.city = this.province;
-  //     this.getCities();
-  //   }
-  // }
-  //
-  // getCities() {
-  //   this.showCities = false;
-  //   this.philgo.cities(this.province).subscribe(cities => {
-  //     console.log('getCities:: ', this.city);
-  //     this.cities = cities;
-  //     this.showCities = true;
-  //   }, e => {
-  //     this.componentService.alert(e);
-  //     this.showCities = false;
-  //   });
-  // }
-  //
-  // get cityKeys() {
-  //   const keys = Object.keys(this.cities);
-  //   keys.splice(0, 1);
-  //   return keys;
-  // }
+
+
+  onClickProvince() {
+    console.log('onClickProvince:: ', this.province);
+    if (this.province) {
+      // this.city = this.province;
+      this.getCities();
+    }
+  }
+
+  getCities() {
+    this.showCities = false;
+    this.philgo.cities(this.province).subscribe(cities => {
+      console.log('getCities:: ', this.city);
+      this.cities = cities;
+      this.showCities = true;
+    }, e => {
+      this.componentService.alert(e);
+      this.showCities = false;
+    });
+  }
+
+  get cityKeys() {
+    const keys = Object.keys(this.cities);
+    keys.splice(0, 1);
+    return keys;
+  }
 
 
 }

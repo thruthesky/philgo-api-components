@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PhilGoApiService, ApiForum, ApiPost, ApiPostSearch } from '../../../../philgo-api/philgo-api.service';
-// import { JobEditService } from '../edit/job-edit.component.service';
+import { JobEditService } from '../edit/job-edit.component.service';
 
 import * as N from '../job.defines';
 import { ComponentService } from '../../../service/component.service';
@@ -81,7 +81,7 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
         private readonly activatedRoute: ActivatedRoute,
         private readonly componentService: ComponentService,
         public philgo: PhilGoApiService,
-        // public edit: JobEditService
+        public edit: JobEditService,
         public scroll: InfiniteScrollService
     ) {
 
@@ -221,31 +221,20 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
     async onEdit(post: ApiPost) {
       console.log('onEdit', post);
 
+      /**
+       * Make a copy from job post. So, it will not be referenced.
+       */
+      const data = Object.assign({}, post);
 
-      // const dialogRef = this.dialog.open(JobEditComponent, {
-      //   data: post
-      // });
-      //
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log('afterClosed::', result);
-      //   if (result.role === 'success') {
-      //       Object.assign(post, res.data);
-      //   }
-      // }, e => {
-      //   this.componentService.alert(e);
-      // });
+      this.edit.present(data).subscribe(result => {
+        console.log('afterClosed::', result);
+        if (result.role === 'success') {
+            Object.assign(post, result.data);
+        }
+      }, e => {
+        this.componentService.alert(e);
+      });
 
-
-
-
-        // /**
-        //  * Make a copy from job post. So, it will not be referenced.
-        //  */
-        // const data = Object.assign({}, post);
-        // const res = await this.edit.present(data);
-        // if (res.role === 'success') {
-        //     Object.assign(post, res.data);
-        // }
     }
 
     async onDelete(post: ApiPost) {
