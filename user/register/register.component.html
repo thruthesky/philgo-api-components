@@ -48,6 +48,30 @@
       (keyup.enter)="onSubmit()">
   </mat-form-field>
 
+  
+  <mat-form-field class="w-100" *ngIf=" gender ">
+      <input [(ngModel)]=" form.gender " name="gender" type="text" matInput placeholder="{{ _.t({ko: '성별', en: 'Gender' }) }}"
+        (keyup.enter)="onSubmit()">
+    </mat-form-field>
+  
+  
+    <ng-container  *ngIf=" birthday ">
+    <mat-form-field class="w-100">
+      <input [(ngModel)]=" form.birth_year " name="birth_year" type="text" matInput placeholder="{{ _.t({ko: '태어난 년도', en: 'Birth Year' }) }}"
+        (keyup.enter)="onSubmit()">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+        <input [(ngModel)]=" form.birth_month " name="birth_month" type="text" matInput placeholder="{{ _.t({ko: '태어난 월', en: 'Birth Month' }) }}"
+          (keyup.enter)="onSubmit()">
+      </mat-form-field>
+      <mat-form-field class="w-100">
+          <input [(ngModel)]=" form.birth_day " name="birth_day" type="text" matInput placeholder="{{ _.t({ko: '태어난 일', en: 'Birth Day' }) }}"
+            (keyup.enter)="onSubmit()">
+        </mat-form-field>
+      </ng-container>
+    
+        
+
 
   <button class="w-100" type="submit" mat-flat-button>
     {{ philgo.isLoggedIn() ? _.t({ko: '회원 정보 수정', en: 'Update Profile' }) : _.t({ko: '회원 가입 하기', en: 'Register' }) }}
