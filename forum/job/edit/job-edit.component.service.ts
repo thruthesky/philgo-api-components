@@ -9,7 +9,7 @@ export class JobEditService {
   ) { }
 
   present(post): Observable<{ data?: any, role: 'success' | 'delete' | 'close' }> {
-
+    console.log('edit::present', post);
     const dialogRef = this.dialog.open( JobEditComponent, {
       data: post
     });

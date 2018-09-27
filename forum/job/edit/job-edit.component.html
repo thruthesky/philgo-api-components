@@ -1,214 +1,157 @@
-<div>HI VIEW</div>
-<!--<ng-template #photo let-code="code">-->
-  <!--<div class="mx-auto mb-1 size-120px of-hidden">-->
-    <!--<img class="w-100" src="{{ src( code ) }}">-->
-  <!--</div>-->
-<!--</ng-template>-->
-<!--<ng-template #progressBar let-show="show" let-percentage="percentage">-->
-  <!--<div class="progress w-200px" *ngIf=" show ">-->
-    <!--<div class="progress-bar" [style.width]="percentage + '%'">{{percentage}}%</div>-->
-  <!--</div>-->
-<!--</ng-template>-->
+<ng-template #photo let-code="code">
+  <div class="mx-auto mb-1 size-120px of-hidden">
+    <img class="w-100" src="{{ src( code ) }}">
+  </div>
+</ng-template>
+<ng-template #progressBar let-show="show" let-percentage="percentage">
+  <div class="progress w-200px" *ngIf=" show ">
+    <div class="progress-bar" [style.width]="percentage + '%'">{{percentage}}%</div>
+  </div>
+</ng-template>
 
-<!--<h1 mat-dialog-title>Hi {{data.name}}</h1>-->
-<!--<div mat-dialog-content>-->
-  <!--<p>What's your favorite animal?</p>-->
-  <!--<mat-form-field>-->
-    <!--<input matInput [(ngModel)]="data.animal">-->
-  <!--</mat-form-field>-->
-<!--</div>-->
-<!--<div mat-dialog-actions>-->
-  <!--<button mat-button (click)="onNoClick()">No Thanks</button>-->
-  <!--<button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>-->
-<!--</div>-->
+<h1 mat-dialog-title>{{ pageTitle }}
+  <button mat-button (click)="onClose()"><i class="material-icons">close</i></button>
+</h1>
+<div mat-dialog-content>
+  <div>
+    Reminder - post your job inquiry only if you need it.
+  </div>
+  <div>
+    Please post your job inquiry only if you really want it.
+    We guarantee that you will have contact from your potential employer as quickly as it can be.
+    But before we show your profile to employers, we will verify if your data is true or not.
+    Please fill in the form with care and wait for the contact.
+  </div>
+  <div class="row py-2">
 
-
-
-<!--<ion-header>-->
-  <!--<ion-toolbar>-->
-    <!--<ion-title>{{ pageTitle }}</ion-title>-->
-    <!--<ion-buttons slot="end">-->
-      <!--<ion-button (click)="controller.dismiss( null, 'close' )">-->
-        <!--<ion-icon name="close"></ion-icon>-->
-      <!--</ion-button>-->
-    <!--</ion-buttons>-->
-  <!--</ion-toolbar>-->
-<!--</ion-header>-->
-<!--<ion-content>-->
-
-  <!--<div class="bg-secondary p-3 px-md-4 fs-md">-->
-    <!--<ion-text class="white">-->
-      <!--Reminder - post your job inquiry only if you need it.-->
-      <!--<b class="pointer" (click)=" tooltip.present( $event, { title: 'Reminder', subTitle: 'Post only if needed', content: 'Please post your job inquery only if you really want it. We guarantee that you will have contact from your potential employer as quickly as it can be. But before we show your profile to employers, we will verify if your data is true or not. Please fill in the form with care and wait for the contact.'})">-->
-          <!--Read more ...-->
-      <!--</b>-->
-    <!--</ion-text>-->
-    <!--&lt;!&ndash; <ion-button color="light" class="ml-4 no-shadow d-none d-md-block" (click)="tooltip.present( $event, { title: 'Job Forum', subTitle: 'Job', content: 'If you are in need of job, this is right place to get it. Please input true information only.'} )">-->
-      <!--<ion-icon name="help"></ion-icon>-->
-    <!--</ion-button> &ndash;&gt;-->
-  <!--</div>-->
-
-  <!--<ion-list class="mx-4 mb-4 mt-3">-->
-    <!--<div class="row py-2">-->
-
-      <!--<div class="col-12 col-md-4 flex-column-center">-->
-        <!--<div class="position-relative" (click)=" onClickCordovaPhotoUpload( N.profilePhoto ) ">-->
-          <!--<ng-container *ngTemplateOutlet="photo; context: { code: N.profilePhoto }"></ng-container>-->
-          <!--<ion-button class="w-180px ml-auto no-shadow" expand="full" color="secondary">Profile Photo</ion-button>-->
-          <!--<input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.profilePhoto )"-->
-            <!--*ngIf=" isWeb ">-->
-        <!--</div>-->
-        <!--<div class="w-180px text-right">-->
-          <!--<ion-icon class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'Profile photo', subTitle: 'Upload Photo', content: 'size: width: 200px, height: 200px'}) "></ion-icon>-->
-        <!--</div>-->
-        <!--<ng-container *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.profilePhoto, percentage: percentage }"></ng-container>-->
+    <div class="col-12 col-md-4 flex-column-center">
+      <div class="position-relative">
+        <ng-container *ngTemplateOutlet="photo; context: { code: N.profilePhoto }"></ng-container>
+        <button class="w-180px ml-auto no-shadow" expand="full" color="secondary">Profile Photo</button>
+        <input class="transparent-cover pointer" type="file" name="file"
+               (change)="onChangeFile($event,  N.profilePhoto )">
+      </div>
+      <!--<div class="w-180px text-right">-->
+      <!--<i class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'Profile photo', subTitle: 'Upload Photo', content: 'size: width: 200px, height: 200px'}) "></i>-->
       <!--</div>-->
+      <ng-container
+        *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.profilePhoto, percentage: percentage }"></ng-container>
+    </div>
 
-      <!--<div class="col-12 col-md-4 flex-column-center my-3 my-md-0">-->
-        <!--<div class="position-relative" (click)=" onClickCordovaPhotoUpload( N.bodyPhoto ) ">-->
-          <!--<ng-container *ngTemplateOutlet="photo; context: { code: N.bodyPhoto }"></ng-container>-->
-          <!--<ion-button class="w-180px no-shadow" expand="full" color="secondary">Whole Body Photo</ion-button>-->
-          <!--<input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.bodyPhoto )"-->
-            <!--*ngIf=" isWeb ">-->
-        <!--</div>-->
-        <!--<div class="w-180px text-right">-->
-          <!--<ion-icon class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'Whole body photo', subTitle: 'Upload Photo', content: 'size: width: 200px, height: 200px'}) "></ion-icon>-->
-        <!--</div>-->
-        <!--<ng-container *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.bodyPhoto, percentage: percentage }"></ng-container>-->
+    <div class="col-12 col-md-4 flex-column-center my-3 my-md-0">
+      <div class="position-relative">
+        <ng-container *ngTemplateOutlet="photo; context: { code: N.bodyPhoto }"></ng-container>
+        <button class="w-180px no-shadow" expand="full" color="secondary">Whole Body Photo</button>
+        <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.bodyPhoto )">
+      </div>
+      <!--<div class="w-180px text-right">-->
+      <!--<i class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'Whole body photo', subTitle: 'Upload Photo', content: 'size: width: 200px, height: 200px'}) "></i>-->
       <!--</div>-->
+      <ng-container
+        *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.bodyPhoto, percentage: percentage }"></ng-container>
+    </div>
 
-      <!--<div class="col-12 col-md-4 flex-column-center">-->
-        <!--<div class="position-relative" (click)=" onClickCordovaPhotoUpload( N.idPhoto ) ">-->
-          <!--<ng-container *ngTemplateOutlet="photo; context: { code: N.idPhoto }"></ng-container>-->
-          <!--<ion-button class="w-180px no-shadow" expand="full" color="secondary">ID Photo</ion-button>-->
-          <!--<input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.idPhoto )"-->
-            <!--*ngIf=" isWeb ">-->
-        <!--</div>-->
-        <!--<div class="w-180px text-right">-->
-          <!--<ion-icon class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'ID Photo', subTitle: 'Upload ID Photo', content: 'size: width: 200px, height: 200px'}) "></ion-icon>-->
-        <!--</div>-->
-        <!--<ng-container *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.idPhoto, percentage: percentage }"></ng-container>-->
+    <div class="col-12 col-md-4 flex-column-center">
+      <div class="position-relative">
+        <ng-container *ngTemplateOutlet="photo; context: { code: N.idPhoto }"></ng-container>
+        <button class="w-180px no-shadow" expand="full" color="secondary">ID Photo</button>
+        <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.idPhoto )">
+      </div>
+      <!--<div class="w-180px text-right">-->
+      <!--<i class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'ID Photo', subTitle: 'Upload ID Photo', content: 'size: width: 200px, height: 200px'}) "></i>-->
       <!--</div>-->
+      <ng-container
+        *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.idPhoto, percentage: percentage }"></ng-container>
+    </div>
 
-    <!--</div>-->
+  </div>
+  <form>
+    <mat-form-field class="w-100">
+      <input name="name" type="text" matInput [(ngModel)]="form[N.name]"
+             placeholder="{{ philgo.t({ en: 'Name', ko: '이름' }) }}">
+    </mat-form-field>
 
+    <mat-form-field class="w-100">
+      <input name="mobile" type="text" matInput [(ngModel)]="form[N.mobile]"
+             placeholder="{{ philgo.t({ en: 'Mobile Number', ko: '핸드폰 번호' }) }}">
+    </mat-form-field>
 
-    <!--<ion-item>-->
-      <!--<ion-label position="floating" text-wrap>{{ philgo.t({ en: 'Name', ko: '이름' }) }}</ion-label>-->
-      <!--<ion-input [(ngModel)]="form[N.name]"></ion-input>-->
-    <!--</ion-item>-->
-    <!--<ion-item>-->
-      <!--<ion-label position="floating" text-wrap>{{ philgo.t({ en: 'Mobile Number', ko: '핸드폰 번호' }) }}</ion-label>-->
-      <!--<ion-input [(ngModel)]="form[N.mobile]"></ion-input>-->
-    <!--</ion-item>-->
+    <mat-form-field class="w-100">
+      <input name="email" type="email" matInput [(ngModel)]="form[N.email]"
+             placeholder="{{ philgo.t({ en: 'Email Address', ko: '이메일 주소' }) }}">
+    </mat-form-field>
 
-    <!--<ion-item>-->
-      <!--<ion-label position="floating" text-wrap>{{ philgo.t({ en: 'Email Address', ko: '이메일 주소' }) }}</ion-label>-->
-      <!--<ion-input [(ngModel)]="form[N.email]"></ion-input>-->
-    <!--</ion-item>-->
+    <mat-form-field class="w-100">
+      <mat-select name="province" placeholder="{{ philgo.t({ en: 'Select Province', ko: '주를 선택하세요.' }) }}" [(ngModel)]=" province "
+                  (ngModelChange)="onClickProvince()">
+        <mat-option *ngFor=" let province of provinces " [value]="province">{{province}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf=" showCities " class="w-100">
+      <mat-select name="city" placeholder="{{ philgo.t({ en: 'Select City', ko: '도시를 선택하세요.' }) }}" [(ngModel)]=" city ">
+        <mat-option *ngFor=" let key of cityKeys" [value]="key">{{cities[key]}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <!--<ion-item class="pt-5">-->
-      <!--<ion-label>{{ philgo.t({ en: 'Province', ko: '주' }) }}</ion-label>-->
-      <!--<ion-select placeholder="{{ philgo.t({ en: 'Select Province', ko: '주를 선택하세요.' }) }}" [(ngModel)]=" province " (ionChange)="onClickProvince()">-->
-        <!--<ion-select-option *ngFor=" let province of provinces" [value]="province">{{province}}</ion-select-option>-->
-      <!--</ion-select>-->
-    <!--</ion-item>-->
+    <mat-form-field class="w-100">
+      <input [(ngModel)]="form[N.address]" name="address" type="text" matInput
+             placeholder="{{ philgo.t({ en: 'Address', ko: '나머지 주소' }) }}">
+      <mat-hint>Address will not be shown to others.</mat-hint>
+    </mat-form-field>
 
-    <!--<ion-item *ngIf=" showCities ">-->
-      <!--<ion-label>{{ philgo.t({ en: 'City', ko: '도시' }) }}</ion-label>-->
-      <!--<ion-select placeholder="{{ philgo.t({ en: 'Select City', ko: '도시를 선택하세요.' }) }}" [(ngModel)]=" city ">-->
-        <!--<ion-select-option *ngFor=" let key of cityKeys" [value]="key">{{cities[key]}}</ion-select-option>-->
-      <!--</ion-select>-->
-    <!--</ion-item>-->
+    <mat-form-field class="w-100">
+      <mat-select name="month" placeholder="{{ philgo.t({ en: 'Month', ko: '달' }) }}" [(ngModel)]=" month ">
+        <mat-option *ngFor=" let m of _.makeArrayNumber(12, 1)" value="{{ philgo.add0(m)}}">{{m}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-select name="day" placeholder="{{ philgo.t({ en: 'Day', ko: '일' }) }}" [(ngModel)]=" day ">
+        <mat-option *ngFor=" let m of _.makeArrayNumber(31, 1)" value="{{ philgo.add0(m)}}">{{m}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-select name="year" placeholder="{{ philgo.t({ en: 'Year', ko: '년' }) }}" [(ngModel)]=" year ">
+        <mat-option *ngFor=" let m of _.makeArrayNumber(50, 1)" value="{{ minAge - m }}">{{ minAge - m }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <!--<ion-item>-->
-      <!--<ion-label position="floating" text-wrap>{{ philgo.t({ en: 'Address', ko: '나머지 주소' }) }}</ion-label>-->
-      <!--<ion-input [(ngModel)]="form[N.address]"></ion-input>-->
-    <!--</ion-item>-->
-    <!--<div class="note mb-3">Address will not be shown to others.</div>-->
-
-    <!--<ion-item-divider>-->
-      <!--<ion-label>-->
-        <!--{{ philgo.t({ en: 'Birth Day', ko: '생년월일' }) }}-->
-      <!--</ion-label>-->
-    <!--</ion-item-divider>-->
-
-
-    <!--<div class="d-flex flex-column flex-md-row">-->
-        <!--<ion-item class="w-100 pr-md-3">-->
-          <!--<ion-label>{{ philgo.t({ en: 'Month', ko: '달' }) }}</ion-label>-->
-          <!--<ion-select placeholder="{{ philgo.t({ en: 'Month', ko: '달' }) }}" [(ngModel)]=" month ">-->
-            <!--<ion-select-option *ngFor=" let m of _.makeArrayNumber(12, 1)" value="{{ philgo.add0(m)}}">{{m}}</ion-select-option>-->
-          <!--</ion-select>-->
-        <!--</ion-item>-->
-        <!--<ion-item class="w-100 px-md-3">-->
-          <!--<ion-label>{{ philgo.t({ en: 'Day', ko: '일' }) }}</ion-label>-->
-          <!--<ion-select placeholder="{{ philgo.t({ en: 'Day', ko: '일' }) }}" [(ngModel)]=" day ">-->
-            <!--<ion-select-option *ngFor=" let m of _.makeArrayNumber(31, 1)" value="{{ philgo.add0(m)}}">{{m}}</ion-select-option>-->
-          <!--</ion-select>-->
-        <!--</ion-item>-->
-        <!--<ion-item class="w-100 pl-md-3">-->
-          <!--<ion-label>{{ philgo.t({ en: 'Year', ko: '년' }) }}</ion-label>-->
-          <!--<ion-select placeholder="{{ philgo.t({ en: 'Year', ko: '년' }) }}" [(ngModel)]=" year ">-->
-            <!--<ion-select-option *ngFor=" let m of _.makeArrayNumber(50, 1)" value="{{ minAge - m }}">{{ minAge - m }}</ion-select-option>-->
-          <!--</ion-select>-->
-        <!--</ion-item>-->
-    <!--</div>-->
-
-
-    <!--<ion-item>-->
-      <!--<ion-label>{{ philgo.t({ en: 'Gender', ko: '성별' }) }}</ion-label>-->
-      <!--<ion-select placeholder="{{ philgo.t({ en: 'Gender', ko: '성별' }) }}" [(ngModel)]="form[N.gender]">-->
-        <!--<ion-select-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</ion-select-option>-->
-        <!--<ion-select-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</ion-select-option>-->
-      <!--</ion-select>-->
-    <!--</ion-item>-->
+    <mat-form-field class="w-100">
+      <mat-select name="gender" placeholder="{{ philgo.t({ en: 'Gender', ko: '성별' }) }}" [(ngModel)]="form[N.gender]">
+        <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
+        <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
 
-
-    <!--<ion-item>-->
-      <!--<ion-label>{{ philgo.t({ en: 'Experience', ko: '경력' }) }}</ion-label>-->
-      <!--<ion-select placeholder="{{ philgo.t({ en: 'Experience', ko: '경력' }) }}" [(ngModel)]="form[N.experience]">-->
-        <!--<ion-select-option *ngFor=" let y of _.makeArrayNumber(30, 1)" value="{{ y }}">{{y}} {{ philgo.t({en: 'Years', ko: '년'}) }}</ion-select-option>-->
-      <!--</ion-select>-->
-    <!--</ion-item>-->
-
-
-    <!--<ion-item>-->
-      <!--<ion-label position="floating">{{ philgo.t({ en: 'Self introduction', ko: '본인소개' }) }}</ion-label>-->
-      <!--<ion-input [(ngModel)]="form[N.intro]"></ion-input>-->
-    <!--</ion-item>-->
-
-    <!--<div class="note">10 글자 이내</div>-->
-
-    <!--<ion-item>-->
-      <!--<ion-label position="floating">{{ philgo.t({ en: 'Facebook or other URL', ko: '페이스북 또는 참고 URL 을 입력하세요.' }) }}-->
-      <!--</ion-label>-->
-      <!--<ion-input [(ngModel)]="form[N.link]"></ion-input>-->
-    <!--</ion-item>-->
+    <mat-form-field class="w-100">
+      <mat-select name="experience" placeholder="{{ philgo.t({ en: 'Experience', ko: '경력' }) }}" [(ngModel)]="form[N.experience]">
+        <mat-option *ngFor=" let y of _.makeArrayNumber(30, 1)" value="{{ y }}">
+          {{y}} {{ philgo.t({en: 'Years', ko: '년'}) }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
 
-    <!--<ion-item class="pt-4">-->
-      <!--<ion-buttons class="m-auto">-->
-
-        <!--<ion-button color="primary" fill="solid" (click)=" onSubmit() ">-->
-          <!--<ion-icon slot="start" name="paper-plane"></ion-icon>-->
-          <!--Submit-->
-        <!--</ion-button>-->
-
-        <!--<ion-button class="mx-2" color="light" fill="solid" (click)=" onDelete() " *ngIf=" form?.idx ">-->
-          <!--<ion-icon color="danger" slot="start" name="trash"></ion-icon>-->
-          <!--Delete-->
-        <!--</ion-button>-->
+    <mat-form-field  class="w-100">
+      <input [(ngModel)]="form[N.intro]" name="intro" type="text" matInput
+             placeholder="{{ philgo.t({ en: 'Self introduction', ko: '본인소개' }) }}">
+      <mat-hint>{{ philgo.t({ en: 'Minimum of 10 characters.', ko: '10 글자 이내.' }) }}</mat-hint>
+    </mat-form-field>
 
 
-        <!--<ion-button color="light" fill="solid" (click)=" controller.dismiss( null, 'close' ) ">-->
-          <!--<ion-icon slot="start" name="close"></ion-icon>-->
-          <!--Close-->
-        <!--</ion-button>-->
+    <mat-form-field  class="w-100">
+      <input [(ngModel)]="form[N.link]" name="link" type="text" matInput
+             placeholder="{{ philgo.t({ en: 'Facebook or other URL', ko: '페이스북 또는 참고 URL 을 입력하세요.' }) }}">
+    </mat-form-field>
 
-      <!--</ion-buttons>-->
-    <!--</ion-item>-->
-  <!--</ion-list>-->
 
-<!--</ion-content>-->
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)=" onSubmit() ">Submit</button>
+  <button mat-button (click)=" onDelete() " *ngIf=" form?.idx ">Delete</button>
+  <button mat-button (click)=" onClose() ">Close</button>
+</div>

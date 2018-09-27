@@ -70,10 +70,12 @@ export class ComponentService {
  *      true will be returned after close.
  */
   alert(data: ModalData): Observable<boolean> {
+
+    console.log('alert:data', data);
     /**
      * Is error object?
      */
-    if (data && data['code']) {
+    if ( data && data['code']) {
       data.content = data['message'];
     }
     this.sanitizeData(data);

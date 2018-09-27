@@ -193,23 +193,29 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     //
-    // async onClickPost() {
-    //
-    //     if (this.philgo.isLoggedOut()) {
-    //         return this.componentService.alert({ message: this.philgo.t({ ko: '먼저 로그인하십시오.', en: 'Please sign-in first.' }) });
-    //     }
-    //
-    //
-    //     // const re = await this.edit.present({
-    //     //     post_id: 'wanted',
-    //     //     category: this.category
-    //     // });
-    //     //
-    //     // if (re.role === 'success') {
-    //     //     this.posts.unshift(re.data);
-    //     // }
-    //
-    // }
+    onClickJobPost() {
+      console.log('Start JobPost');
+
+        if (this.philgo.isLoggedOut()) {
+            return this.componentService.alert({ content: this.philgo.t({ ko: '먼저 로그인하십시오.', en: 'Please sign-in first.' }) });
+        }
+
+
+        this.edit.present({
+            post_id: 'wanted',
+            category: this.category,
+            group_id: this.group_id
+        }).subscribe( result => {
+          console.log('onClickJobPost::result ', result);
+          if (result.role === 'success') {
+              this.posts.unshift(result.data);
+          }
+        }, e => {
+          this.componentService.alert(e);
+        });
+
+
+    }
 
     onView(post: ApiPost) {
         console.log(post);
