@@ -13,7 +13,8 @@
     {{ philgo.t({ en: 'There is no more posts.', ko: '더 이상 글이 없습니다.' })}}
   </div>
 
-  <p class="m-3 p-5" *ngIf=" loading ">
+  <p class="m-3 p-5 flex-center" *ngIf=" loading ">
+    <mat-spinner [diameter]="30"></mat-spinner>
     <b class="ml-3">Loading ...</b>
   </p>
 

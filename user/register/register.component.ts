@@ -1,7 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {
-    ApiErrorResponse, ApiProfileUpdateRequest,
-    ApiRegisterResponse, ApiProfileResponse, ApiErrorFileNotSelected, ApiErrorFileUploadError, PhilGoApiService, URL_PROFILE_PHOTO
+    ApiErrorResponse,
+    ApiRegisterResponse, ApiProfileResponse, ApiErrorFileNotSelected, ApiErrorFileUploadError,
+    PhilGoApiService,
+    ApiUserRegister,
+    ApiProfileUpdateRequest
 } from '../../../philgo-api/philgo-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -17,11 +20,13 @@ import { ComponentService } from '../../service/component.service';
 })
 export class RegisterComponent implements OnInit {
     @Input() domain = 'sonub';
+    @Input() gender = false;
+    @Input() birthday = false;
     @Output() error = new EventEmitter<ApiErrorResponse>();
     @Output() register = new EventEmitter<ApiRegisterResponse>();
     @Output() update = new EventEmitter<ApiProfileResponse>();
     _ = _;
-    form;
+    form: ApiUserRegister = <any> {};
     loader = {
         profile: false,
         submit: false
@@ -52,12 +57,16 @@ export class RegisterComponent implements OnInit {
 
     resetForm() {
         this.form = {
+            id: '',
             email: '',
             password: '',
             name: '',
             nickname: '',
             mobile: '',
-            url_profile_photo: ''
+            gender: '',
+            birth_year: '',
+            birth_month: '',
+            birth_day: ''
         };
     }
 

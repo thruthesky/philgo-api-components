@@ -21,6 +21,7 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     @Input() category;
+    @Input() group_id = ''; // user domain to search jobs from.
 
     showSearch = false;
     forum: ApiForum = null;
@@ -144,7 +145,13 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
             and.push(`${N.birthday}>=${max}0101 AND ${N.birthday}<=${min}1231`);
         }
 
-        const req: ApiPostSearch = { post_id: this.post_id, category: this.category, page_no: this.page_no, limit: this.limit, deleted: 0 };
+        const req: ApiPostSearch = {
+            post_id: this.post_id, page_no: this.page_no, group_id: this.group_id, limit: this.limit, deleted: 0
+        };
+        if ( this.category ) {
+            req.category = this.category;
+        }
+
         req.and = and.join(' AND ');
         if (options.view) {
             req.view = options.view;
