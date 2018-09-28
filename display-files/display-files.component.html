@@ -1,36 +1,48 @@
 <div class="files" *ngIf=" post?.files?.length ">
 
-  <div class="photos clearfix" [attr.no]=" photos.length " *ngIf=" display() && photos.length ">
-
-    <div class="photo 1-photo-only" *ngIf=" edit == false && photos.length == 1">
-      <img class="w-100" src="{{ photos[0].src }}">
+    <div [attr.no]=" photos.length " *ngIf=" display() && photos.length ">
+  
+      <div *ngIf=" edit == false && photos.length == 1">
+          <div class="of-hidden max-size-300px" >
+              <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 400, height: 400, idx: photos[0].idx }) }}">
+          </div>
+      </div>
+  
+      <div class="d-flex" *ngIf=" edit == false && photos.length == 2">
+        <div class="of-hidden max-size-200px m-1" *ngFor=" let photo of photos ">
+          <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 200, height: 200, idx: photo.idx }) }}">
+        </div>
+      </div>
+  
+      <div class="d-flex" *ngIf=" edit == false && photos.length == 3">
+        <div class="of-hidden size-100px size-md-200px m-1" *ngFor=" let photo of photos ">
+          <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photo.idx }) }}">
+        </div>
+      </div>
+  
+      <div class=" flex-center flex-wrap " *ngIf=" edit || photos.length > 3 ">
+        <div class="position-relative of-hidden size-100px   m-1" *ngFor=" let photo of photos ">
+          <img class="w-100 border border-box" src="{{ photo.src_thumbnail }}">
+          <i *ngIf=" edit " class="material-icons top-right mt-1 pointer circle text-danger" (click)=" onClickDeleteButton( photo ) ">remove_circle</i>
+        </div>
+      </div>
+  
+  
     </div>
-    <div class="photo 2-photos row no-gutters" *ngIf=" edit == false && photos.length == 2">
-      <div class="col" *ngFor=" let photo of photos ">
-        <img class="d-block w-100 pr-2" src="{{ philgo.thumbnailUrl({ width: 320, height: 160, idx: photo.idx }) }}">
+  
+    <div class="attachments pt-2" *ngIf=" attachments.length ">
+      <div class="file" *ngFor=" let file of attachments ">
+        <a class="w-100" href="{{ file.url_download }}">
+          {{ file.name }}
+        </a>
+        <i *ngIf=" edit " class="material-icons attachment-delete-icon" (click)=" onClickDeleteButton( file ) ">delete</i>
       </div>
     </div>
-    <ng-container *ngIf=" edit || photos.length > 2 ">
-      <div class="photo many-photos position-relative float-left my-1 mr-2 mw-100px mw-md-200px" [class.edit]=" edit " *ngFor=" let photo of photos ">
-        <img class="w-100" src="{{ photo.src_thumbnail }}">
-        <i *ngIf=" edit " class="material-icons photo-delete-icon" (click)=" onClickDeleteButton( photo ) ">delete</i>
-      </div>
-    </ng-container>
-
   </div>
-
-  <div class="attachments pt-2" *ngIf=" attachments.length ">
-    <div class="file" *ngFor=" let file of attachments ">
-      <a class="w-100" href="{{ file.url_download }}">
-        {{ file.name }}
-      </a>
-      <i *ngIf=" edit " class="material-icons attachment-delete-icon" (click)=" onClickDeleteButton( file ) ">delete</i>
+  
+  <div class="upload-bar text-center" *ngIf=" percentage ">
+    <div class="progress w-200px">
+      <div class="progress-bar" [style.width]=" percentage + '%' ">{{percentage}}%</div>
     </div>
   </div>
-</div>
-
-<div class="upload-bar text-center" *ngIf=" percentage ">
-  <div class="progress w-200px">
-    <div class="progress-bar" [style.width]=" percentage + '%' ">{{percentage}}%</div>
-  </div>
-</div>
+  

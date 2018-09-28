@@ -41,14 +41,13 @@
 
 
   <div class="border-top" *ngIf=" show( post ) ">
-    <app-forum-basic-reply [root]=" post " [post]=" post "></app-forum-basic-reply>
 
-    <div class="comments comments-depth pt-2" *ngIf=" post?.comments?.length ">
+    <div class="comments comments-depth px-3" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
 
-        <div class="ml-1 w-100">
+        <div class="w-100">
 
-          <div class="d-flex">
+          <div class="d-flex pt-3 pb-1">
             <div class="thumbnail">
               <img [src]="philgo.primaryPhotoUrl( comment?.member?.idx_primary_photo )">
             </div>
@@ -61,8 +60,8 @@
             </div>
           </div>
 
-          <div class="pl-3 pt-1" *ngIf=" ! comment['edit'] ">
-            <div [innerHTML]="comment.content"></div>
+          <div class="py-1" *ngIf=" ! comment['edit'] ">
+            <div class="py-2" *ngIf="comment.content" [innerHTML]="comment.content"></div>
             <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "
               [showWhenContentHasNoImage]=" true "></app-display-files>
           </div>
@@ -89,6 +88,8 @@
         </div>
       </div>
     </div>
+
+    <app-forum-basic-reply [root]=" post " [post]=" post "></app-forum-basic-reply>
 
   </div>
 </div>

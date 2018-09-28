@@ -1,11 +1,13 @@
-<form class="form-content pb-5" (ngSubmit)="onSubmit()">
-  <mat-form-field class="w-100">
-    <input matInput [(ngModel)]=" uid " name="email" type="email" placeholder="{{ _.t({ko: '로그인 아이디. 아이디 또는 닉네임, 이메일로 로그인 가능합니다.', en: 'Login ID ( Member ID / Nickname / Email )'})}}"
+<form class="form-content pb-4" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill" class="w-100">
+    <input matInput [(ngModel)]=" uid " name="email" type="email"
       (keyup.enter)="onSubmit()">
+      <mat-label>{{ _.t({ko: '로그인 아이디. 아이디 또는 닉네임, 이메일로 로그인 가능합니다.', en: 'Login ID ( Member ID / Nickname / Email )'})}}</mat-label>
   </mat-form-field>
-  <mat-form-field class="w-100">
-    <input matInput [(ngModel)]=" password " name="password" type="password" placeholder="{{ _.t({ko: '비밀번호', en: 'Password' }) }}"
+  <mat-form-field appearance="fill" class="w-100">
+    <input matInput [(ngModel)]=" password " name="password" type="password"
       (keyup.enter)="onSubmit()">
+      <mat-label>{{ _.t({ko: '비밀번호', en: 'Password' }) }}</mat-label>
   </mat-form-field>
   <button class="w-100 my-5 p-2 fs-lg" type="submit" mat-flat-button>{{ _.t({ko: '로그인', en: 'Login' }) }}</button>
 </form>
