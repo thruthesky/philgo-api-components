@@ -46,6 +46,7 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
         console.log('edited: ', res);
         Object.assign(this.post, res);
         this.post['edit'] = false;
+        this.form.files = [];
       }, e => this.componentService.alert(e));
     } else {
 
@@ -73,9 +74,10 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
           this.root.comments.push(<any>res);
         }
         // clear
-        this.post['reply'] = false;
+        this.post['reply'] = false; // being used in 'view template' to show reply form.
         this.form.content = '';
         this.form.files = [];
+        this.form.gid = _.randomString(19, this.philgo.myIdx());
       }, e => this.componentService.alert(e));
     }
   }

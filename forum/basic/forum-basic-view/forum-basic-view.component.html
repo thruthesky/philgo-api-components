@@ -17,10 +17,7 @@
 
   <div class="post-content pt-0" *ngIf=" show(post) ">
     <div>
-      <!-- <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post "
-        [showWhenContentHasNoImage]=" true "></app-display-files> -->
-      <div class="post-text-content" [innerHTML]=" componentService.safeHtml( post?.content ) "></div>
-      <!-- <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post " [showWhenContentHasImage]=" true "></app-display-files> -->
+      <div class="post-text-content child-image-mw-100" [innerHTML]=" componentService.safeHtml( post?.content ) "></div>
     </div>
 
     <div class="post-buttons border-top">
