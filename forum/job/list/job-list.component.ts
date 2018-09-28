@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnDestroy, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhilGoApiService, ApiForum, ApiPost, ApiPostSearch } from '../../../../philgo-api/philgo-api.service';
 
@@ -15,7 +15,7 @@ import { JobEditComponent } from '../edit/job-edit.component';
   styleUrls: ['../../../scss/index.scss', './job-list.component.scss']
 })
 
-export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
 
   @Input() category;
@@ -84,6 +84,14 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges( event ) {
+    console.log(event);
+    if ( event['category'] && ! event['category']['firstChange'] ) {
+      this.showSearch = true;
+      this.onSearch();
+    }
   }
 
   ngAfterViewInit() {
