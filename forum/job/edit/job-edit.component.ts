@@ -41,9 +41,9 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
 
   constructor(private router: Router,
-              public philgo: PhilGoApiService,
-              public readonly componentService: ComponentService,
-              public activatedRoute: ActivatedRoute
+    public philgo: PhilGoApiService,
+    public readonly componentService: ComponentService,
+    public activatedRoute: ActivatedRoute
   ) {
     console.log('editComponent');
     this.philgo.provinces().subscribe(provinces => {
@@ -52,11 +52,13 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     }, e => {
       this.componentService.alert(e);
     });
+
+
   }
 
   ngOnInit() {
     if (this.philgo.isLoggedOut()) {
-      this.componentService.alert({content: this.philgo.t({ko: '먼저 로그인하십시오.', en: 'Please sign-in first.'})});
+      this.componentService.alert({ content: this.philgo.t({ ko: '먼저 로그인하십시오.', en: 'Please sign-in first.' }) });
       this.router.navigateByUrl('/job');
       return;
     }
@@ -66,15 +68,15 @@ export class JobEditComponent implements OnInit, AfterViewInit {
       if (idx) {
         this.philgo.postLoad(idx).subscribe(res => {
           console.log('postLoad', res);
-          if ( !res ) {
-            this.componentService.alert({content: this.philgo.t({ko: '소식이 없습니다.', en: 'Post doesnt exist.'})});
+          if (!res) {
+            this.componentService.alert({ content: this.philgo.t({ ko: '소식이 없습니다.', en: 'Post doesnt exist.' }) });
             this.router.navigateByUrl('/job');
             return;
           }
-          if ( res.idx_member === this.philgo.myIdx() ) {
+          if (res.idx_member === this.philgo.myIdx()) {
             this.data = res;
             this.form = this.data;
-            this.pageTitle = this.philgo.t({en: `Job Editing ##no`, ko: `구인구직 수정 ##no`}, {no: this.data['idx']});
+            this.pageTitle = this.philgo.t({ en: `Job Editing ##no`, ko: `구인구직 수정 ##no` }, { no: this.data['idx'] });
 
             if (this.data[N.province]) {
               this.province = this.data[N.province];
@@ -90,7 +92,7 @@ export class JobEditComponent implements OnInit, AfterViewInit {
               this.day = b.substr(6, 2);
             }
           } else {
-            this.componentService.alert({content: this.philgo.t({ko: '이 게시물을 소유하고 있지 않습니다.', en: 'You dont own this post.'})});
+            this.componentService.alert({ content: this.philgo.t({ ko: '이 게시물을 소유하고 있지 않습니다.', en: 'You dont own this post.' }) });
             this.router.navigateByUrl('/job');
             return;
           }
@@ -111,6 +113,8 @@ export class JobEditComponent implements OnInit, AfterViewInit {
         const categoryName = this.philgo.forumName(this.data.post_id, this.data.category);
         this.pageTitle = `${forumName} >> ${categoryName}`;
       }
+
+      // setTimeout(() => { this.form.category = 'driver'; this.onSubmit(); }, 100);
     });
   }
 
@@ -256,8 +260,8 @@ export class JobEditComponent implements OnInit, AfterViewInit {
        * Create
        */
       this.philgo.postCreate(this.form).subscribe(res => {
-        console.log('create res: ', res);
-        this.router.navigateByUrl(`/job/${this.form.category}/${this.form.idx}`);
+        // console.log('create res: ', res);
+        this.router.navigateByUrl(`/job/${this.form.category}/${res.idx}`);
       }, e => {
         this.componentService.alert(e);
       });
@@ -266,7 +270,7 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
 
   onDelete() {
-    this.philgo.postDelete({idx: this.form.idx}).subscribe(res => {
+    this.philgo.postDelete({ idx: this.form.idx }).subscribe(res => {
       console.log('delete: res', res);
       alert('delete ok');
     }, e => this.componentService.alert(e));
@@ -284,12 +288,12 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
     console.log('files: ', files);
     if (files === void 0 || !files.length || files[0] === void 0) {
-      const e = {code: -1, content: this.philgo.t({en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.'})};
+      const e = { code: -1, content: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
       // this.componentService.alert(e);
       return;
     }
 
-    this.philgo.fileUpload(files, {gid: this.form.gid, code: code}).subscribe(res => {
+    this.philgo.fileUpload(files, { gid: this.form.gid, code: code }).subscribe(res => {
       if (typeof res === 'number') {
         console.log('percentage: ', res);
         this.percentage = res;
