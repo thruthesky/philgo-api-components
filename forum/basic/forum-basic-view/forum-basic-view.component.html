@@ -1,4 +1,4 @@
-<div *ngIf=" post ">
+<div class="bg-white" *ngIf=" post ">
 
   <div class="post-header" (click)="view.emit( post ) ">
     <div class="thumbnail">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="post-content" *ngIf=" show(post) ">
+  <div class="post-content pt-0" *ngIf=" show(post) ">
     <div>
       <!-- <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post "
         [showWhenContentHasNoImage]=" true "></app-display-files> -->
@@ -23,8 +23,8 @@
       <!-- <app-display-files *ngIf="post.files.length" class="d-block pt-2 pb-1" [post]=" post " [showWhenContentHasImage]=" true "></app-display-files> -->
     </div>
 
-    <div class="buttons">
-      <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" onVote(post, 'good') ">
+    <div class="post-buttons border-top">
+      <button (click)=" onVote(post, 'good') " [class.text-primary]=" post.good != '0'">
         <i class="material-icons">thumb_up</i>
         <span> {{ post.good == '0' ? '' : ' ' + post.good }}</span>
       </button>
@@ -32,18 +32,18 @@
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
-      <button (click)=" edit.emit( post ) ">Edit</button>
-      <button (click)=" onDelete( post ) ">Delete</button>
-      <button (click)=" onReport( post ) ">Report</button>
+        <button (click)=" edit.emit( post ) ">Edit</button>
+        <button (click)=" onDelete( post ) ">Delete</button>
+        <button (click)=" onReport( post ) ">Report</button>
     </div>
   </div>
 
 
 
-  <div *ngIf=" show( post ) ">
+  <div class="border-top" *ngIf=" show( post ) ">
     <app-forum-basic-reply [root]=" post " [post]=" post "></app-forum-basic-reply>
 
-    <div class="comments comments-depth bg-light pt-2" *ngIf=" post?.comments?.length ">
+    <div class="comments comments-depth pt-2" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
 
         <div class="ml-1 w-100">
@@ -66,8 +66,8 @@
             <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "
               [showWhenContentHasNoImage]=" true "></app-display-files>
           </div>
-          <div class="buttons" *ngIf=" ! comment['edit'] ">
-            <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" onVote(comment, 'good') ">
+          <div class="comment-buttons" *ngIf=" ! comment['edit'] ">
+            <button  [class.text-primary]=" comment.good != '0'" (click)=" onVote(comment, 'good') ">
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
             </button>

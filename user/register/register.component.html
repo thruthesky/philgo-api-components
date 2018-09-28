@@ -8,7 +8,8 @@
         <img class="d-block w-100" src="{{ philgo.profilePhotoUrl(form.url_profile_photo) }}">
       </div>
 
-      <i class="top-right m-1 p-1 circle bg-white-transparent pointer material-icons" (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
+      <i class="top-right m-1 p-1 circle bg-white-transparent pointer material-icons"
+         (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
 
       <button mat-flat-button class="my-3 w-100">
         {{ philgo.t({ko: '사진 업로드', en: 'Upload Photo' }) }}
@@ -19,7 +20,7 @@
 
 </section>
 
-<form class="form-content" (ngSubmit)="onSubmit( $event )">
+<form class="form-content pb-5" (ngSubmit)="onSubmit( $event )">
 
   <div class="p-3 mb-3 bg-light border-bottom" *ngIf="philgo.isLoggedIn() ">
     {{ _.t({ko: '닉네임', en: 'Nickname' }) }} : {{ form.nickname }}
@@ -29,51 +30,56 @@
   </div>
 
   <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
-    <input [(ngModel)]=" form.email " name="email" type="email" matInput placeholder="{{ _.t({ko: '이메일', en: 'Email' }) }}"
-      (keyup.enter)="onSubmit()">
+    <input [(ngModel)]=" form.email " name="email" type="email" matInput
+           placeholder="{{ _.t({ko: '이메일', en: 'Email' }) }}"
+           (keyup.enter)="onSubmit()">
   </mat-form-field>
   <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
-    <input [(ngModel)]=" form.password " name="password" type="password" matInput placeholder="{{ _.t({ko: '비밀번호', en: 'Password' }) }}"
-      (keyup.enter)="onSubmit()">
+    <input [(ngModel)]=" form.password " name="password" type="password" matInput
+           placeholder="{{ _.t({ko: '비밀번호', en: 'Password' }) }}"
+           (keyup.enter)="onSubmit()">
   </mat-form-field>
   <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
-    <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput placeholder="{{ _.t({ko: '닉네임', en: 'Nickname' }) }}">
+    <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput
+           placeholder="{{ _.t({ko: '닉네임', en: 'Nickname' }) }}">
   </mat-form-field>
   <mat-form-field class="w-100">
     <input [(ngModel)]=" form.name " name="name" type="text" matInput placeholder="{{ _.t({ko: '이름', en: 'Name' }) }}"
-      (keyup.enter)="onSubmit()">
+           (keyup.enter)="onSubmit()">
   </mat-form-field>
   <mat-form-field class="w-100">
-    <input [(ngModel)]=" form.mobile " name="mobile" type="text" matInput placeholder="{{ _.t({ko: '전화번호', en: 'Phone Number' }) }}"
-      (keyup.enter)="onSubmit()">
+    <input [(ngModel)]=" form.mobile " name="mobile" type="text" matInput
+           placeholder="{{ _.t({ko: '전화번호', en: 'Phone Number' }) }}"
+           (keyup.enter)="onSubmit()">
   </mat-form-field>
 
-  
   <mat-form-field class="w-100" *ngIf=" gender ">
-      <input [(ngModel)]=" form.gender " name="gender" type="text" matInput placeholder="{{ _.t({ko: '성별', en: 'Gender' }) }}"
-        (keyup.enter)="onSubmit()">
-    </mat-form-field>
-  
-  
-    <ng-container  *ngIf=" birthday ">
-    <mat-form-field class="w-100">
-      <input [(ngModel)]=" form.birth_year " name="birth_year" type="text" matInput placeholder="{{ _.t({ko: '태어난 년도', en: 'Birth Year' }) }}"
-        (keyup.enter)="onSubmit()">
-    </mat-form-field>
-    <mat-form-field class="w-100">
-        <input [(ngModel)]=" form.birth_month " name="birth_month" type="text" matInput placeholder="{{ _.t({ko: '태어난 월', en: 'Birth Month' }) }}"
-          (keyup.enter)="onSubmit()">
-      </mat-form-field>
-      <mat-form-field class="w-100">
-          <input [(ngModel)]=" form.birth_day " name="birth_day" type="text" matInput placeholder="{{ _.t({ko: '태어난 일', en: 'Birth Day' }) }}"
-            (keyup.enter)="onSubmit()">
-        </mat-form-field>
-      </ng-container>
-    
-        
+    <mat-select name="gender" placeholder="{{ _.t({ko: '성별', en: 'Gender' }) }}" [(ngModel)]="form.gender">
+      <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
+      <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
 
-  <button class="w-100" type="submit" mat-flat-button>
+  <ng-container *ngIf=" birthday ">
+    <mat-form-field class="w-100">
+      <mat-select name="birth_year" placeholder="{{ _.t({ko: '태어난 년도', en: 'Birth Year' }) }}" [(ngModel)]=" form.birth_year ">
+        <mat-option *ngFor=" let m of _.makeArrayNumber(50, 1)" value="{{ minAge - m }}">{{ minAge - m }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-select name="birth_month" placeholder="{{ _.t({ko: '태어난 월', en: 'Birth Month' }) }}" [(ngModel)]=" form.birth_month ">
+        <mat-option *ngFor=" let m of _.makeArrayNumber(12, 1)" value="{{ m}}">{{m}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-select name="birth_day" placeholder="{{ _.t({ko: '태어난 일', en: 'Birth Day' }) }}" [(ngModel)]=" form.birth_day ">
+        <mat-option *ngFor=" let m of _.makeArrayNumber(31, 1)" value="{{ m}}">{{m}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+
+  <button  class="w-100 my-5 p-2 fs-lg" type="submit" mat-flat-button>
     {{ philgo.isLoggedIn() ? _.t({ko: '회원 정보 수정', en: 'Update Profile' }) : _.t({ko: '회원 가입 하기', en: 'Register' }) }}
   </button>
 </form>

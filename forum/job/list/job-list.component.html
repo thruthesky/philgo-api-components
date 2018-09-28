@@ -1,52 +1,57 @@
-<!--<mat-list class="mb-0">-->
-<!--<h3 class="">-->
-<!--Search-->
-<!--<button mat-flat-button (click)=" showSearch = !showSearch ">-->
-<!--<i class="material-icons">search</i>-->
-<!--</button>-->
-<!--</h3>-->
-<!--<ng-container *ngIf="showSearch">-->
-<!--<mat-list-item>-->
-<!--<h3>{{ philgo.t({ en: 'Gender', ko: '성별' }) }}</h3>-->
-<!--<mat-select placeholder="{{ philgo.t({ en: 'Gender', ko: '성별' }) }}" [(ngModel)]="form[N.gender]">-->
-<!--<mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>-->
-<!--<mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>-->
-<!--</mat-select>-->
-<!--</mat-list-item>-->
-<!--<mat-list-item class="border-bottom py-2">-->
-<!--<div class="d-flex flex-wrap justify-content-between align-items-center w-100">-->
-<!--<div class="py-2">Most Search</div>-->
-<!--<div>-->
-<!--<button mat-flat-button class="pointer my-1 mr-2" *ngFor="let k of _.keys(mostSearch)" (click)="onClickProvince(mostSearch[k])" >{{k}}</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</mat-list-item>-->
-<!--<mat-list-item>-->
-<!--<h3>{{ philgo.t({ en: 'Province', ko: '주' }) }}</h3>-->
-<!--<mat-select placeholder="{{ philgo.t({ en: 'Province', ko: '주' }) }}" [(ngModel)]=" province "-->
-<!--(ionChange)="onClickProvince()">-->
-<!--<mat-option *ngFor=" let province of provinces" [value]="province">{{province}}</mat-option>-->
-<!--</mat-select>-->
-<!--</mat-list-item>-->
+<mat-list class="mb-0">
+  <h3 class="">
+    Search
+    <button mat-flat-button (click)=" showSearch = !showSearch ">
+      <i class="material-icons">search</i>
+    </button>
+  </h3>
+  <ng-container *ngIf="showSearch">
+    <mat-list-item>
+      <mat-select name="category" placeholder="{{ philgo.t({ en: 'Select Job Title', ko: '직책 선택' }) }}" [(ngModel)]="category">
+        <mat-option value="housemaid">{{ philgo.t({ en: 'Housemaid', ko: '하녀' }) }}</mat-option>
+        <mat-option value="driver">{{ philgo.t({ en: 'Driver', ko: '운전사' }) }}</mat-option>
+        <mat-option value="englishTutor">{{ philgo.t({ en: 'English Tutor', ko: '영어 교사' }) }}</mat-option>
+        <mat-option value="carpenter">{{ philgo.t({ en: 'Carpenter', ko: '목수' }) }}</mat-option>
+      </mat-select>
+    </mat-list-item>
+    <mat-list-item>
+      <h3>{{ philgo.t({ en: 'Gender', ko: '성별' }) }}</h3>
+      <mat-select placeholder="{{ philgo.t({ en: 'Gender', ko: '성별' }) }}" [(ngModel)]="form[N.gender]">
+        <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
+        <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
+      </mat-select>
+    </mat-list-item>
+    <mat-list-item class="border-bottom py-2">
+      <div class="d-flex flex-wrap justify-content-between align-items-center w-100">
+        <div class="py-2">Most Search</div>
+        <div>
+          <button mat-flat-button class="pointer my-1 mr-2" *ngFor="let k of _.keys(mostSearch)"
+                  (click)="onClickProvince(mostSearch[k])">{{k}}
+          </button>
+        </div>
+      </div>
+    </mat-list-item>
+    <mat-list-item>
+      <h3>{{ philgo.t({ en: 'Province', ko: '주' }) }}</h3>
+      <mat-select placeholder="{{ philgo.t({ en: 'Province', ko: '주' }) }}" [(ngModel)]=" province "
+                  (ionChange)="onClickProvince()">
+        <mat-option *ngFor=" let province of provinces" [value]="province">{{province}}</mat-option>
+      </mat-select>
+    </mat-list-item>
 
-<!--<mat-list-item *ngIf=" showCities ">-->
-<!--<h3>{{ philgo.t({ en: 'City', ko: '도시' }) }}</h3>-->
-<!--<mat-select placeholder="{{ philgo.t({ en: 'City', ko: '도시' }) }}" [(ngModel)]=" city " (ionChange)="onClickCity()">-->
-<!--<mat-option *ngFor=" let key of cityKeys" [value]="key">{{cities[key]}}</mat-option>-->
-<!--</mat-select>-->
-<!--</mat-list-item>-->
+    <mat-list-item *ngIf=" showCities ">
+      <h3>{{ philgo.t({ en: 'City', ko: '도시' }) }}</h3>
+      <mat-select placeholder="{{ philgo.t({ en: 'City', ko: '도시' }) }}" [(ngModel)]=" city "
+                  (ionChange)="onClickCity()">
+        <mat-option *ngFor=" let key of cityKeys" [value]="key">{{cities[key]}}</mat-option>
+      </mat-select>
+    </mat-list-item>
 
-<!--&lt;!&ndash;<mat-list-item>&ndash;&gt;-->
-<!--&lt;!&ndash;<h3>{{ philgo.t({ en: 'Age', ko: '나이' }) }}</h3>&ndash;&gt;-->
-<!--&lt;!&ndash;<div>{{ageRange['lower']}}</div>&ndash;&gt;-->
-<!--&lt;!&ndash;<ion-range dualKnobs="true" min="18" max="70" [(ngModel)]="ageRange"></ion-range>&ndash;&gt;-->
-<!--&lt;!&ndash;<ion-text>{{ageRange['upper']}}</ion-text>&ndash;&gt;-->
-<!--&lt;!&ndash;</mat-list-item>&ndash;&gt;-->
-<!--<mat-list-item>-->
-<!--<button mat-flat-button class="mx-auto mt-3 mb-5" size="normal" (click)="onSearch()">Submit</button>-->
-<!--</mat-list-item>-->
-<!--</ng-container>-->
-<!--</mat-list>-->
+    <mat-list-item>
+      <button mat-flat-button class="mx-auto mt-3 mb-5" size="normal" (click)="onSearch()">Submit</button>
+    </mat-list-item>
+  </ng-container>
+</mat-list>
 
 <section class="job-list">
 

@@ -1,4 +1,4 @@
-<form class="form-content" (ngSubmit)="onSubmit()">
+<form class="form-content pb-5" (ngSubmit)="onSubmit()">
   <mat-form-field class="w-100">
     <input matInput [(ngModel)]=" uid " name="email" type="email" placeholder="{{ _.t({ko: '로그인 아이디. 아이디 또는 닉네임, 이메일로 로그인 가능합니다.', en: 'Login ID ( Member ID / Nickname / Email )'})}}"
       (keyup.enter)="onSubmit()">
@@ -7,5 +7,5 @@
     <input matInput [(ngModel)]=" password " name="password" type="password" placeholder="{{ _.t({ko: '비밀번호', en: 'Password' }) }}"
       (keyup.enter)="onSubmit()">
   </mat-form-field>
-  <button class="w-100" type="submit" mat-flat-button>{{ _.t({ko: '로그인', en: 'Login' }) }}</button>
+  <button class="w-100 my-5 p-2 fs-lg" type="submit" mat-flat-button>{{ _.t({ko: '로그인', en: 'Login' }) }}</button>
 </form>

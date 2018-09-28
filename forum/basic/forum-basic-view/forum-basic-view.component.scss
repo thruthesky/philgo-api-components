@@ -44,22 +44,48 @@
 }
 
 
-.buttons{
+.post-buttons{
     display: flex;
     align-items: center;
-    height: 32px;
+    justify-content: space-around;
+    height: 42px;
     margin-top: .5rem;
+    color: #616770;
     button{
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex: 1;
         height: 100%;
         border: 0;
         background: transparent;
         outline: 0;
         cursor: pointer;
+        color: #616770;
+        font-size: .75rem;
+        font-weight: 500;
+        &:hover{
+            background-color: rgba(29, 33, 41, .04);
+            border-radius: 2px;        
+        }
     }
     .material-icons{
         margin-right: .5rem;
         font-size: 1rem;
+        color: inherit;
+    }
+}
+
+.comment-buttons{
+    display: flex;
+    align-items: center;
+    button{
+        display: flex;
+        align-items: center;
+        border: 0;
+        background: transparent;
+        outline: 0;
+        cursor: pointer;
+        color: #365899;
     }
 }

@@ -1,20 +1,21 @@
-<form (ngSubmit)=" onSubmit() ">
+<form class="d-flex align-items-center p-3" (ngSubmit)=" onSubmit() ">
 
-<div class="comment-box">
-    <textarea name="content" [(ngModel)]="form.content"></textarea>
-</div>
+  <div class="position-relative d-flex align-items-center comment-box flex-grow-1">
+    <textarea placeholder="Write a comment..." name="content" [(ngModel)]="form.content"></textarea>
+    
+    <div class="camera position-absolute transparent-cover-wrapper">
+      <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
+      <i class="material-icons pointer">camera_alt</i>
+      <!-- <div>Photo Upload</div> -->
+    </div>
+  </div>
 
-  <app-display-files [post]=" form " [edit]=" true "></app-display-files>
-
-
-  <button mat-flat-button class="transparent-cover-wrapper">
-    <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
-    <div>Photo Upload</div>
+  <button class="submit-button ml-2">
+    <span>Submit</span>
+    <!-- <i class="material-icons">send</i> -->
   </button>
-
-
-  <button>Submit</button>
 
 </form>
 
+<app-display-files [post]=" form " [edit]=" true "></app-display-files>
 
