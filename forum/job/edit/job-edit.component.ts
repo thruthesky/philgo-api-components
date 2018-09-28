@@ -98,6 +98,9 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
 
+    if (!this.form.category) {
+      return this.componentService.alert({ content: this.philgo.t({ ko: '직책을 선택하십시오.', en: 'Please choose Job Title.' }) });
+    }
     if (!this.form[N.name]) {
       return this.componentService.alert({ content: this.philgo.t({ ko: '이름을 입력하십시오.', en: 'Please input Name.' }) });
     }
@@ -134,10 +137,10 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     if (!this.form[N.intro]) {
       return this.componentService.alert({ content: this.philgo.t({ ko: '자기 소개를 입력하십시오.', en: 'Please input self introduction.' }) });
     }
-    if (!this.form[N.link]) {
-      return this.componentService.alert({
-        content: this.philgo.t({ ko: '프로필 URL (페이스북 등) 을 입력하십시오.', en: 'Please input your profile link like facebook URL.' }) });
-    }
+    // if (!this.form[N.link]) {
+    //   return this.componentService.alert({
+    //     content: this.philgo.t({ ko: '프로필 URL (페이스북 등) 을 입력하십시오.', en: 'Please input your profile link like facebook URL.' }) });
+    // }
 
     if (!this.form.files || this.form.files.length < 3) {
       return this.componentService.alert({ content: this.philgo.t({ ko: '모든 사진을 업로드하십시오.', en: 'Please upload required photo.' }) });
