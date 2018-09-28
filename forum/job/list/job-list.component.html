@@ -7,15 +7,16 @@
   </h3>
   <ng-container *ngIf="showSearch">
     <mat-list-item>
+      <!--<h3>{{ philgo.t({ en: 'Job Title', ko: '직책 선택' }) }}</h3>-->
       <mat-select name="category" placeholder="{{ philgo.t({ en: 'Select Job Title', ko: '직책 선택' }) }}" [(ngModel)]="category">
         <mat-option value="housemaid">{{ philgo.t({ en: 'Housemaid', ko: '하녀' }) }}</mat-option>
         <mat-option value="driver">{{ philgo.t({ en: 'Driver', ko: '운전사' }) }}</mat-option>
-        <mat-option value="englishTutor">{{ philgo.t({ en: 'English Tutor', ko: '영어 교사' }) }}</mat-option>
+        <mat-option value="englishtutor">{{ philgo.t({ en: 'English Tutor', ko: '영어 교사' }) }}</mat-option>
         <mat-option value="carpenter">{{ philgo.t({ en: 'Carpenter', ko: '목수' }) }}</mat-option>
       </mat-select>
     </mat-list-item>
     <mat-list-item>
-      <h3>{{ philgo.t({ en: 'Gender', ko: '성별' }) }}</h3>
+      <!--<h3>{{ philgo.t({ en: 'Gender', ko: '성별' }) }}</h3>-->
       <mat-select placeholder="{{ philgo.t({ en: 'Gender', ko: '성별' }) }}" [(ngModel)]="form[N.gender]">
         <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
         <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
@@ -32,7 +33,7 @@
       </div>
     </mat-list-item>
     <mat-list-item>
-      <h3>{{ philgo.t({ en: 'Province', ko: '주' }) }}</h3>
+      <!--<h3>{{ philgo.t({ en: 'Province', ko: '주' }) }}</h3>-->
       <mat-select placeholder="{{ philgo.t({ en: 'Province', ko: '주' }) }}" [(ngModel)]=" province "
                   (ionChange)="onClickProvince()">
         <mat-option *ngFor=" let province of provinces" [value]="province">{{province}}</mat-option>
