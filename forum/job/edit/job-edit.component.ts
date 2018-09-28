@@ -4,7 +4,7 @@ import { ComponentService } from '../../../service/component.service';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 
 import * as N from './../job.defines';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-edit',
@@ -40,10 +40,10 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   minAge = new Date().getFullYear() - 17;
 
 
-  constructor(
-    private router: Router,
-    public philgo: PhilGoApiService,
-    public readonly componentService: ComponentService
+  constructor(private router: Router,
+              public philgo: PhilGoApiService,
+              public readonly componentService: ComponentService,
+              public activatedRoute: ActivatedRoute
   ) {
     console.log('editComponent');
     this.philgo.provinces().subscribe(provinces => {
@@ -53,37 +53,63 @@ export class JobEditComponent implements OnInit, AfterViewInit {
       this.componentService.alert(e);
     });
   }
+
   ngOnInit() {
-    if (this.data && this.data.idx === void 0) {
-      this.form.post_id = 'wanted';
-      this.form[N.name] = this.philgo.myName();
-      this.form[N.gender] = this.philgo.myGender();
-      this.year = this.philgo.myBirthYear();
-      this.month = this.philgo.add0(this.philgo.myBirthMonth());
-      this.day = this.philgo.add0(this.philgo.myBirthDay());
-
-      const forumName = this.philgo.forumName(this.data.post_id);
-      const categoryName = this.philgo.forumName(this.data.post_id, this.data.category);
-      this.pageTitle = `${forumName} >> ${categoryName}`;
-    } else {
-      this.form = this.data;
-      this.pageTitle = this.philgo.t({ en: `Job Editing ##no`, ko: `구인구직 수정 ##no` }, { no: this.data['idx'] });
+    if (this.philgo.isLoggedOut()) {
+      this.componentService.alert({content: this.philgo.t({ko: '먼저 로그인하십시오.', en: 'Please sign-in first.'})});
+      this.router.navigateByUrl('/job');
+      return;
     }
 
+    this.activatedRoute.paramMap.subscribe(params => {
+      const idx = params.get('idx');
+      if (idx) {
+        this.philgo.postLoad(idx).subscribe(res => {
+          console.log('postLoad', res);
+          if ( !res ) {
+            this.componentService.alert({content: this.philgo.t({ko: '소식이 없습니다.', en: 'Post doesnt exist.'})});
+            this.router.navigateByUrl('/job');
+            return;
+          }
+          if ( res.idx_member === this.philgo.myIdx() ) {
+            this.data = res;
+            this.form = this.data;
+            this.pageTitle = this.philgo.t({en: `Job Editing ##no`, ko: `구인구직 수정 ##no`}, {no: this.data['idx']});
 
-    if (this.data[N.province]) {
-      this.province = this.data[N.province];
-      this.city = this.data[N.city];
-      this.getCities();
-    }
+            if (this.data[N.province]) {
+              this.province = this.data[N.province];
+              this.city = this.data[N.city];
+              this.getCities();
+            }
 
-    console.log('this.data[N.birthday]', this.data[N.birthday]);
-    if (this.data[N.birthday]) {
-      const b = '' + this.data[N.birthday];
-      this.year = b.substr(0, 4);
-      this.month = b.substr(4, 2);
-      this.day = b.substr(6, 2);
-    }
+            console.log('this.data[N.birthday]', this.data[N.birthday]);
+            if (this.data[N.birthday]) {
+              const b = '' + this.data[N.birthday];
+              this.year = b.substr(0, 4);
+              this.month = b.substr(4, 2);
+              this.day = b.substr(6, 2);
+            }
+          } else {
+            this.componentService.alert({content: this.philgo.t({ko: '이 게시물을 소유하고 있지 않습니다.', en: 'You dont own this post.'})});
+            this.router.navigateByUrl('/job');
+            return;
+          }
+        }, e => {
+          this.componentService.alert(e);
+        });
+      } else {
+        this.form.post_id = 'wanted';
+        this.form[N.name] = this.philgo.myName();
+        this.form[N.gender] = this.philgo.myGender();
+        this.year = this.philgo.myBirthYear();
+        this.month = this.philgo.add0(this.philgo.myBirthMonth());
+        this.day = this.philgo.add0(this.philgo.myBirthDay());
+
+        const forumName = this.philgo.forumName(this.data.post_id);
+        const categoryName = this.philgo.forumName(this.data.post_id, this.data.category);
+        this.pageTitle = `${forumName} >> ${categoryName}`;
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -99,58 +125,110 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   onSubmit() {
 
     if (!this.form.category) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '직책을 선택하십시오.', en: 'Please choose Job Title.' }) });
+      return this.componentService.alert({content: this.philgo.t({ko: '직책을 선택하십시오.', en: 'Please choose Job Title.'})});
     }
     if (!this.form[N.name]) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '이름을 입력하십시오.', en: 'Please input Name.' }) });
+      return this.componentService.alert({content: this.philgo.t({ko: '이름을 입력하십시오.', en: 'Please input Name.'})});
     }
     if (!this.form[N.mobile]) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '휴대 전화 번호를 입력하십시오.', en: 'Please input mobile number.' }) });
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '휴대 전화 번호를 입력하십시오.',
+          en: 'Please input mobile number.'
+        })
+      });
     }
     if (!this.form[N.email]) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '이메일을 입력하십시오.', en: 'Please input Email.' }) });
+      return this.componentService.alert({content: this.philgo.t({ko: '이메일을 입력하십시오.', en: 'Please input Email.'})});
     }
     if (!this.province) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '지방을 선택하십시오.', en: 'Please choose a province.' }) });
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '지방을 선택하십시오.',
+          en: 'Please choose a province.'
+        })
+      });
     }
     if (!this.city) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '도시를 선택하십시오.', en: 'Please choose a city.' }) });
+      return this.componentService.alert({content: this.philgo.t({ko: '도시를 선택하십시오.', en: 'Please choose a city.'})});
     }
     if (!this.form[N.address]) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '주소를 입력하십시오.', en: 'Please input address.' }) });
+      return this.componentService.alert({content: this.philgo.t({ko: '주소를 입력하십시오.', en: 'Please input address.'})});
     }
     if (!this.month) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '태어난 달을 선택하십시오.', en: 'Please select birth month.' }) });
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '태어난 달을 선택하십시오.',
+          en: 'Please select birth month.'
+        })
+      });
     }
     if (!this.day) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '태어난 일을 선택하십시오.', en: 'Please select birth day.' }) });
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '태어난 일을 선택하십시오.',
+          en: 'Please select birth day.'
+        })
+      });
     }
     if (!this.year) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '태어난 년도를 선택하십시오.', en: 'Please select birth year.' }) });
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '태어난 년도를 선택하십시오.',
+          en: 'Please select birth year.'
+        })
+      });
     }
     if (!this.form[N.gender]) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '성별을 선택하십시오.', en: 'Please select gender.' }) });
+      return this.componentService.alert({content: this.philgo.t({ko: '성별을 선택하십시오.', en: 'Please select gender.'})});
     }
     if (!this.form[N.experience]) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '경력을 선택하십시오.', en: 'Please select year of experience.' }) });
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '경력을 선택하십시오.',
+          en: 'Please select year of experience.'
+        })
+      });
     }
     if (!this.form[N.intro]) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '자기 소개를 입력하십시오.', en: 'Please input self introduction.' }) });
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '자기 소개를 입력하십시오.',
+          en: 'Please input self introduction.'
+        })
+      });
     }
     // if (!this.form[N.link]) {
     //   return this.componentService.alert({
     //     content: this.philgo.t({ ko: '프로필 URL (페이스북 등) 을 입력하십시오.', en: 'Please input your profile link like facebook URL.' }) });
     // }
 
-    if (!this.form.files || this.form.files.length < 3) {
-      return this.componentService.alert({ content: this.philgo.t({ ko: '모든 사진을 업로드하십시오.', en: 'Please upload required photo.' }) });
+    if (this.form[N.link]) {
+      if (this.form[N.link].indexOf('http://') === 0 || this.form[N.link].indexOf('https://') === 0) {
+        // link is ok
+      } else {
+        return this.componentService.alert({
+          content: this.philgo.t({
+            ko: '잘못된 URL 링크입니다. 링크는 http:// 또는 https:// 로 시작해야합니다.',
+            en: 'Malformed URL link. Link should start with http:// or https://'
+          })
+        });
+      }
+    }
+
+    if (!this.form.files || this.form.files.length < 2) {
+      return this.componentService.alert({
+        content: this.philgo.t({
+          ko: '모든 사진을 업로드하십시오.',
+          en: 'Please upload required photo.'
+        })
+      });
     }
 
 
-
     /**
-   * Pass job category
-   */
+     * Pass job category
+     */
     // this.form.category = this.data.category;
 
     //
@@ -186,7 +264,7 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
 
   onDelete() {
-    this.philgo.postDelete({ idx: this.form.idx }).subscribe(res => {
+    this.philgo.postDelete({idx: this.form.idx}).subscribe(res => {
       console.log('delete: res', res);
       alert('delete ok');
     }, e => this.componentService.alert(e));
@@ -204,12 +282,12 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
     console.log('files: ', files);
     if (files === void 0 || !files.length || files[0] === void 0) {
-      const e = { code: -1, content: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
+      const e = {code: -1, content: this.philgo.t({en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.'})};
       // this.componentService.alert(e);
       return;
     }
 
-    this.philgo.fileUpload(files, { gid: this.form.gid, code: code }).subscribe(res => {
+    this.philgo.fileUpload(files, {gid: this.form.gid, code: code}).subscribe(res => {
       if (typeof res === 'number') {
         console.log('percentage: ', res);
         this.percentage = res;
@@ -284,6 +362,10 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     const keys = Object.keys(this.cities);
     keys.splice(0, 1);
     return keys;
+  }
+
+  onClose() {
+    this.router.navigateByUrl('/job');
   }
 
 
