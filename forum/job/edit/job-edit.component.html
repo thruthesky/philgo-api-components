@@ -9,7 +9,7 @@
   </div>
 </ng-template>
 
-<div mat-dialog-content>
+<section>
   <div>
     Reminder - post your job inquiry only if you need it.
   </div>
@@ -156,9 +156,10 @@
 
 
   </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button cdkFocusInitial (click)=" onSubmit() ">Submit</button>
-  <button mat-button (click)=" onDelete() " *ngIf=" form?.idx ">Delete</button>
-  <button mat-button (click)=" 1 ">Cancel</button>
-</div>
+
+  <div>
+    <button mat-button cdkFocusInitial (click)=" onSubmit() ">Submit</button>
+    <button mat-button (click)=" onDelete() " *ngIf=" form?.idx ">Delete</button>
+    <button mat-button (click)=" onClose() ">Cancel</button>
+  </div>
+</section>

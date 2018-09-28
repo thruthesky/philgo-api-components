@@ -144,7 +144,7 @@ export class ComponentService {
   //   return '';
   // }
 
-  async deletePostWithMemberLogin(post: ApiPost) {
+  deletePostWithMemberLogin(post: ApiPost): Observable<any> {
     console.log('deletePostWithMemberLogin::', post);
     const data: ModalData = {
       title: 'Delete Post #' + post.idx,
@@ -154,21 +154,25 @@ export class ComponentService {
       type: 'confirm'
     };
 
-    // const re = await this.alert(data).toPromise().then( result => result ).catch( e => console.log(e));
-    // if (re.role === 'yes') {
-    //   return this.philgo.postDelete({ idx: post.idx }).
-    //   toPromise().then(res => {
-    //     console.log('delete success: ', res);
-    //     post.subject = this.philgo.textDeleted();
-    //     post.content = this.philgo.textDeleted();
-    //     return 'success';
-    //   }).catch(async e => {
-    //     this.alert(e);
+    return this.alert(data);
+
+    // this.alert(data).subscribe( res => {
+    //   console.log('alert', res);
+    //   if (re.role === 'yes') {
+    //     return this.philgo.postDelete({ idx: post.idx }).
+    //     toPromise().then(result => {
+    //       console.log('delete success: ', res);
+    //       post.subject = this.philgo.textDeleted();
+    //       post.content = this.philgo.textDeleted();
+    //       return 'success';
+    //     }).catch(async e => {
+    //       this.alert(e);
+    //       return 'failed';
+    //     });
+    //   } else {
     //     return 'failed';
-    //   });
-    // } else {
-    //   return 'failed';
-    // }
+    //   }
+    // }, e => this.alert(e));
   }
 
   // async deletePostWithPassword(post: ApiPost) {

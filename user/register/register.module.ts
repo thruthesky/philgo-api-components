@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register.component';
 import { ComponentServiceModule } from '../../service/component.service.module';
-import { MatFormFieldModule, MatInputModule, MatListModule, MatButtonModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatListModule, MatButtonModule, MatSelectModule } from '@angular/material';
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import { MatFormFieldModule, MatInputModule, MatListModule, MatButtonModule } fr
     MatInputModule,
     MatListModule,
     MatButtonModule,
+    MatSelectModule,
     ComponentServiceModule
   ],
   declarations: [

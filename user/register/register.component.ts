@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
         submit: false
     };
     percentage = 0;
+    minAge = new Date().getFullYear() - 17;
     constructor(
         public philgo: PhilGoApiService,
         private componentService: ComponentService
