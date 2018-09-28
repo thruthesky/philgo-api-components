@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     }
     this.loader.submit = true;
     this.philgo.login({ uid: this.uid, password: this.password }).subscribe(res => {
+      console.log('login: ', res);
       this.loader.submit = false;
       this.login.emit();
     }, e => {
