@@ -101,6 +101,8 @@ export class JobEditComponent implements OnInit, AfterViewInit {
         this.form.post_id = 'wanted';
         this.form[N.name] = this.philgo.myName();
         this.form[N.gender] = this.philgo.myGender();
+        this.form[N.mobile] = this.philgo.myMobile();
+        this.form[N.email] = this.philgo.myEmail();
         this.year = this.philgo.myBirthYear();
         this.month = this.philgo.add0(this.philgo.myBirthMonth());
         this.day = this.philgo.add0(this.philgo.myBirthDay());
