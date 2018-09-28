@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PhilGoApiService, ApiForum, ApiPost, ApiPostSearch } from '../../../../philgo-api/philgo-api.service';
-import { JobEditService } from '../edit/job-edit.component.service';
 
 import * as N from '../job.defines';
 import { ComponentService } from '../../../service/component.service';
@@ -9,7 +8,6 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 import { Subscription } from 'rxjs';
 import { InfiniteScrollService } from '../../../../philgo-api/infinite-scroll';
 import { JobEditComponent } from '../edit/job-edit.component';
-
 
 @Component({
     selector: 'app-job-list-component',
@@ -82,10 +80,10 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
         private readonly activatedRoute: ActivatedRoute,
         private readonly componentService: ComponentService,
         public philgo: PhilGoApiService,
-        public edit: JobEditService,
         public scroll: InfiniteScrollService
     ) {
 
+        window['comp'] = this;
     }
     ngOnInit() { }
     ngAfterViewInit() {
@@ -156,11 +154,13 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
         if (options.view) {
             req.view = options.view;
         }
-        // console.log('re: ', req);
+        console.log('re: ', req);
+        this.philgo.debug = true;
 
         // setTimeout(() => this.loading = true);
         this.loading = true;
 
+        // this.philgo.debug = true;
         this.philgo.postSearch(req).subscribe(search => {
             this.loading = false;
             console.log('search: ', search);
@@ -169,11 +169,6 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
             if (search && search.view && search.view.idx) {
                 this.postView = search.view;
                 this.postView['show'] = true;
-            }
-
-            if (!search.posts || !search.posts.length || search.posts.length < this.limit ) {
-                this.noMorePosts = true;
-                return;
             }
 
             if (this.postView && this.postView.idx) {
@@ -185,6 +180,12 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
 
             this.posts = this.posts.concat(search.posts);
 
+
+
+            if (!search.posts || !search.posts.length || search.posts.length < this.limit ) {
+                this.noMorePosts = true;
+                return;
+            }
 
         }, e => {
             this.loading = false;
@@ -200,19 +201,19 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
             return this.componentService.alert({ content: this.philgo.t({ ko: '먼저 로그인하십시오.', en: 'Please sign-in first.' }) });
         }
 
+        // this.edit.present({
+        //     post_id: 'wanted',
+        //     category: this.category,
+        //     group_id: this.group_id
+        // }).subscribe( result => {
+        //   console.log('onClickJobPost::result ', result);
+        //   if (result.role === 'success') {
+        //       this.posts.unshift(result.data);
+        //   }
+        // }, e => {
+        //   this.componentService.alert(e);
+        // });
 
-        this.edit.present({
-            post_id: 'wanted',
-            category: this.category,
-            group_id: this.group_id
-        }).subscribe( result => {
-          console.log('onClickJobPost::result ', result);
-          if (result.role === 'success') {
-              this.posts.unshift(result.data);
-          }
-        }, e => {
-          this.componentService.alert(e);
-        });
 
 
     }
@@ -237,16 +238,16 @@ export class JobListComponent implements OnInit, AfterViewInit, OnDestroy {
       /**
        * Make a copy from job post. So, it will not be referenced.
        */
-      const data = Object.assign({}, post);
+    //   const data = Object.assign({}, post);
 
-      this.edit.present(data).subscribe(result => {
-        console.log('afterClosed::', result);
-        if (result.role === 'success') {
-            Object.assign(post, result.data);
-        }
-      }, e => {
-        this.componentService.alert(e);
-      });
+    //   this.edit.present(data).subscribe(result => {
+    //     console.log('afterClosed::', result);
+    //     if (result.role === 'success') {
+    //         Object.assign(post, result.data);
+    //     }
+    //   }, e => {
+    //     this.componentService.alert(e);
+    //   });
 
     }
 

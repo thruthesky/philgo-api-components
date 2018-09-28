@@ -1,5 +1,7 @@
 # PhilgoApi Components
 
+@see PhilGo Api README file for details
+
 ## Installation
 
 ### Dependencies

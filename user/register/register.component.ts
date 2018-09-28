@@ -79,7 +79,11 @@ export class RegisterComponent implements OnInit {
             // console.log('going to update profile');
             const data: ApiProfileUpdateRequest = {
                 name: this.form.name,
-                mobile: this.form.mobile
+                mobile: this.form.mobile,
+                gender: this.form.gender,
+                birth_year: this.form.birth_year,
+                birth_month: this.form.birth_month,
+                birth_day: this.form.birth_day
             };
             console.log(data);
             this.philgo.profileUpdate(data).subscribe(user => {

@@ -1,7 +1,7 @@
 <div class="w-100">
   <div class="border row" (click)=" View.emit( post ) ">
     <div class="of-hidden p-3">
-      <img class="size-32px" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
+      <img class="size-32px" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 48, 48 )}}">
     </div>
     <div class="px-1 py-2 text-center">
       <div class="fs-md">{{ post[ N.name ] }}</div>
