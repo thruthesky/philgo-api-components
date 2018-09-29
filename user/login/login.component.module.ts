@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -10,7 +11,8 @@ import { MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/ma
   imports: [
     CommonModule,
     FormsModule,
-    MatFormFieldModule, MatInputModule, MatButtonModule
+    MatFormFieldModule, MatInputModule, MatButtonModule,
+    RouterModule,
   ],
   declarations: [
       LoginComponent

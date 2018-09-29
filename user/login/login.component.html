@@ -9,5 +9,6 @@
       (keyup.enter)="onSubmit()">
       <mat-label>{{ _.t({ko: '비밀번호', en: 'Password' }) }}</mat-label>
   </mat-form-field>
-  <button class="w-100 mt-5 mb-1 p-2 fs-md" type="submit" mat-flat-button>{{ _.t({ko: '로그인', en: 'Login' }) }}</button>
+  <button class="w-100 mt-4 mb-1 p-2 fs-md" type="submit" mat-flat-button>{{ _.t({ko: '로그인', en: 'Login' }) }}</button>
+  <a routerLink="/profile" class="bg-success w-100 mt-3 mb-3 p-1 fs-md" mat-flat-button>Create New Account</a>
 </form>

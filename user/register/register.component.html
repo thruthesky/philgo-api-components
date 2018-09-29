@@ -8,8 +8,8 @@
         <img class="d-block w-100" src="{{ philgo.profilePhotoUrl(form.url_profile_photo) }}">
       </div>
 
-      <i class="top-right m-1 p-1 circle bg-white-transparent pointer material-icons"
-         (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
+      <i class="top-right m-1 p-1 fs-lg circle bg-white-transparent text-danger pointer material-icons"
+         (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">clear</i>
 
       <button mat-flat-button class="bg-primary mt-3 w-100">
         {{ philgo.t({ko: '사진 업로드', en: 'Upload Photo' }) }}

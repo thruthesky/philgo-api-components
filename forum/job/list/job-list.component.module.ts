@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { JobEditComponentModule } from '../edit/job-edit.component.module';
 import { JobViewComponent } from '../view/job.view.component';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatListModule, MatProgressSpinnerModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatProgressSpinnerModule, MatSelectModule, MatChipsModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -14,7 +14,8 @@ import { MatButtonModule, MatListModule, MatProgressSpinnerModule, MatSelectModu
         MatProgressSpinnerModule,
         MatListModule,
         MatButtonModule,
-        MatSelectModule
+        MatSelectModule,
+        MatChipsModule
     ],
     declarations: [
         JobListComponent,
