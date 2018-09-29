@@ -7,3 +7,23 @@
 .w-180px{
     width: 180px!important;
 }
+
+.mw-180px{
+    max-width: 180px!important;
+}
+
+.reminder{
+    border: 1px solid rgba(orange,0.8);
+    border-radius: 2px;
+    background: rgba(orange,0.1);
+    font-size: 14px;
+    line-height: 1.4em;
+}
+
+mat-form-field{
+    padding: 0 1px;
+    box-sizing: border-box;
+    &[appearance]{
+        padding: 0;
+    }
+}

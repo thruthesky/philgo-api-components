@@ -39,6 +39,8 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
   minAge = new Date().getFullYear() - 17;
 
+  showReminder = true;
+
 
   constructor(private router: Router,
     public philgo: PhilGoApiService,

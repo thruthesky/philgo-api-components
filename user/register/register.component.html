@@ -1,6 +1,6 @@
 <section class="flex-center flex-column" *ngIf="philgo.isLoggedIn() ">
 
-  <div class="d-flex flex-column align-items-center  of-hidden py-3 w-200px">
+  <div class="d-flex flex-column align-items-center  of-hidden pt-4 pb-5 w-200px">
     <div class="position-relative">
 
       <input class="transparent-cover w-200px pointer" type="file" name="file" (change)="onChangePrimaryPhoto($event)">
@@ -11,7 +11,7 @@
       <i class="top-right m-1 p-1 circle bg-white-transparent pointer material-icons"
          (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
 
-      <button mat-flat-button class="my-3 w-100">
+      <button mat-flat-button class="bg-primary mt-3 w-100">
         {{ philgo.t({ko: '사진 업로드', en: 'Upload Photo' }) }}
       </button>
     </div>
@@ -83,7 +83,7 @@
     </mat-form-field>
   </div>
 
-  <button  class="w-100 my-5 p-2 fs-lg" type="submit" mat-flat-button>
+  <button  class="w-100 mt-5 mb-1 p-2 fs-md" type="submit" mat-flat-button>
     {{ philgo.isLoggedIn() ? _.t({ko: '회원 정보 수정', en: 'Update Profile' }) : _.t({ko: '회원 가입 하기', en: 'Register' }) }}
   </button>
 </form>

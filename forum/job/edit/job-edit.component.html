@@ -4,64 +4,53 @@
   </div>
 </ng-template>
 <ng-template #progressBar let-show="show" let-percentage="percentage">
-  <div class="progress w-200px" *ngIf=" show ">
-    <div class="progress-bar" [style.width]="percentage + '%'">{{percentage}}%</div>
-  </div>
+  <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center"  *ngIf=" show " [style.width]="percentage + '%'">{{percentage}}%</div>
 </ng-template>
 
 <section>
-  <div>
-    Reminder - post your job inquiry only if you need it.
+  <div class="container-fluid px-0 py-3">
+      <div class="row py-2">
+          <div class="col-12 col-md-4 flex-column-center">
+            <div class="position-relative">
+              <ng-container *ngTemplateOutlet="photo; context: { code: N.profilePhoto }"></ng-container>
+              <button class="w-180px fs-sm mt-2" mat-flat-button>Profile Photo</button>
+              <input class="transparent-cover pointer" type="file" name="file"
+                     (change)="onChangeFile($event,  N.profilePhoto )">
+            </div>
+            <ng-container
+              *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.profilePhoto, percentage: percentage }"></ng-container>
+          </div>
+      
+          <div class="col-12 col-md-4 flex-column-center my-3 my-md-0">
+            <div class="position-relative">
+              <ng-container *ngTemplateOutlet="photo; context: { code: N.bodyPhoto }"></ng-container>
+              <button class="w-180px fs-sm mt-2" mat-flat-button>Whole Body Photo</button>
+              <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.bodyPhoto )">
+            </div>
+            <ng-container
+              *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.bodyPhoto, percentage: percentage }"></ng-container>
+          </div>
+      
+          <div class="col-12 col-md-4 flex-column-center">
+            <div class="position-relative">
+              <ng-container *ngTemplateOutlet="photo; context: { code: N.idPhoto }"></ng-container>
+              <button class="w-180px fs-sm mt-2" mat-flat-button>ID Photo</button>
+              <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.idPhoto )">
+            </div>
+            <ng-container
+              *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.idPhoto, percentage: percentage }"></ng-container>
+          </div>
   </div>
-  <div>
-    Please post your job inquiry only if you really want it.
-    We guarantee that you will have contact from your potential employer as quickly as it can be.
-    But before we show your profile to employers, we will verify if your data is true or not.
-    Please fill in the form with care and wait for the contact.
-  </div>
-  <div class="row py-2">
-
-    <div class="col-12 col-md-4 flex-column-center">
-      <div class="position-relative">
-        <ng-container *ngTemplateOutlet="photo; context: { code: N.profilePhoto }"></ng-container>
-        <button class="w-180px ml-auto no-shadow" expand="full" color="secondary">Profile Photo</button>
-        <input class="transparent-cover pointer" type="file" name="file"
-               (change)="onChangeFile($event,  N.profilePhoto )">
-      </div>
-      <!--<div class="w-180px text-right">-->
-      <!--<i class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'Profile photo', subTitle: 'Upload Photo', content: 'size: width: 200px, height: 200px'}) "></i>-->
-      <!--</div>-->
-      <ng-container
-        *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.profilePhoto, percentage: percentage }"></ng-container>
-    </div>
-
-    <div class="col-12 col-md-4 flex-column-center my-3 my-md-0">
-      <div class="position-relative">
-        <ng-container *ngTemplateOutlet="photo; context: { code: N.bodyPhoto }"></ng-container>
-        <button class="w-180px no-shadow" expand="full" color="secondary">Whole Body Photo</button>
-        <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.bodyPhoto )">
-      </div>
-      <!--<div class="w-180px text-right">-->
-      <!--<i class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'Whole body photo', subTitle: 'Upload Photo', content: 'size: width: 200px, height: 200px'}) "></i>-->
-      <!--</div>-->
-      <ng-container
-        *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.bodyPhoto, percentage: percentage }"></ng-container>
-    </div>
-
-    <div class="col-12 col-md-4 flex-column-center">
-      <div class="position-relative">
-        <ng-container *ngTemplateOutlet="photo; context: { code: N.idPhoto }"></ng-container>
-        <button class="w-180px no-shadow" expand="full" color="secondary">ID Photo</button>
-        <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event,  N.idPhoto )">
-      </div>
-      <!--<div class="w-180px text-right">-->
-      <!--<i class="size-24px pointer"  name="more" mode="ios" (click)=" tooltip.present( $event, { title: 'ID Photo', subTitle: 'Upload ID Photo', content: 'size: width: 200px, height: 200px'}) "></i>-->
-      <!--</div>-->
-      <ng-container
-        *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.idPhoto, percentage: percentage }"></ng-container>
-    </div>
 
   </div>
+  <div class="position-relative reminder p-3 pr-4 my-2" *ngIf="showReminder">
+      Please post your job inquiry only if you really want it.
+      We guarantee that you will have contact from your potential employer as quickly as it can be.
+      But before we show your profile to employers, we will verify if your data is true or not.
+      Please fill in the form with care and wait for the contact.
+      <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showReminder=false">clear</i>
+  </div>
+
   <form>
 
     <mat-form-field class="w-100">
@@ -73,20 +62,22 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="w-100">
-      <input name="name" type="text" matInput [(ngModel)]="form[N.name]"
-             placeholder="{{ philgo.t({ en: 'Name', ko: '이름' }) }}">
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <input name="mobile" type="text" matInput [(ngModel)]="form[N.mobile]"
-             placeholder="{{ philgo.t({ en: 'Mobile Number', ko: '핸드폰 번호' }) }}">
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <input name="email" type="email" matInput [(ngModel)]="form[N.email]"
-             placeholder="{{ philgo.t({ en: 'Email Address', ko: '이메일 주소' }) }}">
-    </mat-form-field>
+    <div class="d-md-flex w-100">
+        <mat-form-field  class="w-100 mr-md-2" appearance="fill">
+          <input name="name" type="text" matInput [(ngModel)]="form[N.name]">
+          <mat-label>{{ philgo.t({ en: 'Name', ko: '이름' }) }}</mat-label>
+        </mat-form-field>
+      
+        <mat-form-field  class="w-100 mx-md-2" appearance="fill" >
+          <input name="mobile" type="text" matInput [(ngModel)]="form[N.mobile]">
+          <mat-label>{{ philgo.t({ en: 'Mobile Number', ko: '핸드폰 번호' }) }}</mat-label>
+        </mat-form-field>
+    
+        <mat-form-field  class="w-100 ml-md-2" appearance="fill" >
+          <input name="email" type="email" matInput [(ngModel)]="form[N.email]">
+          <mat-label>{{ philgo.t({ en: 'Email Address', ko: '이메일 주소' }) }}</mat-label>
+        </mat-form-field>
+    </div>
 
     <mat-form-field class="w-100">
       <mat-select name="province" placeholder="{{ philgo.t({ en: 'Select Province', ko: '주를 선택하세요.' }) }}" [(ngModel)]=" province "
@@ -100,30 +91,33 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="w-100">
-      <input [(ngModel)]="form[N.address]" name="address" type="text" matInput
-             placeholder="{{ philgo.t({ en: 'Address', ko: '나머지 주소' }) }}">
+    <mat-form-field appearance="fill" class="w-100">
+      <input [(ngModel)]="form[N.address]" name="address" type="text" matInput>
+      <mat-label>{{ philgo.t({ en: 'Address', ko: '나머지 주소' }) }}</mat-label>
       <mat-hint>Address will not be shown to others.</mat-hint>
     </mat-form-field>
 
-    <mat-form-field class="w-100">
-      <mat-select name="month" placeholder="{{ philgo.t({ en: 'Month', ko: '달' }) }}" [(ngModel)]=" month ">
-        <mat-option *ngFor=" let m of _.makeArrayNumber(12, 1)" value="{{ philgo.add0(m)}}">{{m}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="w-100">
-      <mat-select name="day" placeholder="{{ philgo.t({ en: 'Day', ko: '일' }) }}" [(ngModel)]=" day ">
-        <mat-option *ngFor=" let m of _.makeArrayNumber(31, 1)" value="{{ philgo.add0(m)}}">{{m}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="w-100">
-      <mat-select name="year" placeholder="{{ philgo.t({ en: 'Year', ko: '년' }) }}" [(ngModel)]=" year ">
-        <mat-option *ngFor=" let m of _.makeArrayNumber(50, 1)" value="{{ minAge - m }}">{{ minAge - m }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="d-md-flex">
+        <mat-form-field class="w-100 mr-md-2">
+          <mat-select name="month" placeholder="{{ philgo.t({ en: 'Month', ko: '달' }) }}" [(ngModel)]=" month ">
+            <mat-option *ngFor=" let m of _.makeArrayNumber(12, 1)" value="{{ philgo.add0(m)}}">{{m}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100 mx-md-3">
+          <mat-select name="day" placeholder="{{ philgo.t({ en: 'Day', ko: '일' }) }}" [(ngModel)]=" day ">
+            <mat-option *ngFor=" let m of _.makeArrayNumber(31, 1)" value="{{ philgo.add0(m)}}">{{m}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100 ml-md-2">
+          <mat-select name="year" placeholder="{{ philgo.t({ en: 'Year', ko: '년' }) }}" [(ngModel)]=" year ">
+            <mat-option *ngFor=" let m of _.makeArrayNumber(50, 1)" value="{{ minAge - m }}">{{ minAge - m }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+
 
     <mat-form-field class="w-100">
       <mat-select name="gender" placeholder="{{ philgo.t({ en: 'Gender', ko: '성별' }) }}" [(ngModel)]="form[N.gender]">
@@ -142,24 +136,39 @@
     </mat-form-field>
 
 
-    <mat-form-field  class="w-100">
-      <input [(ngModel)]="form[N.intro]" name="intro" type="text" matInput
-             placeholder="{{ philgo.t({ en: 'Self introduction', ko: '본인소개' }) }}">
+    <mat-form-field class="w-100 mb-2" appearance="fill">
+      <input [(ngModel)]="form[N.intro]" name="intro" type="text" matInput>
+      <mat-label>{{ philgo.t({ en: 'Self introduction', ko: '본인소개' }) }}</mat-label>
       <mat-hint>{{ philgo.t({ en: 'Minimum of 10 characters.', ko: '10 글자 이내.' }) }}</mat-hint>
     </mat-form-field>
 
 
-    <mat-form-field  class="w-100">
-      <input [(ngModel)]="form[N.link]" name="link" type="text" matInput
-             placeholder="{{ philgo.t({ en: 'Facebook or other URL', ko: '페이스북 또는 참고 URL 을 입력하세요.' }) }}">
+    <mat-form-field class="w-100" appearance="fill">
+      <input [(ngModel)]="form[N.link]" name="link" type="text" matInput>
+      <mat-label>{{ philgo.t({ en: 'Facebook or other URL', ko: '페이스북 또는 참고 URL 을 입력하세요.' }) }}</mat-label>
     </mat-form-field>
 
 
   </form>
 
-  <div>
+  <!-- <div>
     <button mat-button cdkFocusInitial (click)=" onSubmit() ">Submit</button>
     <button mat-button (click)=" onDelete() " *ngIf=" form?.idx ">Delete</button>
     <button mat-button (click)=" onClose() ">Cancel</button>
+  </div> -->
+
+  <div class="my-4 text-center">
+      <button class="mx-1 fs-sm bg-primary" mat-flat-button type="submit" cdkFocusInitial (click)=" onSubmit() ">
+        <span class="mr-2">Submit</span>
+        <i class="material-icons">send</i>
+      </button>
+      <button class="mx-1 fs-sm bg-white black bg-light" mat-flat-button (click)=" onDelete() " *ngIf=" form?.idx ">
+        <i class="material-icons">delete</i>
+        <span class="ml-1">Delete</span>
+      </button>
+      <button class="mx-1 fs-sm bg-white black bg-light" mat-flat-button (click)=" onClose() ">
+        <i class="material-icons red">clear</i>
+        <span class="ml-1">Cancel</span>
+      </button>
   </div>
 </section>

@@ -1,10 +1,8 @@
 <mat-list class="mb-0">
-  <h3 class="">
-    Search
-    <button mat-flat-button (click)=" showSearch = !showSearch ">
-      <i class="material-icons">search</i>
-    </button>
-  </h3>
+  <button class="flex-center p-1 fs-md border bg-light w-100 pointer" (click)=" showSearch = !showSearch ">
+    <span>Search</span>
+    <i class="material-icons ml-1">search</i>
+  </button>
   <ng-container *ngIf="showSearch">
     <mat-list-item>
       <!--<h3>{{ philgo.t({ en: 'Job Title', ko: '직책 선택' }) }}</h3>-->
@@ -66,10 +64,10 @@
     </div>
   </div>
 
-  <mat-list-item class="m-3 p-5" *ngIf=" loading ">
-    <mat-spinner></mat-spinner>
+  <div class="m-3 p-5 flex-center" *ngIf=" loading ">
+    <mat-spinner [diameter]="40"></mat-spinner>
     <span class="ml-3">Loading ...</span>
-  </mat-list-item>
+  </div>
 
   <div class="text-center py-5 text-muted" *ngIf=" noMorePosts ">
     {{ philgo.t({ en: 'There is no more posts.', ko: '더 이상 글이 없습니다.' })}}
