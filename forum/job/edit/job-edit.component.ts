@@ -204,6 +204,8 @@ export class JobEditComponent implements OnInit, AfterViewInit {
         })
       });
     }
+
+
     // if (!this.form[N.link]) {
     //   return this.componentService.alert({
     //     content: this.philgo.t({ ko: '프로필 URL (페이스북 등) 을 입력하십시오.', en: 'Please input your profile link like facebook URL.' }) });
@@ -270,10 +272,19 @@ export class JobEditComponent implements OnInit, AfterViewInit {
 
 
   onDelete() {
-    this.philgo.postDelete({ idx: this.form.idx }).subscribe(res => {
-      console.log('delete: res', res);
-      alert('delete ok');
-    }, e => this.componentService.alert(e));
+
+    console.log(this.form);
+    this.componentService.deletePostWithMemberLogin(this.form).subscribe(res => {
+      console.log('deletePostWithMemberLogin', res);
+      if (res.role === 'yes') {
+        this.philgo.postDelete({ idx: this.form.idx }).subscribe(result => {
+          console.log('postDelete:: ', result);
+          this.router.navigateByUrl(`/job/${this.form.category}`);
+        });
+      }
+    }, e => {
+      this.componentService.alert(e);
+    });
   }
 
 
