@@ -1,15 +1,15 @@
 <section class="flex-center flex-column" *ngIf="philgo.isLoggedIn() ">
 
   <div class="d-flex flex-column align-items-center  of-hidden pt-4 pb-5 w-200px">
-    <div class="position-relative">
+    <div class="position-relative p-2">
 
       <input class="transparent-cover w-200px pointer" type="file" name="file" (change)="onChangePrimaryPhoto($event)">
       <div class="size-120px of-hidden">
         <img class="d-block w-100" src="{{ philgo.profilePhotoUrl(form.url_profile_photo) }}">
       </div>
 
-      <i class="top-right m-1 p-1 fs-lg circle bg-white-transparent text-danger pointer material-icons"
-         (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">clear</i>
+      <i class="top-right p-1 fs-lg circle bg-danger white pointer material-icons"
+         (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
 
       <button mat-flat-button class="bg-primary mt-3 w-100">
         {{ philgo.t({ko: '사진 업로드', en: 'Upload Photo' }) }}

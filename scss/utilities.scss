@@ -96,3 +96,21 @@
     max-width: 100%;
   }
 }
+
+.child-image-mb-2 {
+  img {
+    margin-bottom: .5rem;
+  }
+}
+
+.custom-child-caption{
+  figure{
+    font-weight: bold;
+    text-align: center;
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
