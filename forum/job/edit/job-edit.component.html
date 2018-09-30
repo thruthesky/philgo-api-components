@@ -63,17 +63,17 @@
     </mat-form-field>
 
     <div class="d-md-flex w-100">
-        <mat-form-field  class="w-100 mr-md-2" appearance="fill">
+        <mat-form-field  class="w-100 mr-md-2" appearance="outline">
           <input name="name" type="text" matInput [(ngModel)]="form[N.name]">
           <mat-label>{{ philgo.t({ en: 'Name', ko: '이름' }) }}</mat-label>
         </mat-form-field>
       
-        <mat-form-field  class="w-100 mx-md-2" appearance="fill" >
+        <mat-form-field  class="w-100 mx-md-2" appearance="outline" >
           <input name="mobile" type="text" matInput [(ngModel)]="form[N.mobile]">
           <mat-label>{{ philgo.t({ en: 'Mobile Number', ko: '핸드폰 번호' }) }}</mat-label>
         </mat-form-field>
     
-        <mat-form-field  class="w-100 ml-md-2" appearance="fill" >
+        <mat-form-field  class="w-100 ml-md-2" appearance="outline" >
           <input name="email" type="email" matInput [(ngModel)]="form[N.email]">
           <mat-label>{{ philgo.t({ en: 'Email Address', ko: '이메일 주소' }) }}</mat-label>
         </mat-form-field>
@@ -91,7 +91,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="w-100">
+    <mat-form-field appearance="outline" class="w-100">
       <input [(ngModel)]="form[N.address]" name="address" type="text" matInput>
       <mat-label>{{ philgo.t({ en: 'Address', ko: '나머지 주소' }) }}</mat-label>
       <mat-hint>Address will not be shown to others.</mat-hint>
@@ -136,14 +136,14 @@
     </mat-form-field>
 
 
-    <mat-form-field class="w-100 mb-2" appearance="fill">
+    <mat-form-field class="w-100 mb-2" appearance="outline">
       <input [(ngModel)]="form[N.intro]" name="intro" type="text" matInput>
       <mat-label>{{ philgo.t({ en: 'Self introduction', ko: '본인소개' }) }}</mat-label>
       <mat-hint>{{ philgo.t({ en: 'Minimum of 10 characters.', ko: '10 글자 이내.' }) }}</mat-hint>
     </mat-form-field>
 
 
-    <mat-form-field class="w-100" appearance="fill">
+    <mat-form-field class="w-100" appearance="outline">
       <input [(ngModel)]="form[N.link]" name="link" type="text" matInput>
       <mat-label>{{ philgo.t({ en: 'Facebook or other URL', ko: '페이스북 또는 참고 URL 을 입력하세요.' }) }}</mat-label>
     </mat-form-field>

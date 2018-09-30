@@ -1,10 +1,10 @@
 <form class="form-content pb-4" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="fill" class="w-100">
+  <mat-form-field appearance="outline" class="w-100">
     <input matInput [(ngModel)]=" uid " name="email" type="email"
       (keyup.enter)="onSubmit()">
       <mat-label>{{ _.t({ko: '로그인 아이디. 아이디 또는 닉네임, 이메일로 로그인 가능합니다.', en: 'Login ID ( Member ID / Nickname / Email )'})}}</mat-label>
   </mat-form-field>
-  <mat-form-field appearance="fill" class="w-100">
+  <mat-form-field appearance="outline" class="w-100">
     <input matInput [(ngModel)]=" password " name="password" type="password"
       (keyup.enter)="onSubmit()">
       <mat-label>{{ _.t({ko: '비밀번호', en: 'Password' }) }}</mat-label>
