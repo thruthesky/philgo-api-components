@@ -19,6 +19,13 @@
 @media (min-width:$md) {
     .size-md-200px{
         height: 200px!important;
-        width: 200px!important
+        width: 32%!important
+    }   
+    .h-md-220px{
+        height: 220px!important;
     }
+}
+
+.h-150px{
+    height: 150px;
 }

@@ -22,12 +22,13 @@
     font-size: 1.5rem;
  }
 
-.submit-button{
-    padding: .35rem .65rem;
+.send-button{
     border: 0;
-    border-radius: 2px;
-    background-color: #4267b2;
-    color: #fff;
     cursor: pointer;
-    font-size: .7rem;
+    font-weight: bold;
+    &:hover{
+      color: #4267b2;
+    }
+
+
 }
