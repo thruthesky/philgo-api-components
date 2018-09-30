@@ -1,58 +1,62 @@
 <div class="files" *ngIf=" post?.files?.length ">
 
   <div [attr.no]=" photos.length " *ngIf=" display() && photos.length ">
-
-    <div *ngIf=" edit == false && photos.length == 1">
-      <div class="m-1">
-          <img class=" border border-box w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 200, idx: photos[0].idx }) }}">
-      </div>
+    <div  class="m-1" *ngIf=" edit == false && photos.length == 1">
+        <img class=" border border-box w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 200, idx: photos[0].idx }) }}">
     </div>
 
     <div class="d-flex" *ngIf=" edit == false && photos.length == 2">
       <div class="m-1" *ngFor=" let photo of photos ">
-        <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 360, height: 200, idx: photo.idx }) }}">
+        <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 360, height: 250, idx: photo.idx }) }}">
       </div>
     </div>
 
     <div class="m-1" *ngIf=" edit == false && photos.length == 3">
         <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 760, height: 180, idx: photos[0].idx }) }}">
         <div class="d-flex my-1">
-          <div class="flex-center w-50 h-150px h-md-220px mr-1 of-hidden">
-            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photos[1].idx }) }}">
+          <div class="flex-center w-50 h-150px h-md-200px mr-1 of-hidden">
+            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[1].idx }) }}">
           </div> 
-          <div class="flex-center w-50 h-150px h-md-220px ml-1 of-hidden">
-            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photos[2].idx }) }}">
+          <div class="flex-center w-50 h-150px h-md-200px ml-1 of-hidden">
+            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[2].idx }) }}">
           </div>
         </div>
     </div>
 
     <div class="d-flex flex-wrap my-1 m-md-1" *ngIf=" edit == false && photos.length > 3">
-      <div class="of-hidden size-100px border-box size-md-200px m-1" *ngFor=" let photo of photos ">
-        <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photo.idx }) }}">
-      </div>
+      <img class="w-100 border border-box mb-1" src="{{ philgo.thumbnailUrl({ width: 760, height: 180, idx: photos[0].idx }) }}">
+      <ng-container  *ngFor=" let photo of photos; let index = index; ">
+          <div *ngIf="index != 0" class="size-103px size-md-box my-1 border-box of-hidden" [class.mx-2]="index%3==2" >
+            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photo.idx }) }}">
+          </div>
+      </ng-container>
     </div>
 
-    <div class=" flex-center flex-wrap " *ngIf=" edit ">
-      <div class="position-relative of-hidden size-100px m-1" *ngFor=" let photo of photos ">
+    <div class=" flex-center flex-wrap pb-3" *ngIf=" edit ">
+      <div class="position-relative of-hidden size-100px p-2" *ngFor=" let photo of photos ">
         <img class="w-100 border border-box" src="{{ photo.src_thumbnail }}">
-        <i *ngIf=" edit " class="material-icons top-right mt-1 pointer circle text-danger" (click)=" onClickDeleteButton( photo ) ">remove_circle</i>
+        <i *ngIf=" edit " class="material-icons top-right pointer circle text-danger" (click)=" onClickDeleteButton( photo ) ">remove_circle</i>
       </div>
     </div>
-
   </div>
 
-  <div class="attachments pt-2" *ngIf=" attachments.length ">
-    <div class="file" *ngFor=" let file of attachments ">
-      <a class="w-100" href="{{ file.url_download }}">
-        {{ file.name }}
+
+
+  <div class="attachments pt-1 pb-2 " [class.flex-center]="edit" *ngIf=" attachments.length ">
+    <span class="d-inline-block position-relative p-1" *ngFor=" let file of attachments ">
+      <a class="flex-center p-2 mx-1 border rounded bg-light" href="{{ file.url_download }}">
+        <i class="material-icons">attach_file</i>
+        <span class="mx-1">{{ file.name }}</span>
       </a>
-      <i *ngIf=" edit " class="material-icons attachment-delete-icon" (click)=" onClickDeleteButton( file ) ">delete</i>
-    </div>
+      <i *ngIf=" edit " class="material-icons top-right pointer circle text-danger" (click)=" onClickDeleteButton( file ) ">remove_circle</i>
+    </span>
   </div>
+
+
 </div>
 
 <div class="upload-bar text-center" *ngIf=" percentage ">
   <div class="progress w-200px">
-    <div class="progress-bar" [style.width]=" percentage + '%' ">{{percentage}}%</div>
+    <div class="progress-bar p-5" [style.width]=" percentage + '%' ">{{percentage}}%</div>
   </div>
 </div>
