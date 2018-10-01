@@ -46,6 +46,7 @@ export class RegisterComponent implements OnInit {
     loadUserProfile() {
         if (this.philgo.isLoggedIn()) {
             this.loader.profile = true;
+            this.philgo.debug = true;
             this.philgo.profile().subscribe(user => {
                 this.loader.profile = false;
                 this.form = user;
@@ -140,6 +141,8 @@ export class RegisterComponent implements OnInit {
 
                 // this.philgo.loginUser(URL_PROFILE_PHOTO, re['src']);
                 this.percentage = 0;
+
+                this.onSubmit();
             }
         }, (e: HttpErrorResponse) => {
             console.log('error subscribe: ', e);
