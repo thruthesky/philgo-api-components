@@ -25,7 +25,7 @@
         <i class="material-icons">thumb_up</i>
         <span> {{ post.good == '0' ? '' : ' ' + post.good }}</span>
       </button>
-      <button color="medium" (click)=" onVote(post, 'bad') ">
+      <button (click)=" onVote(post, 'bad') ">
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
@@ -67,11 +67,11 @@
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
             </button>
-            <button color="medium" (click)=" onVote(comment, 'bad') ">
+            <button (click)=" onVote(comment, 'bad') ">
               <i class="material-icons">thumb_down</i>
               <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
             </button>
-            <button color="medium" (click)=" comment['reply'] = true ">
+            <button (click)=" comment['reply'] = true ">
               <i class="material-icons">reply</i>
               <span>Reply</span>
             </button>
