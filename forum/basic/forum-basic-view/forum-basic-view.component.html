@@ -4,8 +4,8 @@
     <div class="thumbnail">
       <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
     </div>
-    <div class="post-header-text">
-      <h2>
+    <div class="post-header-text of-hidden">
+      <h2 class="truncate">
         {{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
       </h2>
       <div class="fs-sm">
