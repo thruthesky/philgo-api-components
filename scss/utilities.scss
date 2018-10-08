@@ -97,9 +97,16 @@
   }
 }
 
-.child-image-mb-2 {
+.child-image-my-2 {
   img {
-    margin-bottom: .5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.child-figure-m-0{
+  figure{
+    margin: 0;
   }
 }
 
