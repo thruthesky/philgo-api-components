@@ -8,7 +8,20 @@
 </ng-template>
 
 <section>
-  <div class="container-fluid px-0 py-3">
+    <div class="position-relative reminder p-3 pr-4 my-2" *ngIf="showReminder">
+        Please post your job inquiry only if you really want it.
+        We guarantee that you will have contact from your potential employer as quickly as it can be.
+        But before we show your profile to employers, we will verify if your data is true or not.
+        Please fill in the form with care and wait for the contact.
+        <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showReminder=false">clear</i>
+    </div>
+    <div class="position-relative note p-3 pr-4"  *ngIf="showNote">
+        When uploading Profile Photo, Whole Body Photo, and Id Photo, <em class="fw-bold">HEIGHT</em> and <em class="fw-bold">WIDTH</em> must be equal 
+        for better quality of display photos. For Ex: 200x200, 250x250, 500x500, etc... 
+      <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showNote=false">clear</i>
+    </div>
+
+  <div class="container-fluid px-0 pt-4 pb-2">
       <div class="row py-2">
           <div class="col-12 col-md-4 flex-column-center">
             <div class="position-relative">
@@ -43,13 +56,6 @@
   </div>
 
   </div>
-  <div class="position-relative reminder p-3 pr-4 my-2" *ngIf="showReminder">
-      Please post your job inquiry only if you really want it.
-      We guarantee that you will have contact from your potential employer as quickly as it can be.
-      But before we show your profile to employers, we will verify if your data is true or not.
-      Please fill in the form with care and wait for the contact.
-      <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showReminder=false">clear</i>
-  </div>
 
   <form>
 
@@ -63,17 +69,17 @@
     </mat-form-field>
 
     <div class="d-md-flex w-100">
-        <mat-form-field  class="w-100 mr-md-2" appearance="outline">
+        <mat-form-field  class="w-100 mr-md-1">
           <input name="name" type="text" matInput [(ngModel)]="form[N.name]">
           <mat-label>{{ philgo.t({ en: 'Name', ko: '이름' }) }}</mat-label>
         </mat-form-field>
       
-        <mat-form-field  class="w-100 mx-md-2" appearance="outline" >
+        <mat-form-field  class="w-100 mx-md-1" >
           <input name="mobile" type="text" matInput [(ngModel)]="form[N.mobile]">
           <mat-label>{{ philgo.t({ en: 'Mobile Number', ko: '핸드폰 번호' }) }}</mat-label>
         </mat-form-field>
     
-        <mat-form-field  class="w-100 ml-md-2" appearance="outline" >
+        <mat-form-field  class="w-100 ml-md-1" >
           <input name="email" type="email" matInput [(ngModel)]="form[N.email]">
           <mat-label>{{ philgo.t({ en: 'Email Address', ko: '이메일 주소' }) }}</mat-label>
         </mat-form-field>
@@ -91,7 +97,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field class="w-100">
       <input [(ngModel)]="form[N.address]" name="address" type="text" matInput>
       <mat-label>{{ philgo.t({ en: 'Address', ko: '나머지 주소' }) }}</mat-label>
       <mat-hint>Address will not be shown to others.</mat-hint>
@@ -136,14 +142,14 @@
     </mat-form-field>
 
 
-    <mat-form-field class="w-100 mb-2" appearance="outline">
+    <mat-form-field class="w-100 mb-2">
       <input [(ngModel)]="form[N.intro]" name="intro" type="text" matInput>
       <mat-label>{{ philgo.t({ en: 'Self introduction', ko: '본인소개' }) }}</mat-label>
       <mat-hint>{{ philgo.t({ en: 'Minimum of 10 characters.', ko: '10 글자 이내.' }) }}</mat-hint>
     </mat-form-field>
 
 
-    <mat-form-field class="w-100" appearance="outline">
+    <mat-form-field class="w-100">
       <input [(ngModel)]="form[N.link]" name="link" type="text" matInput>
       <mat-label>{{ philgo.t({ en: 'Facebook or other URL', ko: '페이스북 또는 참고 URL 을 입력하세요.' }) }}</mat-label>
     </mat-form-field>
