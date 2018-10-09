@@ -1,7 +1,7 @@
-<div class="w-100">
+<div class="w-100"  (click)=" View.emit( post ) " >
 
 
-  <div class="border rounded m-1 pointer" (click)=" View.emit( post ) ">
+  <div class="border rounded m-1 pointer" *ngIf="!show( post )">
     <div class="flex-center of-hidden size-100px">
       <img class="w-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 100, 100 )}}">
     </div>
@@ -15,24 +15,25 @@
     </div>
   </div>
 
-  <div *ngIf=" show( post ) ">
+  <div class="border my-2 p-2 p-md-3 rounded" *ngIf=" show( post ) " >
 
-    <div class="view-post-content py-5">
-      <div class="flex-center justify-content-around">
-        <div class="img-resizable mr-1">
+    <div class="view-post-content">
+      <div class="flex-center justify-content-around mx-minus-1">
+        <div class="flex-center w-33-percent max-h-200px mx-1">
           <img class="w-100" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
         </div>
-        <div class="img-resizable mx-1">
+        <div class="flex-center w-33-percent max-h-200px mx-1">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.bodyPhoto ) }}">
         </div>
-        <div class="img-resizable ml-1">
+        <div class="flex-center w-33-percent max-h-200px mx-1">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.idPhoto ) }}">
         </div>
       </div>
 
+      <div class="bg-light my-3 p-3 fs-md">{{ post[ N.intro ] }}</div>
 
-      <div class="meta">
-        <div class="container-fluid">
+      <div class="meta fs-md p-3">
+        <div class="container-fluid p-0">
           <div class="row no-gutters">
             <div class="col-4">Name:</div>
             <div class="col">{{ post[ N.name ] }}</div>
@@ -53,7 +54,7 @@
           </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid p-0">
           <div class="row no-gutters">
             <div class="col-4">Email:</div>
             <div class="col">{{ post[ N.email ] }}</div>
@@ -74,19 +75,25 @@
         </div>
       </div>
 
-      <div class="bg-light p-3">{{ post[ N.intro ] }}</div>
+    </div>
 
-    </div>
-    <div>
-      <button mat-flat-button (click)=" Edit.emit( post ) " *ngIf="philgo.isMyPost( post )">
-        <i class="d-none d-md-block material-icons">create</i>
-        Edit
+
+    <div class="flex-center">
+      <button class="flex-center mx-2 fs-sm" mat-flat-button (click)=" Edit.emit( post ) " *ngIf="philgo.isMyPost( post )">
+        <i class="material-icons fs-lg">create</i>
+        <span class="ml-1">Edit</span>
       </button>
-      <button mat-flat-button (click)=" Delete.emit( post ) " *ngIf="philgo.isMyPost( post )">
-        <i class="d-none d-md-block material-icons">delete</i>
-        Delete
+      <button class="flex-center mx-2 fs-sm" mat-flat-button (click)=" Delete.emit( post ) " *ngIf="philgo.isMyPost( post )">
+        <i class="material-icons fs-lg">delete</i>
+        <span class="ml-1">Delete</span>
+      </button>
+      <button class="flex-center mx-2 fs-sm" mat-flat-button (click)=" Delete.emit( post ) " *ngIf="philgo.isMyPost( post )">
+        <i class="material-icons fs-lg">clear</i>
+        <span class="ml-1">Close</span>
       </button>
     </div>
+
+
   </div>
 
 
