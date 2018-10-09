@@ -1,19 +1,21 @@
 <div class="w-100">
-  <div class="border row" (click)=" View.emit( post ) ">
-    <div class="of-hidden p-3">
-      <img class="size-32px" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 48, 48 )}}">
+
+
+  <div class="border rounded m-1 pointer" (click)=" View.emit( post ) ">
+    <div class="flex-center of-hidden size-100px">
+      <img class="w-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 100, 100 )}}">
     </div>
-    <div class="px-1 py-2 text-center">
-      <div class="fs-md">{{ post[ N.name ] }}</div>
-      <div class="fs-md">#{{ post.idx }}</div>
-      <div class="fs-sm py-1 text-muted">( {{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) :
+    <div class="px-1 py-2 text-center of-hidden fs-sm">
+      <div class="text-link truncate fs-md"> {{ post[ N.name ] }}</div>
+      <div class="text-muted my-1">( {{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) :
         post[ N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }} / {{ _.getAge(post[ N.birthday ])
         }} )
       </div>
+      <!-- <div>#{{ post.idx }}</div> -->
     </div>
   </div>
 
-  <div class="" *ngIf=" show( post ) ">
+  <div *ngIf=" show( post ) ">
 
     <div class="view-post-content py-5">
       <div class="flex-center justify-content-around">

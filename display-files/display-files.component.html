@@ -1,7 +1,7 @@
 <div class="files" *ngIf=" post?.files?.length ">
 
   <div [attr.no]=" photos.length " *ngIf=" display() && photos.length ">
-    <div class="flex-center m-1 max-h-200px max-h-md-250px of-hidden" *ngIf=" edit == false && photos.length == 1">
+    <div class="flex-center mb-2 max-h-200px max-h-md-250px of-hidden" *ngIf=" edit == false && photos.length == 1">
         <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">
     </div>
 
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="my-1" *ngIf=" edit == false && photos.length == 3">
+    <div class="mb-2" *ngIf=" edit == false && photos.length == 3">
       <div class="flex-center mb-2 max-h-200px max-h-md-250px of-hidden">
           <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">
       </div>
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="my-1 m-md-1" *ngIf=" edit == false && photos.length > 3">
+    <div class="my-1" *ngIf=" edit == false && photos.length > 3">
       <div class="flex-center mb-1 max-h-200px max-h-md-250px of-hidden">
         <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">  
       </div>

@@ -1,8 +1,8 @@
 
-  <button class="flex-center p-1 mt-3 mb-2 fs-md border bg-light w-100 pointer" (click)=" showSearch = !showSearch ">
+  <div class="flex-center p-1 mt-default-spacing mb-2 fs-md rounded bg-darkgreen white pointer" (click)=" showSearch = !showSearch ">
     <span>Search</span>
     <i class="material-icons ml-1">search</i>
-  </button>
+  </div>
 
   <div class="my-4"  *ngIf="showSearch">
     <mat-form-field class="w-100">
@@ -52,14 +52,15 @@
 
 <section class="job-list">
 
-  <div *ngIf=" postView?.idx ">
-    <app-job-view [post]=" postView " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
-  </div>
 
-  <div class="p-2">
-    <div class="px-2 pb-2" *ngFor="let post of posts">
-      <app-job-view [post]=" post " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
-    </div>
+  <div class="row no-gutters mx-minus-1">
+      <div class="col-12" *ngIf=" postView?.idx ">
+        <app-job-view [post]=" postView " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
+      </div>
+
+      <div class="col-4 col-md-2" [ngClass]="{ 'col-12': post.show, 'col-md-12': post.show }" *ngFor="let post of posts">
+        <app-job-view [post]=" post " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
+      </div>
   </div>
 
   <div class="m-3 p-5 flex-center" *ngIf=" loading ">

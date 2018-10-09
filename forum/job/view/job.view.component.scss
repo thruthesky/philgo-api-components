@@ -1,28 +1,7 @@
 @import './../../../scss/index';
-//.view-post container must not be position:absolute/relative
-//and should be position static
-// EXAMPLE:
-// <div class="row no-gutters">
-// <div class="position-static col-md-2 col-6 p-2"  *ngIf=" postView?.idx ">
-//   <app-job-view
-//     [post]=" postView "
-//     (onView)=" onView( $event ) "
-//     (onEdit)=" onEdit( $event ) "
-//     (onDelete)=" onDelete( $event ) "
-//   ></app-job-view>
-// </div>
-// <div class="position-static col-md-2 col-6 p-2" *ngFor="let post of posts">
-//   <app-job-view [post]=" post "
-//   (onView)=" onView( $event ) "
-//   (onEdit)=" onEdit( $event ) "
-//   (onDelete)=" onDelete( $event ) "
-//   ></app-job-view>
-// </div>
-// </div>
  .view-post{
      position: fixed;
      @media (min-width:$md) {
-         // so it does not cover the 'Sidebar'
          position: absolute;
          top: 0;
          min-height: 2000px;
