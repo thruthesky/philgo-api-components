@@ -1,15 +1,6 @@
-@import './../../../scss/index';
  .meta {
-     @media (min-width: $md) {
-         display: flex;
-     }
-     margin: 1em 0;
      word-break: break-all;
-
-     .row{
-         &>div{
-             padding: .25rem;
-             border: 1px solid #ccc;
-         }
-     }
+    .row>div{
+        padding: .5rem .75rem;
+    }
  }

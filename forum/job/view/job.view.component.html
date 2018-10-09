@@ -1,11 +1,10 @@
-<div class="w-100"  (click)=" View.emit( post ) " >
+<div class="w-100" >
 
-
-  <div class="border rounded m-1 pointer" *ngIf="!show( post )">
-    <div class="flex-center of-hidden size-100px">
-      <img class="w-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 100, 100 )}}">
+  <div class="border rounded m-2 border-box pointer" *ngIf="!show( post )" (click)=" View.emit( post ) ">
+    <div class="flex-center of-hidden w-100">
+      <img class="w-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}">
     </div>
-    <div class="px-1 py-2 text-center of-hidden fs-sm">
+    <div class="py-2 px-1 text-center of-hidden fs-sm">
       <div class="text-link truncate fs-md"> {{ post[ N.name ] }}</div>
       <div class="text-muted my-1">( {{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) :
         post[ N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }} / {{ _.getAge(post[ N.birthday ])
@@ -15,7 +14,7 @@
     </div>
   </div>
 
-  <div class="border my-2 p-2 p-md-3 rounded" *ngIf=" show( post ) " >
+  <div class="m-2 rounded" *ngIf=" show( post ) " >
 
     <div class="view-post-content">
       <div class="flex-center justify-content-around mx-minus-1">
@@ -30,9 +29,9 @@
         </div>
       </div>
 
-      <div class="bg-light my-3 p-3 fs-md">{{ post[ N.intro ] }}</div>
+      <div class="my-3 text-md-center fs-md">{{ post[ N.intro ] }}</div>
 
-      <div class="meta fs-md p-3">
+      <div class="meta d-md-flex my-2 p-2 fs-md bg-light">
         <div class="container-fluid p-0">
           <div class="row no-gutters">
             <div class="col-4">Name:</div>
@@ -69,7 +68,7 @@
           </div>
           <div class="row no-gutters">
             <div class="col-4">Link:</div>
-            <div class="col"><a href="{{post[ N.link ]}}" (click)="onClickLink($event)">{{
+            <div class="col"><a class="text-link" href="{{post[ N.link ]}}" (click)="onClickLink($event)">{{
               post[ N.link ] }}</a></div>
           </div>
         </div>
@@ -78,17 +77,17 @@
     </div>
 
 
-    <div class="flex-center">
-      <button class="flex-center mx-2 fs-sm" mat-flat-button (click)=" Edit.emit( post ) " *ngIf="philgo.isMyPost( post )">
-        <i class="material-icons fs-lg">create</i>
+    <div class="flex-center my-3 mt-md-4">
+      <button class="flex-center mx-2" mat-button (click)=" Edit.emit( post ) " *ngIf="philgo.isMyPost( post )">
+        <i class="material-icons fs-lg text-link">rate_review</i>
         <span class="ml-1">Edit</span>
       </button>
-      <button class="flex-center mx-2 fs-sm" mat-flat-button (click)=" Delete.emit( post ) " *ngIf="philgo.isMyPost( post )">
-        <i class="material-icons fs-lg">delete</i>
+      <button class="flex-center mx-2" mat-button (click)=" Delete.emit( post ) " *ngIf="philgo.isMyPost( post )">
+        <i class="material-icons fs-lg text-danger">delete</i>
         <span class="ml-1">Delete</span>
       </button>
-      <button class="flex-center mx-2 fs-sm" mat-flat-button (click)=" Delete.emit( post ) " *ngIf="philgo.isMyPost( post )">
-        <i class="material-icons fs-lg">clear</i>
+      <button class="flex-center mx-2" mat-button (click)=" View.emit( post ) ">
+        <i class="material-icons fs-lg text-danger">clear</i>
         <span class="ml-1">Close</span>
       </button>
     </div>
