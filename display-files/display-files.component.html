@@ -1,35 +1,41 @@
 <div class="files" *ngIf=" post?.files?.length ">
 
   <div [attr.no]=" photos.length " *ngIf=" display() && photos.length ">
-    <div  class="m-1" *ngIf=" edit == false && photos.length == 1">
-        <img class=" border border-box w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 200, idx: photos[0].idx }) }}">
+    <div class="flex-center m-1 max-h-200px max-h-md-250px of-hidden" *ngIf=" edit == false && photos.length == 1">
+        <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">
     </div>
 
-    <div class="d-flex" *ngIf=" edit == false && photos.length == 2">
-      <div class="m-1" *ngFor=" let photo of photos ">
-        <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 360, height: 250, idx: photo.idx }) }}">
+    <div class="d-flex mx-minus-1 mb-2" *ngIf=" edit == false && photos.length == 2">
+      <div class="flex-center w-50 p-1 max-h-200px of-hidden border-box" *ngFor=" let photo of photos ">
+        <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 300, height: 220, idx: photo.idx }) }}">
       </div>
     </div>
 
-    <div class="m-1" *ngIf=" edit == false && photos.length == 3">
-        <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 760, height: 180, idx: photos[0].idx }) }}">
-        <div class="d-flex my-1">
-          <div class="flex-center w-50 h-150px h-md-200px mr-1 of-hidden">
-            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[1].idx }) }}">
+    <div class="my-1" *ngIf=" edit == false && photos.length == 3">
+      <div class="flex-center mb-2 max-h-200px max-h-md-250px of-hidden">
+          <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">
+      </div>
+       <div class="d-flex my-1">
+          <div class="flex-center w-50 max-h-200px pr-1 border-box of-hidden">
+            <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[1].idx }) }}">
           </div> 
-          <div class="flex-center w-50 h-150px h-md-200px ml-1 of-hidden">
-            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[2].idx }) }}">
+          <div class="flex-center w-50 max-h-200px pl-1 border-box of-hidden">
+            <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[2].idx }) }}">
           </div>
         </div>
     </div>
 
-    <div class="d-flex flex-wrap my-1 m-md-1" *ngIf=" edit == false && photos.length > 3">
-      <img class="w-100 border border-box mb-1" src="{{ philgo.thumbnailUrl({ width: 760, height: 180, idx: photos[0].idx }) }}">
-      <ng-container  *ngFor=" let photo of photos; let index = index; ">
-          <div *ngIf="index != 0" class="size-103px size-md-box my-1 border-box of-hidden" [class.mx-2]="index%3==2" >
-            <img class="w-100 border border-box" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photo.idx }) }}">
+    <div class="my-1 m-md-1" *ngIf=" edit == false && photos.length > 3">
+      <div class="flex-center mb-1 max-h-200px max-h-md-250px of-hidden">
+        <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">  
+      </div>
+      <div class="d-flex flex-wrap mx-minus-1">
+        <ng-container  *ngFor=" let photo of photos; let index = index; ">
+          <div *ngIf="index != 0" class="w-33-percent max-height-150px my-1 px-1 border-box of-hidden" >
+            <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photo.idx }) }}">
           </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
 
     <div class=" flex-center flex-wrap pb-3" *ngIf=" edit ">
