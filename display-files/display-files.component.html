@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class=" flex-center flex-wrap pb-3" *ngIf=" edit ">
+    <div class=" flex-center justify-content-start flex-wrap pb-3" *ngIf=" edit ">
       <div class="position-relative of-hidden size-100px p-2" *ngFor=" let photo of photos ">
         <img class="w-100 border border-box" src="{{ photo.src_thumbnail }}">
         <i *ngIf=" edit " class="material-icons top-right pointer circle text-danger" (click)=" onClickDeleteButton( photo ) ">remove_circle</i>
