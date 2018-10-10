@@ -2,7 +2,7 @@
 
   <div class="border rounded m-1 border-box pointer" *ngIf="!show( post )" (click)=" View.emit( post ) ">
     <div class="flex-center of-hidden w-100 h-100px">
-      <img class="w-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}">
+      <img class="h-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}">
     </div>
     <div class="py-2 px-1 text-center of-hidden fs-sm">
       <div class="text-link truncate fs-md"> {{ post[ N.name ] }}</div>
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="my-3 fs-md">{{ post[ N.intro ] }}</div>
+      <div class="my-3 fs-md text-md-center">{{ post[ N.intro ] }}</div>
 
       <div class="meta d-md-flex my-2 p-2 fs-md bg-light">
         <div class="container-fluid p-0">
