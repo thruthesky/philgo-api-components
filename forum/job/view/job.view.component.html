@@ -1,6 +1,6 @@
 <div class="w-100" >
 
-  <div class="border rounded m-1 border-box pointer" *ngIf="!show( post )" (click)=" View.emit( post ) ">
+  <div class="border rounded m-1 border-box pointer" *ngIf="!show( post )" (click)=" View.emit( post ); scrollToTop(50); ">
     <div class="flex-center of-hidden w-100 h-100px bg-secondary">
       <img class="h-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}">
     </div>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="m-1 rounded" *ngIf=" show( post ) " >
+  <div class="mx-1 my-4" *ngIf=" show( post ) " >
 
     <div class="view-post-content">
       <div class="flex-center justify-content-around mx-minus-1">

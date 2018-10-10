@@ -31,7 +31,7 @@
       </div>
       <div class="d-flex flex-wrap mx-minus-1">
         <ng-container  *ngFor=" let photo of photos; let index = index; ">
-          <div *ngIf="index != 0" class="w-33-percent max-h-200px my-1 px-1 border-box of-hidden" >
+          <div *ngIf="index != 0" class="w-33-percent max-h-100px max-h-md-170px my-1 px-1 border-box of-hidden" >
             <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 300, height: 300, idx: photo.idx }) }}">
           </div>
         </ng-container>
