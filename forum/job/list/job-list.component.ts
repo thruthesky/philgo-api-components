@@ -164,7 +164,7 @@ export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDes
       req.view = options.view;
     }
     console.log('re: ', req);
-    this.philgo.debug = true;
+    // this.philgo.debug = true;
 
     // setTimeout(() => this.loading = true);
     this.loading = true;
