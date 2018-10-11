@@ -8,6 +8,10 @@
         <img class="d-block w-100" src="{{ philgo.profilePhotoUrl(form.url_profile_photo) }}">
       </div>
 
+      <div class="text-center fs-80" *ngIf="percentage">
+        <mat-progress-bar class="pt-2" mode="determinate" value="{{percentage}}"></mat-progress-bar>
+        {{percentage}}%
+      </div>
       <i class="top-right p-1 fs-lg circle bg-danger white pointer material-icons"
          (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
 
@@ -16,7 +20,7 @@
       </button>
     </div>
   </div>
-  <i class="mb-4" *ngIf="percentage">{{ percentage }}%</i>
+
 
 </section>
 
@@ -26,7 +30,7 @@
     <input matInput disabled>
     <mat-label>{{ _.t({ko: '닉네임', en: 'Nickname' }) }} : {{ form.nickname }}</mat-label>
   </mat-form-field>
-  
+
   <mat-form-field appearance="outline" class="w-100" *ngIf="philgo.isLoggedIn() ">
     <input matInput disabled>
     <mat-label> {{ _.t({ko: '이메일', en: 'Email' }) }} : {{ form.email }}</mat-label>
@@ -47,7 +51,7 @@
     <mat-label>{{ _.t({ko: '닉네임', en: 'Nickname' }) }}</mat-label>
   </mat-form-field>
   <mat-form-field appearance="outline" class="w-100">
-    <input [(ngModel)]=" form.name " name="name" type="text" matInput 
+    <input [(ngModel)]=" form.name " name="name" type="text" matInput
            (keyup.enter)="onSubmit()">
     <mat-label>{{ _.t({ko: '이름', en: 'Name' }) }}</mat-label>
   </mat-form-field>
@@ -84,6 +88,11 @@
   </div>
 
   <button  class="w-100 mt-5 mb-1 p-2 fs-md" type="submit" mat-flat-button>
-    {{ philgo.isLoggedIn() ? _.t({ko: '회원 정보 수정', en: 'Update Profile' }) : _.t({ko: '회원 가입 하기', en: 'Register' }) }}
+    <span *ngIf="!loader.submit">{{ philgo.isLoggedIn() ? _.t({ko: '회원 정보 수정', en: 'Update Profile' }) : _.t({ko: '회원 가입 하기', en: 'Register' }) }}</span>
+
+    <span class="flex-center" *ngIf="loader.submit">
+      <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-3">{{_.t({ko: '로딩...', en: 'Loading...' })}}</span>
+    </span>
   </button>
+
 </form>

@@ -29,31 +29,51 @@ export class ForumBasicViewComponent implements OnInit {
   }
 
   onReport(post: ApiPost) {
-
+    if ( post['loaderReport'] ) {
+      return;
+    }
+    post['loaderReport'] = true;
     this.philgo.postReport(post.idx).subscribe(res => {
       this.componentService.alert({
         content: this.philgo.t({ en: 'This post has been reported.', ko: '본 글은 신고되었습니다.' })
       });
+      post['loaderReport'] = false;
     }, e => {
       this.componentService.alert(e);
+      post['loaderReport'] = false;
     });
 
   }
 
   onVote(post: ApiPost, mode: 'good' | 'bad') {
+    if ( post['loaderVote'] ) {
+      return;
+    }
+    post['loaderVote'] = true;
+    post['vote'] = mode;
     this.philgo.postLike({ idx: post.idx, mode: mode }).subscribe(res => {
       console.log('res: ', res);
       post[mode] = res.result;
+      post['loaderVote'] = false;
     }, e => {
       this.componentService.alert(e);
+      post['loaderVote'] = false;
     });
   }
   onDelete(post: ApiPost) {
+    if ( post['loaderDelete'] ) {
+      return;
+    }
+    post['loaderDelete'] = true;
     this.philgo.postDelete({ idx: post.idx }).subscribe(res => {
       console.log('delete success: ', res);
       post.subject = this.philgo.textDeleted();
       post.content = this.philgo.textDeleted();
-    }, e => this.componentService.alert(e));
+      post['loaderDelete'] = false;
+    }, e => {
+      this.componentService.alert(e);
+      post['loaderDelete'] = false;
+    });
   }
 }
 

@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    if ( this.loader.submit ) {
+      return;
+    }
     /**
      * @todo langauge must be optional from the parent component side to customize.
      */
@@ -43,6 +46,7 @@ export class LoginComponent implements OnInit {
       })));
       return;
     }
+
     this.loader.submit = true;
     this.philgo.login({ uid: this.uid, password: this.password }).subscribe(res => {
       console.log('login: ', res);

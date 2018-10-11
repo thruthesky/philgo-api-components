@@ -16,6 +16,10 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
     gid: _.randomString(19, this.philgo.myIdx())
   };
   percentage = 0;
+
+  loader = {
+    submit: false
+  };
   constructor(
     public philgo: PhilGoApiService,
     public componentService: ComponentService
@@ -37,6 +41,11 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
   onSubmit() {
     console.log('this.form: ', this.form);
 
+    if ( this.loader.submit ) {
+      return;
+    }
+
+    this.loader.submit = true;
     /**
      * Edit
      */
@@ -47,7 +56,11 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
         Object.assign(this.post, res);
         this.post['edit'] = false;
         this.form.files = [];
-      }, e => this.componentService.alert(e));
+        this.loader.submit = false;
+      }, e => {
+        this.componentService.alert(e);
+        this.loader.submit = false;
+      });
     } else {
 
       console.log('create');
@@ -78,7 +91,11 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
         this.form.content = '';
         this.form.files = [];
         this.form.gid = _.randomString(19, this.philgo.myIdx());
-      }, e => this.componentService.alert(e));
+        this.loader.submit = false;
+      }, e => {
+        this.componentService.alert(e);
+        this.loader.submit = false;
+      });
     }
   }
 

@@ -9,5 +9,10 @@
       (keyup.enter)="onSubmit()">
       <mat-label>{{ _.t({ko: '비밀번호', en: 'Password' }) }}</mat-label>
   </mat-form-field>
-  <button class="w-100 mt-4 mb-1 p-2 fs-md" type="submit" mat-flat-button>{{ _.t({ko: '로그인', en: 'Login' }) }}</button>
+  <button class="w-100 mt-4 mb-1 p-2 fs-md" type="submit" mat-flat-button>
+    <span *ngIf="!loader.submit">{{ _.t({ko: '로그인', en: 'Login' }) }}</span>
+    <span class="flex-center" *ngIf="loader.submit">
+      <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-3">{{_.t({ko: '로딩...', en: 'Loading...' })}}</span>
+    </span>
+  </button>
 </form>

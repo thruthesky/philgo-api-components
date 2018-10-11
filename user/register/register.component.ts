@@ -77,6 +77,11 @@ export class RegisterComponent implements OnInit {
             event.preventDefault();
         }
 
+        if ( this.loader.submit ) {
+          return;
+        }
+        this.loader.submit = true;
+
         if (this.philgo.isLoggedIn()) {
             // console.log('going to update profile');
             const data: ApiProfileUpdateRequest = {

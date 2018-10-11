@@ -22,16 +22,18 @@
 
     <div class="post-buttons border-top">
       <button (click)=" onVote(post, 'good') " [class.text-primary]=" post.good != '0'">
+        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderVote'] && post['vote'] == 'good'"></mat-spinner>
         <i class="material-icons">thumb_up</i>
         <span> {{ post.good == '0' ? '' : ' ' + post.good }}</span>
       </button>
       <button (click)=" onVote(post, 'bad') ">
+        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderVote'] && post['vote'] == 'bad'"></mat-spinner>
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
         <button (click)=" edit.emit( post ) ">Edit</button>
-        <button (click)=" onDelete( post ) ">Delete</button>
-        <button (click)=" onReport( post ) ">Report</button>
+        <button (click)=" onDelete( post ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderDelete']"></mat-spinner>Delete</button>
+        <button (click)=" onReport( post ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderReport']"></mat-spinner>Report</button>
     </div>
   </div>
 
@@ -64,10 +66,12 @@
           </div>
           <div class="comment-buttons" *ngIf=" ! comment['edit'] ">
             <button  [class.text-primary]=" comment.good != '0'" (click)=" onVote(comment, 'good') ">
+              <mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderVote'] && comment['vote'] == 'good'"></mat-spinner>
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
             </button>
             <button (click)=" onVote(comment, 'bad') ">
+              <mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderVote'] && comment['vote'] == 'bad'"></mat-spinner>
               <i class="material-icons">thumb_down</i>
               <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
             </button>
@@ -76,8 +80,8 @@
               <span>Reply</span>
             </button>
             <button (click)=" comment['edit'] = true ">Edit</button>
-            <button (click)=" onDelete( comment ) ">Delete</button>
-            <button (click)=" onReport( comment ) ">Report</button>
+            <button (click)=" onDelete( comment ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderDelete']"></mat-spinner>Delete</button>
+            <button (click)=" onReport( comment ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>Report</button>
 
           </div>
 

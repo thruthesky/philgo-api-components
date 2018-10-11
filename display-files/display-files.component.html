@@ -18,7 +18,7 @@
        <div class="d-flex my-1">
           <div class="flex-center w-50 max-h-200px pr-1 border-box of-hidden">
             <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[1].idx }) }}">
-          </div> 
+          </div>
           <div class="flex-center w-50 max-h-200px pl-1 border-box of-hidden">
             <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 300, height: 200, idx: photos[2].idx }) }}">
           </div>
@@ -27,7 +27,7 @@
 
     <div class="my-1" *ngIf=" edit == false && photos.length > 3">
       <div class="flex-center mb-1 max-h-200px max-h-md-250px of-hidden">
-        <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">  
+        <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 760, height: 250, idx: photos[0].idx }) }}">
       </div>
       <div class="d-flex flex-wrap mx-minus-1">
         <ng-container  *ngFor=" let photo of photos; let index = index; ">
@@ -61,8 +61,7 @@
 
 </div>
 
-<div class="upload-bar text-center" *ngIf=" percentage ">
-  <div class="progress w-200px">
-    <div class="progress-bar p-5" [style.width]=" percentage + '%' ">{{percentage}}%</div>
-  </div>
+<div class="w-200px p-3 fs-80 text-center" *ngIf="percentage">
+  <mat-progress-bar mode="determinate" value="{{percentage}}"></mat-progress-bar>
+  {{percentage}}%
 </div>
