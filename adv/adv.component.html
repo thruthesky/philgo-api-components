@@ -1,10 +1,11 @@
-<section class="ad-box sonub-free-adv">
-  <header>Another Advertisement</header>
+<section class="adv bg-white fs-sm" *ngIf=" post ">
   <article>
-    You can post advertisement free<br>
-    Post now<br>
+    <div>
+      <img class="w-100" src="{{ post.files[0].src }}">
+    </div>
+    <div class="p-2 bg-light">
+      <header class="">{{ post.varchar_3 }}</header>
+      {{ post.varchar_4 }}
+    </div>
   </article>
-  <footer>
-    Free Advertisement
-  </footer>
 </section>
