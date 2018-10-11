@@ -22,36 +22,34 @@
 
 <form class="form-content pb-4" (ngSubmit)="onSubmit( $event )">
 
-  <mat-form-field appearance="outline" class="w-100" *ngIf="philgo.isLoggedIn() ">
-    <input matInput disabled>
-    <mat-label>{{ _.t({ko: '닉네임', en: 'Nickname' }) }} : {{ form.nickname }}</mat-label>
-  </mat-form-field>
+  <div class="w-100 p-3 bg-light mb-3 border-box" *ngIf="philgo.isLoggedIn() ">
+    {{ _.t({ko: '닉네임', en: 'Nickname' }) }} : {{ form.nickname }}
+  </div>
   
-  <mat-form-field appearance="outline" class="w-100" *ngIf="philgo.isLoggedIn() ">
-    <input matInput disabled>
-    <mat-label> {{ _.t({ko: '이메일', en: 'Email' }) }} : {{ form.email }}</mat-label>
-  </mat-form-field>
+  <div class="w-100 p-3 bg-light mb-3 border-box" *ngIf="philgo.isLoggedIn() ">
+    {{ _.t({ko: '이메일', en: 'Email' }) }} : {{ form.email }}
+  </div>
 
-  <mat-form-field appearance="outline" class="w-100" *ngIf=" philgo.isLoggedOut() ">
+  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
     <input [(ngModel)]=" form.email " name="email" type="email" matInput
            (keyup.enter)="onSubmit()">
     <mat-label> {{ _.t({ko: '이메일', en: 'Email' }) }}</mat-label>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="w-100" *ngIf=" philgo.isLoggedOut() ">
+  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
     <input [(ngModel)]=" form.password " name="password" type="password" matInput
            (keyup.enter)="onSubmit()">
     <mat-label>{{ _.t({ko: '비밀번호', en: 'Password' }) }}</mat-label>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="w-100" *ngIf=" philgo.isLoggedOut() ">
+  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
     <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput>
     <mat-label>{{ _.t({ko: '닉네임', en: 'Nickname' }) }}</mat-label>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="w-100">
+  <mat-form-field class="w-100">
     <input [(ngModel)]=" form.name " name="name" type="text" matInput 
            (keyup.enter)="onSubmit()">
     <mat-label>{{ _.t({ko: '이름', en: 'Name' }) }}</mat-label>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="w-100">
+  <mat-form-field class="w-100">
     <input [(ngModel)]=" form.mobile " name="mobile" type="text" matInput
            (keyup.enter)="onSubmit()">
     <mat-label>{{ _.t({ko: '전화번호', en: 'Phone Number' }) }}</mat-label>
