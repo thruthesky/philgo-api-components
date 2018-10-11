@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     loadUserProfile() {
         if (this.philgo.isLoggedIn()) {
             this.loader.profile = true;
-            this.philgo.debug = true;
+            // this.philgo.debug = true;
             this.philgo.profile().subscribe(user => {
                 this.loader.profile = false;
                 this.form = user;
