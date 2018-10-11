@@ -9,6 +9,7 @@ import { PhilGoApiService, ApiPost } from 'share/philgo-api/philgo-api.service';
 })
 export class AdvComponent implements OnInit, AfterViewInit {
 
+  @Input() design: 'title-up' | 'title-bottom' = 'title-bottom';
   @Input() code: string;
   @Input() place = 'all';
   post: ApiPost;
@@ -36,7 +37,7 @@ export class AdvComponent implements OnInit, AfterViewInit {
 
     this.philgo.debug = true;
     this.philgo.postQuery({
-      fields: ` idx, gid, subject, int_1, int_2, varchar_1, varchar_3, varchar_4, varchar_5 `,
+      fields: ` idx, gid, subject, int_1, int_2, varchar_1, varchar_3, varchar_4, link `,
       where: where,
       orderby: ``,
       limit: 1
