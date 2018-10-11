@@ -58,7 +58,7 @@
         <app-job-view [post]=" postView " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
       </div>
 
-      <div class="col-4 col-md-2 order-1" [ngClass]="{'order-1': !post.show, 'col-12': post.show, 'col-md-12': post.show }" *ngFor="let post of posts">
+      <div class="col-4 col-md-2" [ngClass]="{ 'col-12': post.show, 'col-md-12': post.show }" *ngFor="let post of posts">
         <app-job-view [post]=" post " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
       </div>
   </div>

@@ -49,8 +49,5 @@ export class JobViewComponent implements OnInit {
         window.open(this.post[N.link]);
     }
 
-    scrollToTop() {
-        window.scrollTo( { top: 0, behavior: 'smooth'} );
-    }
 }
 
