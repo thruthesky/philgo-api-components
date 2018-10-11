@@ -6,7 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { ComponentServiceModule } from '../../../service/component.service.module';
 import {
   MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTooltipModule
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
+    MatTooltipModule
   ],
   declarations: [JobEditComponent],
   exports: [JobEditComponent]

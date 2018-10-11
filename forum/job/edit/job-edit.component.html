@@ -8,22 +8,25 @@
 </ng-template>
 
 <section>
-    <div class="position-relative reminder p-3 pr-4 my-2" *ngIf="showReminder">
-        Please post your job inquiry only if you really want it.
-        We guarantee that you will have contact from your potential employer as quickly as it can be.
-        But before we show your profile to employers, we will verify if your data is true or not.
-        Please fill in the form with care and wait for the contact.
+    <div class="position-relative reminder p-3 pr-4 my-2"
+        matTooltipClass="p-3 bg-secondary fw-light fs-md"
+        matTooltip="We guarantee that you will have contact from your potential employer as quickly as it can be.
+                    But before we show your profile to employers, we will verify if your data is true or not.
+                    Please fill in the form with care and wait for the contact."
+        *ngIf="showReminder">
+        Please post your job inquiry only if you really want it.  We will verify if your data is true or not.
         <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showReminder=false">clear</i>
     </div>
-    <div class="position-relative note p-3 pr-4"  *ngIf="showNote">
-        When uploading Profile Photo, Whole Body Photo, and Id Photo, <em class="fw-bold">HEIGHT</em> and <em class="fw-bold">WIDTH</em> must be equal 
-        for better quality of display photos. For Ex: 200x200, 250x250, 500x500, etc... 
+    <div class="d-md-none position-relative note p-3 pr-4"  *ngIf="showNote">
+      <em class="fw-bold">HEIGHT</em> and <em class="fw-bold">WIDTH</em> must be equal for better quality of display photos. 
       <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showNote=false">clear</i>
     </div>
 
   <div class="container-fluid px-0 pt-4 pb-2">
       <div class="row py-2">
-          <div class="col-12 col-md-4 flex-column-center">
+          <div class="col-12 col-md-4 flex-column-center"
+               matTooltipClass="p-3 bg-secondary fw-light fs-md"
+               matTooltip="Recommended sizes - 200x200 / 250x250 / 500x500 / etc... ">
             <div class="position-relative">
               <ng-container *ngTemplateOutlet="photo; context: { code: N.profilePhoto }"></ng-container>
               <button class="w-180px fs-sm mt-2" mat-flat-button>Profile Photo</button>
@@ -34,7 +37,9 @@
               *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.profilePhoto, percentage: percentage }"></ng-container>
           </div>
       
-          <div class="col-12 col-md-4 flex-column-center my-3 my-md-0">
+          <div class="col-12 col-md-4 flex-column-center my-3 my-md-0"
+               matTooltipClass="p-3 bg-secondary fw-light fs-md"
+               matTooltip="Recommended sizes - 200x200 / 250x250 / 500x500 / etc... ">
             <div class="position-relative">
               <ng-container *ngTemplateOutlet="photo; context: { code: N.bodyPhoto }"></ng-container>
               <button class="w-180px fs-sm mt-2" mat-flat-button>Whole Body Photo</button>
@@ -44,7 +49,9 @@
               *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.bodyPhoto, percentage: percentage }"></ng-container>
           </div>
       
-          <div class="col-12 col-md-4 flex-column-center">
+          <div class="col-12 col-md-4 flex-column-center"
+               matTooltipClass="p-3 bg-secondary fw-light fs-md"
+               matTooltip="Recommended sizes - 200x200 / 250x250 / 500x500 / etc... ">
             <div class="position-relative">
               <ng-container *ngTemplateOutlet="photo; context: { code: N.idPhoto }"></ng-container>
               <button class="w-180px fs-sm mt-2" mat-flat-button>ID Photo</button>
