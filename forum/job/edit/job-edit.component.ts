@@ -307,6 +307,10 @@ export class JobEditComponent implements OnInit, AfterViewInit {
       return;
     }
 
+    /**
+     * Set percentage to 10 to display file is being uploaded already.
+     */
+    this.percentage = 10;
     this.philgo.fileUpload(files, { gid: this.form.gid, code: code }).subscribe(res => {
       if (typeof res === 'number') {
         console.log('percentage: ', res);

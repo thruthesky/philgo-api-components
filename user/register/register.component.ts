@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     loadUserProfile() {
         if (this.philgo.isLoggedIn()) {
             this.loader.profile = true;
-            this.philgo.debug = true;
+            // this.philgo.debug = true;
             this.philgo.profile().subscribe(user => {
                 this.loader.profile = false;
                 this.form = user;
@@ -127,6 +127,7 @@ export class RegisterComponent implements OnInit {
     }
 
     onUpload(files: FileList) {
+        this.percentage = 10;
         this.philgo.uploadPrimaryPhotoWeb(files).subscribe(re => {
             // console.log(event);
             if (typeof re === 'number') {
@@ -150,6 +151,7 @@ export class RegisterComponent implements OnInit {
                 this.onSubmit();
             }
         }, (e: HttpErrorResponse) => {
+            this.percentage = 0;
             console.log('error subscribe: ', e);
             if (e.error instanceof Error) {
                 console.log('Client-side error occurred.');

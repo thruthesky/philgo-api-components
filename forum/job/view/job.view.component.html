@@ -1,6 +1,6 @@
 <div class="w-100" >
 
-  <div class="rounded m-1 border-box pointer" [class.border]="!show(post)" (click)=" View.emit( post ) ">
+  <div class="rounded m-1 border-box pointer" [ngClass]="{ 'border': !show(post), 'mt-4': show(post) }" (click)=" View.emit( post ) ">
     <div class="flex-center of-hidden w-100 h-100px" [class.bg-secondary]="!show(post)">
       <img class="h-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}">
     </div>
