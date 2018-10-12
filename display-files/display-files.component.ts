@@ -76,6 +76,20 @@ export class DisplayFilesComponent implements OnInit, OnChanges {
       if (pos !== -1) {
         this.post.files.splice(pos, 1);
       }
-    }, e => alert(e));
+    }, e => alert(e.message));
+  }
+
+  onClickFeature(file: ApiFile) {
+    console.log('going to set imaeg as featured: ', file);
+    this.philgo.fileFeature(file.idx).subscribe(res => {
+      console.log('file feature success', res);
+      this.post.files.find(orgFile => {
+        if (orgFile.code === 'featured') {
+          orgFile.code = '';
+          return true;
+        }
+      });
+      file.code = 'featured';
+    }, e => alert(e.message));
   }
 }
