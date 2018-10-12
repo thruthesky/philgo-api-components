@@ -34,55 +34,70 @@
     {{ _.t({ko: '이메일', en: 'Email' }) }} : {{ form.email }}
   </div>
 
-  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
-    <input [(ngModel)]=" form.email " name="email" type="email" matInput
-           (keyup.enter)="onSubmit()">
-    <mat-label> {{ _.t({ko: '이메일', en: 'Email' }) }}</mat-label>
-  </mat-form-field>
-  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
-    <input [(ngModel)]=" form.password " name="password" type="password" matInput
-           (keyup.enter)="onSubmit()">
-    <mat-label>{{ _.t({ko: '비밀번호', en: 'Password' }) }}</mat-label>
-  </mat-form-field>
-  <mat-form-field class="w-100" *ngIf=" philgo.isLoggedOut() ">
-    <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput>
-    <mat-label>{{ _.t({ko: '닉네임', en: 'Nickname' }) }}</mat-label>
-  </mat-form-field>
-  <mat-form-field class="w-100">
-    <input [(ngModel)]=" form.name " name="name" type="text" matInput
-           (keyup.enter)="onSubmit()">
-    <mat-label>{{ _.t({ko: '이름', en: 'Name' }) }}</mat-label>
-  </mat-form-field>
-  <mat-form-field class="w-100">
-    <input [(ngModel)]=" form.mobile " name="mobile" type="text" matInput
-           (keyup.enter)="onSubmit()">
-    <mat-label>{{ _.t({ko: '전화번호', en: 'Phone Number' }) }}</mat-label>
-  </mat-form-field>
-
-  <mat-form-field class="w-100" *ngIf=" gender ">
-    <mat-select name="gender" placeholder="{{ _.t({ko: '성별', en: 'Gender' }) }}" [(ngModel)]="form.gender">
-      <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
-      <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-
-  <div class="d-md-flex" *ngIf=" birthday ">
-    <mat-form-field class="w-100 mr-md-2">
-      <mat-select name="birth_month" placeholder="{{ _.t({ko: '태어난 월', en: 'Birth Month' }) }}" [(ngModel)]=" form.birth_month ">
-        <mat-option *ngFor=" let m of _.makeArrayNumber(12, 1)" value="{{ m}}">{{m}}</mat-option>
-      </mat-select>
+  <div class="border-box">
+    <mat-form-field appearance="outline" class="w-100" *ngIf=" philgo.isLoggedOut() ">
+      <input [(ngModel)]=" form.email " name="email" type="email" matInput
+             (keyup.enter)="onSubmit()">
+      <mat-label> {{ _.t({ko: '이메일', en: 'Email' }) }}</mat-label>
+      <mat-hint>Input Valid Email Only</mat-hint>
     </mat-form-field>
-    <mat-form-field class="w-100 mx-md-3">
-      <mat-select name="birth_day" placeholder="{{ _.t({ko: '태어난 일', en: 'Birth Day' }) }}" [(ngModel)]=" form.birth_day ">
-        <mat-option *ngFor=" let m of _.makeArrayNumber(31, 1)" value="{{ m}}">{{m}}</mat-option>
-      </mat-select>
+    <mat-form-field appearance="outline" class="w-100" *ngIf=" philgo.isLoggedOut() ">
+      <input [(ngModel)]=" form.password " name="password" type="password" matInput
+             (keyup.enter)="onSubmit()">
+      <mat-label>{{ _.t({ko: '비밀번호', en: 'Password' }) }}</mat-label>
+      <mat-hint>Please Input Strong Password</mat-hint>
     </mat-form-field>
-    <mat-form-field class="w-100 ml-md-2">
-      <mat-select name="birth_year" placeholder="{{ _.t({ko: '태어난 년도', en: 'Birth Year' }) }}" [(ngModel)]=" form.birth_year ">
-        <mat-option *ngFor=" let m of _.makeArrayNumber(50, 1)" value="{{ minAge - m }}">{{ minAge - m }}</mat-option>
-      </mat-select>
+    <mat-form-field appearance="outline" class="w-100" *ngIf=" philgo.isLoggedOut() ">
+      <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput>
+      <mat-label>{{ _.t({ko: '닉네임', en: 'Nickname' }) }}</mat-label>
+      <mat-hint>Input Nickname</mat-hint>
     </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input [(ngModel)]=" form.name " name="name" type="text" matInput
+             (keyup.enter)="onSubmit()">
+      <mat-label>{{ _.t({ko: '이름', en: 'Name' }) }}</mat-label>
+      <mat-hint>Input Name</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input [(ngModel)]=" form.mobile " name="mobile" type="text" matInput
+             (keyup.enter)="onSubmit()">
+      <mat-label>{{ _.t({ko: '전화번호', en: 'Phone Number' }) }}</mat-label>
+      <mat-hint>Input Valid Phone Number</mat-hint>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="w-100" *ngIf=" gender ">
+      <mat-select name="gender" [(ngModel)]="form.gender">
+        <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
+        <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
+      </mat-select>
+      <mat-label>{{ _.t({ko: '성별', en: 'Gender' }) }}</mat-label>
+      <mat-hint>Select Gender</mat-hint>
+    </mat-form-field>
+  
+  
+    <div class="d-md-flex border-box" *ngIf=" birthday ">
+      <mat-form-field appearance="outline" class="w-100 mr-md-1 border-box">
+        <mat-select name="birth_month" [(ngModel)]=" form.birth_month ">
+          <mat-option *ngFor=" let m of _.makeArrayNumber(12, 1)" value="{{ m}}">{{m}}</mat-option>
+        </mat-select>
+        <mat-label>{{ _.t({ko: '태어난 월', en: 'Birth Month' }) }}</mat-label>
+        <mat-hint>Select Birth Month</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100 mx-md-1 border-box">
+        <mat-select name="birth_day" [(ngModel)]=" form.birth_day ">
+          <mat-option *ngFor=" let m of _.makeArrayNumber(31, 1)" value="{{ m}}">{{m}}</mat-option>
+        </mat-select>
+        <mat-label>{{ _.t({ko: '태어난 일', en: 'Birth Day' }) }}</mat-label>
+        <mat-hint>Select Birth Day</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100 ml-md-1 border-box">
+        <mat-select name="birth_year" [(ngModel)]=" form.birth_year ">
+          <mat-option *ngFor=" let m of _.makeArrayNumber(50, 1)" value="{{ minAge - m }}">{{ minAge - m }}</mat-option>
+        </mat-select>
+        <mat-label>{{ _.t({ko: '태어난 년도', en: 'Birth Year' }) }}</mat-label>
+        <mat-hint>Select Birth Year</mat-hint>
+      </mat-form-field>
+    </div>
   </div>
 
   <button  class="w-100 mt-5 mb-1 p-2 fs-md" type="submit" mat-flat-button>
