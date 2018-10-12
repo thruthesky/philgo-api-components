@@ -64,7 +64,7 @@
       <mat-label>{{ _.t({ko: '전화번호', en: 'Phone Number' }) }}</mat-label>
       <mat-hint>Input Valid Phone Number</mat-hint>
     </mat-form-field>
-  
+
     <mat-form-field appearance="outline" class="w-100" *ngIf=" gender ">
       <mat-select name="gender" [(ngModel)]="form.gender">
         <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
@@ -73,8 +73,8 @@
       <mat-label>{{ _.t({ko: '성별', en: 'Gender' }) }}</mat-label>
       <mat-hint>Select Gender</mat-hint>
     </mat-form-field>
-  
-  
+
+
     <div class="d-md-flex border-box" *ngIf=" birthday ">
       <mat-form-field appearance="outline" class="w-100 mr-md-1 border-box">
         <mat-select name="birth_month" [(ngModel)]=" form.birth_month ">
@@ -100,7 +100,7 @@
     </div>
   </div>
 
-  <button  class="w-100 mt-5 mb-1 p-2 fs-md" type="submit" mat-flat-button>
+  <button  class="flex-center w-100 mt-5 mb-1 p-2 fs-md" type="submit" mat-flat-button>
     <span *ngIf="!loader.submit">{{ philgo.isLoggedIn() ? _.t({ko: '회원 정보 수정', en: 'Update Profile' }) : _.t({ko: '회원 가입 하기', en: 'Register' }) }}</span>
 
     <span class="flex-center" *ngIf="loader.submit">
