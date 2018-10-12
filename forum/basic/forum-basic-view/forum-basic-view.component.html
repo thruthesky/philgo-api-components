@@ -31,9 +31,9 @@
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
-        <button (click)=" edit.emit( post ) ">Edit</button>
-        <button (click)=" onDelete( post ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderDelete']"></mat-spinner>Delete</button>
-        <button (click)=" onReport( post ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderReport']"></mat-spinner>Report</button>
+        <button (click)=" edit.emit( post ) " *ngIf=" philgo.isMyPost(post) ">Edit</button>
+        <button (click)=" onDelete( post ) " *ngIf=" philgo.isMyPost(post) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderDelete']"></mat-spinner>Delete</button>
+        <button (click)=" onReport( post ) " *ngIf=" ! philgo.isMyPost(post) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderReport']"></mat-spinner>Report</button>
     </div>
   </div>
 
@@ -79,9 +79,10 @@
               <i class="material-icons">reply</i>
               <span>Reply</span>
             </button>
-            <button (click)=" comment['edit'] = true ">Edit</button>
-            <button (click)=" onDelete( comment ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderDelete']"></mat-spinner>Delete</button>
-            <button (click)=" onReport( comment ) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>Report</button>
+            <button (click)=" philgo.isMyPost(comment) && comment['edit'] = true "  *ngIf=" philgo.isMyPost(comment) ">Edit</button>
+            <button (click)=" onDelete( comment ) " *ngIf=" philgo.isMyPost(comment) "><mat-spinner class="mr-1" [diameter]="14" *ngIf=" comment['loaderDelete']"></mat-spinner>Delete</button>
+
+            <button (click)=" onReport( comment ) " *ngIf=" ! philgo.isMyPost(comment) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>Report</button>
 
           </div>
 
