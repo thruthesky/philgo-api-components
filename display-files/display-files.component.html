@@ -46,7 +46,10 @@
         </div>
         <div class="fs-sm">
             <div class="bg-primary white" *ngIf=" photo.code == 'featured' ">Featured</div>
-            <div class="pointer" *ngIf=" photo.code != 'featured' " (click)="onClickFeature( photo )">Set as featured</div>
+            <div class="flex-center pointer text-link" *ngIf=" photo.code != 'featured' " (click)="onClickFeature( photo )">
+              Set as featured
+              <i class="material-icons fs-md ml-1 text-dark">wallpaper</i>
+            </div>
         </div>
       </div>
     </div>
