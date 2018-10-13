@@ -18,7 +18,7 @@
         <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showReminder=false">clear</i>
     </div>
     <div class="position-relative note p-3 pr-4"  *ngIf="showNote">
-      <em class="fw-bold">HEIGHT</em> and <em class="fw-bold">WIDTH</em> must be equal for better quality of display photos. 
+      <em class="fw-bold">HEIGHT</em> and <em class="fw-bold">WIDTH</em> must be equal for better quality of display photos.
       <i class="material-icons top-right fs-lg p-1 pointer text-muted"  (click)="showNote=false">clear</i>
     </div>
 
@@ -36,7 +36,7 @@
             <ng-container
               *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.profilePhoto, percentage: percentage }"></ng-container>
           </div>
-      
+
           <div class="col-12 col-md-4 flex-column-center my-3 my-md-0"
                matTooltipClass="p-3 bg-primary white rounded fw-light fs-md"
                matTooltip="Recommended sizes - 200x200 / 250x250 / 500x500 / etc... ">
@@ -48,7 +48,7 @@
             <ng-container
               *ngTemplateOutlet="progressBar; context: { show: percentage && fileCode == N.bodyPhoto, percentage: percentage }"></ng-container>
           </div>
-      
+
           <div class="col-12 col-md-4 flex-column-center"
                matTooltipClass="p-3 bg-primary white rounded fw-light fs-md"
                matTooltip="Recommended sizes - 200x200 / 250x250 / 500x500 / etc... ">
@@ -80,12 +80,12 @@
           <input name="name" type="text" matInput [(ngModel)]="form[N.name]">
           <mat-label>{{ philgo.t({ en: 'Name', ko: '이름' }) }}</mat-label>
         </mat-form-field>
-      
+
         <mat-form-field  class="w-100 mx-md-1" >
           <input name="mobile" type="text" matInput [(ngModel)]="form[N.mobile]">
           <mat-label>{{ philgo.t({ en: 'Mobile Number', ko: '핸드폰 번호' }) }}</mat-label>
         </mat-form-field>
-    
+
         <mat-form-field  class="w-100 ml-md-1" >
           <input name="email" type="email" matInput [(ngModel)]="form[N.email]">
           <mat-label>{{ philgo.t({ en: 'Email Address', ko: '이메일 주소' }) }}</mat-label>
@@ -164,24 +164,22 @@
 
   </form>
 
-  <!-- <div>
-    <button mat-button cdkFocusInitial (click)=" onSubmit() ">Submit</button>
-    <button mat-button (click)=" onDelete() " *ngIf=" form?.idx ">Delete</button>
-    <button mat-button (click)=" onClose() ">Cancel</button>
-  </div> -->
-
   <div class="my-4 text-center">
+    <button class="mx-1 fs-sm bg-white black bg-light" mat-flat-button (click)=" onClose() ">
+      <i class="material-icons red">clear</i>
+      <span class="ml-1">Cancel</span>
+    </button>
       <button class="mx-1 fs-sm bg-primary" mat-flat-button type="submit" cdkFocusInitial (click)=" onSubmit() ">
-        <span class="mr-2">Submit</span>
-        <i class="material-icons">send</i>
+        <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+        <span class="flex-center" *ngIf="loader.submit">
+          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{philgo.t({ko: '절약...', en: 'Saving...' })}}</span>
+        </span>
       </button>
       <button class="mx-1 fs-sm bg-white black bg-light" mat-flat-button (click)=" onDelete() " *ngIf=" form?.idx ">
-        <i class="material-icons">delete</i>
-        <span class="ml-1">Delete</span>
-      </button>
-      <button class="mx-1 fs-sm bg-white black bg-light" mat-flat-button (click)=" onClose() ">
-        <i class="material-icons red">clear</i>
-        <span class="ml-1">Cancel</span>
+        <span class="flex-center" *ngIf="!loader.delete">Delete <i class="ml-2 material-icons">delete</i></span>
+        <span class="flex-center" *ngIf="loader.delete">
+          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{philgo.t({ko: '삭제 중...', en: 'Deleting...' })}}</span>
+        </span>
       </button>
   </div>
 </section>

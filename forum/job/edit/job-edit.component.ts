@@ -42,6 +42,10 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   showReminder = true;
   showNote = true;
 
+  loader = {
+    submit: false,
+    delete: false
+  };
 
   constructor(private router: Router,
     public philgo: PhilGoApiService,
@@ -132,6 +136,9 @@ export class JobEditComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+    if ( this.loader.submit ) {
+      return;
+    }
 
     if (!this.form.category) {
       return this.componentService.alert({content: this.philgo.t({ko: '직책을 선택하십시오.', en: 'Please choose Job Title.'})});
@@ -209,11 +216,6 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     }
 
 
-    // if (!this.form[N.link]) {
-    //   return this.componentService.alert({
-    //     content: this.philgo.t({ ko: '프로필 URL (페이스북 등) 을 입력하십시오.', en: 'Please input your profile link like facebook URL.' }) });
-    // }
-
     if (this.form[N.link]) {
       if (this.form[N.link].indexOf('http://') === 0 || this.form[N.link].indexOf('https://') === 0) {
         // link is ok
@@ -237,12 +239,6 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     }
 
 
-    /**
-     * Pass job category
-     */
-    // this.form.category = this.data.category;
-
-    //
 
     this.form[N.birthday] = this.year + this.month + this.day;
 
@@ -251,14 +247,18 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     this.form[N.city] = this.city;
 
     this.form.group_id = this.group_id;
+
+    this.loader.submit = true;
     /**
      * Edit
      */
     if (this.form.idx) {
       this.philgo.postEdit(this.form).subscribe(res => {
+        this.loader.submit = false;
         this.router.navigateByUrl(`/job/${this.form.category}/${this.form.idx}`);
       }, e => {
         this.componentService.alert(e);
+        this.loader.submit = false;
       });
     } else {
       /**
@@ -266,17 +266,23 @@ export class JobEditComponent implements OnInit, AfterViewInit {
        */
       this.philgo.postCreate(this.form).subscribe(res => {
         // console.log('create res: ', res);
+        this.loader.submit = false;
         this.router.navigateByUrl(`/job/${this.form.category}/${res.idx}`);
       }, e => {
         this.componentService.alert(e);
+        this.loader.submit = false;
       });
     }
   }
 
 
   onDelete() {
+    if ( this.loader.delete ) {
+      return;
+    }
 
     console.log(this.form);
+    this.loader.delete = true;
     this.componentService.deletePostWithMemberLogin(this.form).subscribe(res => {
       console.log('deletePostWithMemberLogin', res);
       if (res.role === 'yes') {
@@ -285,8 +291,10 @@ export class JobEditComponent implements OnInit, AfterViewInit {
           this.router.navigateByUrl(`/job/${this.form.category}`);
         });
       }
+      this.loader.delete = false;
     }, e => {
       this.componentService.alert(e);
+      this.loader.delete = false;
     });
   }
 

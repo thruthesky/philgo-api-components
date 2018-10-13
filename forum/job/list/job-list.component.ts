@@ -73,6 +73,10 @@ export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     // 'Muntinlupa': {province: 'Metro Manila', city: 'Metro Manila - Muntinlupa'},
   };
 
+  loader = {
+    delete: false
+  };
+
   //
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly componentService: ComponentService,
@@ -224,16 +228,31 @@ export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   onDelete(post: ApiPost) {
     console.log(post);
+
+    if ( this.loader.delete ) {
+      return;
+    }
     this.componentService.deletePostWithMemberLogin(post).subscribe(res => {
       console.log('deletePostWithMemberLogin', res);
       if (res.role === 'yes') {
+
+        this.loader.delete = true;
         this.philgo.postDelete({idx: post.idx}).subscribe(result => {
           console.log('postDelete:: ', result);
+
+          if ( this.postView.idx  === post.idx ) {
+            this.postView.idx = null;
+            return;
+          }
           const pos = this.posts.findIndex(p => p.idx === post.idx);
           console.log('pos: ', pos);
           if (pos !== -1) {
             this.posts.splice(pos, 1);
           }
+          this.loader.delete = false;
+        }, e => {
+          this.loader.delete = false;
+          this.componentService.alert(e);
         });
       }
     }, e => {
