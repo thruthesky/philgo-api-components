@@ -7,18 +7,18 @@
       <div class="size-120px of-hidden">
         <img class="d-block w-100" src="{{ philgo.profilePhotoUrl(form.url_profile_photo) }}">
       </div>
-
-      <div class="text-center fs-80" *ngIf="percentage">
-        <mat-progress-bar class="pt-2" mode="determinate" value="{{percentage}}"></mat-progress-bar>
-        {{percentage}}%
-      </div>
       <i class="top-right p-1 fs-lg circle bg-danger white pointer material-icons"
          (click)=" onClickDeletePrimaryPhoto( $event ) " *ngIf=" form.url_profile_photo ">delete</i>
 
       <button mat-flat-button class="bg-primary mt-3 w-100">
         {{ philgo.t({ko: '사진 업로드', en: 'Upload Photo' }) }}
       </button>
-      <div class=" w-100 my-2 p-1 rounded bg-success fs-xs white text-center border-box"  *ngIf="percentage" [style.width]=" percentage + '%'">{{percentage}}%</div>
+
+      <div class="text-center fs-80" *ngIf="percentage">
+        <mat-progress-bar class="mb-1 mt-3" mode="determinate" value="{{percentage}}"></mat-progress-bar>
+        {{percentage}}%
+      </div>
+      <!-- <div class=" w-100 my-2 p-1 rounded bg-success fs-xs white text-center border-box"  *ngIf="percentage" [style.width]=" percentage + '%'">{{percentage}}%</div> -->
     </div>
   </div>
 </section>
