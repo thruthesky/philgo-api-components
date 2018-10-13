@@ -65,7 +65,7 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnInit() {
   }
   ngAfterViewInit() {
-    this.infiniteScrollSubscription = this.scroll.watch('section.forum-basic-list', 300).subscribe(e => {
+    this.infiniteScrollSubscription = this.scroll.watch('.layout-content', 300).subscribe(e => {
       if (this.page_no >= 2) {
         this.loadPage();
       }

@@ -118,7 +118,7 @@ export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
     // Which element do you want to watch for scroll?
     // update `section.post-list` as you need.
-    this.infiniteScrollSubscription = this.scroll.watch('section.job-list', 400).subscribe(e => this.loadPage());
+    this.infiniteScrollSubscription = this.scroll.watch('.layout-content', 400).subscribe(e => this.loadPage());
   }
 
   // Un-subscription or you may get multiple events.
