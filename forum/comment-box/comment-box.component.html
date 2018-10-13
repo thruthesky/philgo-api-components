@@ -2,18 +2,18 @@
 
     <div class="position-relative d-flex align-items-center comment-box flex-grow-1">
       <textarea matInput placeholder="Write a comment..." name="content" [(ngModel)]="form.content"></textarea>
-      
+
       <div class="camera position-absolute transparent-cover-wrapper">
         <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
         <i class="material-icons pointer">camera_alt</i>
       </div>
     </div>
-  
+
     <button class="flex-center send-button ml-1 p-2">
-      <i class="material-icons ml-2">send</i>
+      <i class="ml-2 material-icons" *ngIf="!loader.submit">send</i>
+      <mat-spinner class="d-inline-block ml-2" *ngIf="loader.submit" [diameter]="24"></mat-spinner>
     </button>
-  
+
   </form>
-  
+
   <app-display-files class="d-block px-2" [post]=" form " [edit]=" true "  [percentage]=" percentage "></app-display-files>
-  

@@ -174,11 +174,16 @@ export class RegisterComponent implements OnInit {
 
     onClickDeletePrimaryPhoto(event: Event) {
         event.stopPropagation();
+        this.form['loaderDelete'] = true;
         const idx = this.form.url_profile_photo.split('/').pop();
         this.philgo.deleteFile(parseInt(idx, 10)).subscribe(res => {
             // console.log('res: ', res);
             this.form.url_profile_photo = '';
-        }, e => alert(e.message));
+            this.form['loaderDelete'] = false;
+        }, e => {
+          alert(e.message);
+          this.form['loaderDelete'] = false;
+        });
     }
 }
 

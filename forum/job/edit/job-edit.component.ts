@@ -282,19 +282,21 @@ export class JobEditComponent implements OnInit, AfterViewInit {
     }
 
     console.log(this.form);
-    this.loader.delete = true;
     this.componentService.deletePostWithMemberLogin(this.form).subscribe(res => {
       console.log('deletePostWithMemberLogin', res);
       if (res.role === 'yes') {
+        this.loader.delete = true;
         this.philgo.postDelete({ idx: this.form.idx }).subscribe(result => {
           console.log('postDelete:: ', result);
+          this.loader.delete = false;
           this.router.navigateByUrl(`/job/${this.form.category}`);
+        }, er => {
+          this.componentService.alert(er);
+          this.loader.delete = false;
         });
       }
-      this.loader.delete = false;
     }, e => {
       this.componentService.alert(e);
-      this.loader.delete = false;
     });
   }
 
