@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 // import { FilesComponentModule } from '../../files/files.module';
 import { ComponentServiceModule } from '../../../service/component.service.module';
 import {
-  MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule,
+  MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule,
   MatSelectModule,
   MatTooltipModule
 } from '@angular/material';
@@ -20,7 +20,8 @@ import {
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   declarations: [JobEditComponent],
   exports: [JobEditComponent]

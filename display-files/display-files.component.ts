@@ -68,6 +68,9 @@ export class DisplayFilesComponent implements OnInit, OnChanges {
 
 
   onClickDeleteButton(file: ApiFile) {
+
+    // todo add delete loader according to file.
+
     const req = { idx: file.idx, gid: this.post.gid, user_password: this.post.user_password };
     console.log('going to delete file: ', file, req);
     this.philgo.fileDelete(req).subscribe(res => {

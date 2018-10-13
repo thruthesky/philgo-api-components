@@ -5,7 +5,7 @@ import { RegisterComponent } from './register.component';
 import { ComponentServiceModule } from '../../service/component.service.module';
 import {
   MatFormFieldModule, MatInputModule, MatListModule, MatButtonModule, MatSelectModule,
-  MatProgressSpinnerModule, MatSpinner, MatProgressBar, MatProgressBarModule
+  MatProgressSpinnerModule, MatSpinner, MatProgressBar, MatProgressBarModule, MatRadioModule
 } from '@angular/material';
 
 
@@ -20,6 +20,7 @@ import {
     MatSelectModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatRadioModule,
     ComponentServiceModule
   ],
   declarations: [
