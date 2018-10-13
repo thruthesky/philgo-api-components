@@ -38,14 +38,17 @@
       </div>
     </div>
 
-    <div class=" flex-center justify-content-start flex-wrap pb-3" *ngIf=" edit ">
+    <div class=" flex-center justify-content-start flex-wrap mx-minus-2px pb-3" *ngIf=" edit ">
       <div class="text-center" *ngFor=" let photo of photos ">
         <div class="position-relative of-hidden size-100px p-2">
           <img class="w-100 border border-box" src="{{ photo.src_thumbnail }}">
           <i *ngIf=" edit " class="material-icons fs-delete-icon top-right pointer circle text-danger" (click)=" onClickDeleteButton( photo ) ">remove_circle</i>
         </div>
         <div class="fs-sm">
-            <div class="bg-primary white" *ngIf=" photo.code == 'featured' ">Featured</div>
+            <div class="flex-center fs-sm rounded text-darkgreen" *ngIf=" photo.code == 'featured' ">
+              Featured
+              <i class="material-icons fs-md ml-1">check_circle </i>
+            </div>
             <div class="flex-center pointer text-primary" *ngIf=" photo.code != 'featured' " (click)="onClickFeature( photo )">
               Set as featured
               <i class="material-icons fs-md ml-1 text-dark">wallpaper</i>
