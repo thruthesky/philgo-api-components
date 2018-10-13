@@ -70,7 +70,7 @@ export class DisplayFilesComponent implements OnInit, OnChanges {
   onClickDeleteButton(file: ApiFile) {
 
     // todo add delete loader according to file.
-
+    file['loaderDelete'] = true;
     const req = { idx: file.idx, gid: this.post.gid, user_password: this.post.user_password };
     console.log('going to delete file: ', file, req);
     this.philgo.fileDelete(req).subscribe(res => {
@@ -79,7 +79,11 @@ export class DisplayFilesComponent implements OnInit, OnChanges {
       if (pos !== -1) {
         this.post.files.splice(pos, 1);
       }
-    }, e => alert(e.message));
+      file['loaderDelete'] = false;
+    }, e => {
+      alert(e.message);
+      file['loaderDelete'] = false;
+    });
   }
 
   onClickFeature(file: ApiFile) {

@@ -42,7 +42,8 @@
       <div class="text-center" *ngFor=" let photo of photos ">
         <div class="position-relative of-hidden size-100px p-2">
           <img class="w-100 border border-box" src="{{ photo.src_thumbnail }}">
-          <i *ngIf=" edit " class="material-icons fs-delete-icon top-right pointer circle text-danger" (click)=" onClickDeleteButton( photo ) ">remove_circle</i>
+          <i *ngIf=" edit && !photo['loaderDelete']" class="material-icons fs-delete-icon top-right pointer circle text-danger" (click)=" onClickDeleteButton( photo ) ">remove_circle</i>
+          <span class="top-right pr-1 fs-delete-icon" *ngIf="photo['loaderDelete']"><mat-spinner class="d-inline-block" [diameter]="24"></mat-spinner></span>
         </div>
         <div class="fs-sm">
             <div class="flex-center fs-sm rounded text-darkgreen" *ngIf=" photo.code == 'featured' ">
