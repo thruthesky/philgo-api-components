@@ -16,6 +16,7 @@
   </div>
 
   <div class="post-content pt-0" *ngIf=" show(post) ">
+    <!--{{post|json}}-->
     <div>
       <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold" [innerHTML]=" componentService.safeHtml( post?.content ) "></div>
     </div>
