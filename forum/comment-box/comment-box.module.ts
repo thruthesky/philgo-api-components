@@ -5,6 +5,7 @@ import { DisplayFilesModule } from '../../display-files/display-files.module';
 import { FormsModule } from '@angular/forms';
 import { ComponentServiceModule } from '../../service/component.service.module';
 import { MatProgressSpinnerModule } from '@angular/material';
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { MatProgressSpinnerModule } from '@angular/material';
     FormsModule,
     DisplayFilesModule,
     ComponentServiceModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AutosizeModule
   ],
   declarations: [CommentBoxComponent],
   exports: [CommentBoxComponent]

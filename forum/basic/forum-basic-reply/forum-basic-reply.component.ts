@@ -31,17 +31,20 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       if (this.post['edit']) {
-        this.form = this.post;
+        this.form = Object.assign({}, this.post);
       } else {
         this.form.idx_parent = this.post.idx;
       }
+
+      this.form.content = this.philgo.strip_tags(this.form.content);
     }, 10);
+
   }
 
   onSubmit() {
     console.log('this.form: ', this.form);
 
-    if ( this.loader.submit ) {
+    if (this.loader.submit) {
       return;
     }
 

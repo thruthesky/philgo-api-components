@@ -1,19 +1,28 @@
 <form class="d-flex align-items-center p-3" (ngSubmit)=" onSubmit() ">
 
-    <div class="position-relative d-flex align-items-center comment-box flex-grow-1">
-      <textarea matInput placeholder="Write a comment..." name="content" [(ngModel)]="form.content"></textarea>
+  <div class="position-relative d-flex align-items-center comment-box flex-grow-1">
+    <textarea
+     matInput placeholder="Write a comment..."
+      name="content"
+       autosize [minRows]="1"
+       [maxRows]="6" 
+       rows="1"
+       [(ngModel)]="form.content"></textarea>
 
-      <div class="camera position-absolute transparent-cover-wrapper">
-        <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
-        <i class="material-icons pointer">camera_alt</i>
-      </div>
+    <div class="camera position-absolute transparent-cover-wrapper">
+      <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
+      <i class="material-icons pointer">camera_alt</i>
     </div>
+  </div>
 
-    <button class="flex-center send-button ml-1 p-2">
-      <i class="ml-2 material-icons" *ngIf="!loader.submit">send</i>
-      <mat-spinner class="d-inline-block ml-2" *ngIf="loader.submit" [diameter]="24"></mat-spinner>
-    </button>
+  <button class="flex-center send-button ml-1 p-2">
+    <i class="ml-2 material-icons" *ngIf="!loader.submit">send</i>
+    <mat-spinner class="d-inline-block ml-2" *ngIf="loader.submit" [diameter]="24"></mat-spinner>
+  </button>
 
-  </form>
+  <button class="flex-center cancel-button ml-1 p-2" *ngIf="form.idx" (click)="post['edit'] = false">
+    <i class="ml-2 material-icons">cancel</i>
+  </button>
+</form>
 
-  <app-display-files class="d-block px-2" [post]=" form " [edit]=" true "  [percentage]=" percentage "></app-display-files>
+<app-display-files class="d-block px-2" [post]=" form " [edit]=" true " [percentage]=" percentage "></app-display-files>

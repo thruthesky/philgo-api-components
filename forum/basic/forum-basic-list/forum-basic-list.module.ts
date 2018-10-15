@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ComponentServiceModule } from '../../../service/component.service.module';
 import { MatProgressSpinnerModule } from '@angular/material';
+import { AutosizeModule } from 'ngx-autosize';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material';
     RouterModule,
     DisplayFilesModule,
     ComponentServiceModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AutosizeModule
   ],
   declarations: [
     ForumBasicListComponent,
