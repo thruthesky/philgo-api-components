@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiPost, PhilGoApiService } from '../../../../philgo-api/philgo-api.service';
 import { ComponentService } from '../../../service/component.service';
+import { AppService } from '../../../../../projects/pwa/src/services/app.service';
 
 @Component({
   selector: 'app-forum-basic-view',
@@ -17,6 +18,7 @@ export class ForumBasicViewComponent implements OnInit {
 
 
   constructor(
+    public a: AppService,
     public philgo: PhilGoApiService,
     public componentService: ComponentService
   ) { }

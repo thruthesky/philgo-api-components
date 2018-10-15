@@ -18,7 +18,8 @@
   </div>
 
   <div class="post-content pt-0" *ngIf=" show(post) ">
-    <div>
+
+    <div (click)="a.openImages( post.files )">
       <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold" [innerHTML]=" componentService.safeHtml( post?.content ) "></div>
     </div>
 
@@ -81,7 +82,7 @@
               <i class="material-icons">reply</i>
               <span>Reply</span>
             </button>
-            <button (click)=" philgo.isMyPost(comment) && comment['edit'] = true "  *ngIf=" philgo.isMyPost(comment) ">Edit</button>
+            <button (click)=" philgo.isMyPost(comment); comment['edit'] = true; "  *ngIf=" philgo.isMyPost(comment) ">Edit</button>
             <button (click)=" onDelete( comment ) " *ngIf=" philgo.isMyPost(comment) "><mat-spinner class="mr-1" [diameter]="14" *ngIf=" comment['loaderDelete']"></mat-spinner>Delete</button>
 
             <button (click)=" onReport( comment ) " *ngIf=" ! philgo.isMyPost(comment) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>Report</button>
