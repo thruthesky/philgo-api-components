@@ -42,7 +42,7 @@ export class AdvComponent implements OnInit, AfterViewInit {
       orderby: ``,
       limit: 1
     }).subscribe(res => {
-      console.log('postQuery: ', res);
+      // console.log('postQuery: ', res);
       if (res && res.length) {
         this.post = res[0];
       }
