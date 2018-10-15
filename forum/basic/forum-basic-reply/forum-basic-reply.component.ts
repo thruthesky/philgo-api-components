@@ -36,7 +36,9 @@ export class ForumBasicReplyComponent implements OnInit, AfterViewInit {
         this.form.idx_parent = this.post.idx;
       }
 
-      this.form.content = this.philgo.strip_tags(this.form.content);
+      if ( this.form.content ) {
+        this.form.content = this.philgo.strip_tags(this.form.content);
+      }
     }, 10);
 
   }
