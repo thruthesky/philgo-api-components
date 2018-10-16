@@ -46,7 +46,7 @@ export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDes
    */
   post_id = 'wanted';
   page_no = 1;
-  limit = 12;
+  limit = 48;
   noMorePosts = false;
   loading = false;
   // inifite scroll subscription
@@ -118,7 +118,7 @@ export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
     // Which element do you want to watch for scroll?
     // update `section.post-list` as you need.
-    this.infiniteScrollSubscription = this.scroll.watch('.layout-content', 400).subscribe(e => this.loadPage());
+    this.infiniteScrollSubscription = this.scroll.watch('.layout-content', 500).subscribe(e => this.loadPage());
   }
 
   // Un-subscription or you may get multiple events.
@@ -173,7 +173,7 @@ export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     // setTimeout(() => this.loading = true);
     this.loading = true;
 
-    // this.philgo.debug = true;
+    this.philgo.debug = true;
     this.philgo.postSearch(req).subscribe(search => {
       this.loading = false;
       console.log('search: ', search);
