@@ -31,6 +31,7 @@ export class ForumBasicViewComponent implements OnInit, AfterViewInit {
 
   showImage(img) {
     console.log('popup this image:', img);
+    this.a.openImageModal(img);
     // this.a.toast(img);
   }
   ngAfterViewInit() {
