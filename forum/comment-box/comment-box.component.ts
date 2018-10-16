@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 import { PhilGoApiService, ApiPost } from '../../../philgo-api/philgo-api.service';
 import { ComponentService } from '../../service/component.service';
-import { AppService } from 'projects/pwa/src/services/app.service';
+import { AppService } from '../../../../projects/pwa/src/services/app.service';
 
 @Component({
   selector: 'app-comment-box',
@@ -38,7 +38,9 @@ export class CommentBoxComponent implements OnInit, AfterViewInit {
       } else {
         this.form.idx_parent = this.post.idx;
       }
-      this.form.content = this.philgo.strip_tags(this.form.content);
+      if ( this.form.content ) {
+        this.form.content = this.philgo.strip_tags(this.form.content);
+      }
     }, 10);
   }
 

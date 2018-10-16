@@ -31,12 +31,13 @@ export class ForumBasicViewComponent implements OnInit, AfterViewInit {
 
   showImage(img) {
     console.log('popup this image:', img);
+    // this.a.toast(img);
   }
   ngAfterViewInit() {
     setTimeout(() => {
       let content = this.post.content;
       if (content) {
-        content = content.replace('<img', `<img onclick="showImage(this)"`);
+        content = content.replace(/<img/ig, `<img class="pointer" onclick="showImage(this.src)"`);
         this.content = content;
       }
     }, 100);
