@@ -20,8 +20,8 @@
     <mat-spinner class="d-inline-block ml-2" *ngIf="loader.submit" [diameter]="24"></mat-spinner>
   </button>
 
-  <button class="flex-center cancel-button ml-1 p-2" *ngIf="form.idx" (click)="post['edit'] = false">
-    <i class="ml-2 material-icons">cancel</i>
+  <button class="flex-center cancel-button p-2" *ngIf="form.idx" (click)="post['edit'] = false">
+    <i class="material-icons text-danger">cancel</i>
   </button>
 </form>
 

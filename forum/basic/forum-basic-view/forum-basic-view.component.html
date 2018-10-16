@@ -5,10 +5,10 @@
       <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
     </div>
     <div class="post-header-text of-hidden">
-      <h2 class="truncate mr-2">
+      <h2 class="truncate d-flex align-items-center mr-2">
         {{ post.subject }} 
-        <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
-        <i class="material-icons" *ngIf="post.no_of_first_image != '0' ">photo</i>
+        <span class="mx-1" *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
+        <i class="material-icons fs-lg" *ngIf="post.no_of_first_image != '0' ">photo</i>
       </h2>
       <div class="fs-sm">
         <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
