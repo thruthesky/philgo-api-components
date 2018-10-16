@@ -6,7 +6,7 @@
     </div>
     <div class="post-header-text of-hidden">
       <h2 class="truncate mr-2">
-        {{ post.subject }} 
+        {{ post.subject }}
         <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
         <i class="material-icons" *ngIf="post.no_of_first_image != '0' ">photo</i>
       </h2>
@@ -19,8 +19,10 @@
 
   <div class="post-content pt-0" *ngIf=" show(post) ">
 
-    <div (click)="a.openImages( post.files )">
-      <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold" [innerHTML]=" componentService.safeHtml( post?.content ) "></div>
+    <!-- <div (click)="a.openImages( $event, post.files )"> -->
+<div>
+      <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold"
+        [innerHTML]=" componentService.safeHtml( content ) "></div>
     </div>
 
     <div class="post-buttons border-top">
@@ -34,9 +36,13 @@
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
-        <button (click)=" edit.emit( post ) " *ngIf=" philgo.isMyPost(post) ">Edit</button>
-        <button (click)=" onDelete( post ) " *ngIf=" philgo.isMyPost(post) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderDelete']"></mat-spinner>Delete</button>
-        <button (click)=" onReport( post ) " *ngIf=" ! philgo.isMyPost(post) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderReport']"></mat-spinner>Report</button>
+      <button (click)=" edit.emit( post ) " *ngIf=" philgo.isMyPost(post) ">Edit</button>
+      <button (click)=" onDelete( post ) " *ngIf=" philgo.isMyPost(post) ">
+        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderDelete']"></mat-spinner>Delete
+      </button>
+      <button (click)=" onReport( post ) " *ngIf=" ! philgo.isMyPost(post) ">
+        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderReport']"></mat-spinner>Report
+      </button>
     </div>
   </div>
 
@@ -68,7 +74,7 @@
               [showWhenContentHasNoImage]=" true "></app-display-files>
           </div>
           <div class="comment-buttons" *ngIf=" ! comment['edit'] ">
-            <button  [class.text-primary]=" comment.good != '0'" (click)=" onVote(comment, 'good') ">
+            <button [class.text-primary]=" comment.good != '0'" (click)=" onVote(comment, 'good') ">
               <mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderVote'] && comment['vote'] == 'good'"></mat-spinner>
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
@@ -82,10 +88,14 @@
               <i class="material-icons">reply</i>
               <span>Reply</span>
             </button>
-            <button (click)=" philgo.isMyPost(comment); comment['edit'] = true; "  *ngIf=" philgo.isMyPost(comment) ">Edit</button>
-            <button (click)=" onDelete( comment ) " *ngIf=" philgo.isMyPost(comment) "><mat-spinner class="mr-1" [diameter]="14" *ngIf=" comment['loaderDelete']"></mat-spinner>Delete</button>
+            <button (click)=" philgo.isMyPost(comment); comment['edit'] = true; " *ngIf=" philgo.isMyPost(comment) ">Edit</button>
+            <button (click)=" onDelete( comment ) " *ngIf=" philgo.isMyPost(comment) ">
+              <mat-spinner class="mr-1" [diameter]="14" *ngIf=" comment['loaderDelete']"></mat-spinner>Delete
+            </button>
 
-            <button (click)=" onReport( comment ) " *ngIf=" ! philgo.isMyPost(comment) "><mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>Report</button>
+            <button (click)=" onReport( comment ) " *ngIf=" ! philgo.isMyPost(comment) ">
+              <mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>Report
+            </button>
 
           </div>
 
