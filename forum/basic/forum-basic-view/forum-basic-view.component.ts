@@ -48,10 +48,6 @@ export class ForumBasicViewComponent implements OnInit, AfterViewInit {
   }
 
 
-  onClickImage(img) {
-    console.log('img: clicked ', img);
-  }
-
   show(post) {
     return post['show'];
   }
