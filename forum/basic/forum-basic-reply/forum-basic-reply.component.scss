@@ -22,15 +22,18 @@
     font-size: 1.5rem;
  }
 
-.send-button{
-    border: 0;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: .85rem;  
-    color: #143A85;
-    &:hover{
-      color: #4267b2;
-    }
-
-
-}
+ .send-button,
+ .cancel-button {
+   border: 0;
+   cursor: pointer;
+   font-weight: bold;
+   font-size: .85rem;
+ }
+ .send-button{
+   color: #143A85;
+   &:hover {
+     color: #4267b2;
+   }
+ }
+ 
+ 
