@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 import { PhilGoApiService, ApiPost } from '../../../philgo-api/philgo-api.service';
 import { ComponentService } from '../../service/component.service';
-import { AppService } from '../../../../projects/pwa/src/services/app.service';
+// import { AppService } from '../../../../projects/pwa/src/services/app.service';
 
 @Component({
   selector: 'app-comment-box',
@@ -13,6 +13,7 @@ export class CommentBoxComponent implements OnInit, AfterViewInit {
 
   @Input() root: ApiPost; // post only
   @Input() post: ApiPost; // post or comment
+  @Input() group_id = '';
   form: ApiPost = <any>{
     gid: _.randomString(19, this.philgo.myIdx())
   };
@@ -22,7 +23,7 @@ export class CommentBoxComponent implements OnInit, AfterViewInit {
     submit: false
   };
   constructor(
-    public a: AppService,
+    // public a: AppService,
     public philgo: PhilGoApiService,
     public componentService: ComponentService
   ) { }
@@ -72,7 +73,7 @@ export class CommentBoxComponent implements OnInit, AfterViewInit {
       /**
        * Reply. Creating a comment.
        */
-      this.form.group_id = `blog-${this.a.blog.idx}`;
+      this.form.group_id = this.group_id;
       this.philgo.postCreate(this.form).subscribe(res => {
         console.log('created: ', res);
 
