@@ -6,7 +6,7 @@
     </div>
     <div class="post-header-text of-hidden">
       <h2 class="truncate d-flex align-items-center mr-2">
-        {{ post.subject }} 
+        {{ post.subject }}
         <span class="mx-1" *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
         <i class="material-icons fs-lg" *ngIf="post.no_of_first_image != '0' ">photo</i>
       </h2>
@@ -20,9 +20,8 @@
   <div class="post-content pt-0" *ngIf=" show(post) ">
 
     <!-- <div (click)="a.openImages( $event, post.files )"> -->
-<div>
-      <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold"
-        [innerHTML]=" componentService.safeHtml( content ) "></div>
+    <div>
+      <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold" [innerHTML]=" componentService.safeHtml( content ) "></div>
     </div>
 
     <div class="post-buttons border-top">
@@ -99,12 +98,13 @@
 
           </div>
 
-          <app-forum-basic-reply [root]=" post " [post]=" comment " *ngIf=" comment['edit'] == true || comment['reply'] == true "></app-forum-basic-reply>
+          <app-comment-box [root]=" post " [post]=" comment " *ngIf=" comment['edit'] == true || comment['reply'] == true "></app-comment-box>
         </div>
       </div>
     </div>
 
-    <app-forum-basic-reply [root]=" post " [post]=" post "></app-forum-basic-reply>
+    <app-comment-box [root]=" post " [post]=" post "></app-comment-box>
+
 
   </div>
 </div>
