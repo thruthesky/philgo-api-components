@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiPost, PhilGoApiService } from '../../../../philgo-api/philgo-api.service';
 import * as N from '../job.defines';
 import { SimpleLibrary as _ } from 'ng-simple-library';
+import { AppService } from '../../../../../projects/pwa/src/services/app.service';
 
 
 @Component({
@@ -21,7 +22,9 @@ export class JobViewComponent implements OnInit {
     N = N;
     _ = _;
 
-    constructor(public philgo: PhilGoApiService
+    constructor(
+      public philgo: PhilGoApiService,
+      public a: AppService
         ) {
     }
 
