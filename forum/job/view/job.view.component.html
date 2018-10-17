@@ -1,8 +1,7 @@
 <div class="w-100 fs-small">
-
-  <div class="rounded m-1 border-box pointer" [ngClass]="{ 'border': !show(post), 'mt-4': show(post) }" (click)=" View.emit( post ) ">
-    <div class="flex-center of-hidden w-100 h-100px" [class.bg-secondary]="!show(post)">
-      <img class="h-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}">
+  <div *ngIf="!show(post) || show(post) && !post?.files.length" class="rounded m-1 border-box pointer" [ngClass]="{ 'border': !show(post), 'mt-4': show(post) }" (click)=" View.emit( post ) ">
+    <div class="flex-center of-hidden w-100 h-100px">
+      <img class="h-100 mw-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}" (error)="a.onErrorGetAnonymousPhoto($event)">
     </div>
     <div class="py-2 px-1 text-center of-hidden">
       <div class="text-link truncate"> {{ post[ N.name ] }}</div>
@@ -17,14 +16,14 @@
   <div class="mx-1 my-4" *ngIf=" show( post ) " >
 
     <div class="view-post-content">
-      <div class="flex-center justify-content-around mx-minus-1">
-        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary">
+      <div class="flex-center justify-content-around mx-minus-1" *ngIf=" post?.files?.length " (click)=" View.emit( post ) ">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary" *ngIf=" philgo.getSrc( post.files, N.profilePhoto )">
           <img class="w-100" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
         </div>
-        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary" *ngIf=" philgo.getSrc( post.files, N.bodyPhoto )">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.bodyPhoto ) }}">
         </div>
-        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary" *ngIf="philgo.getSrc( post.files, N.idPhoto )">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.idPhoto ) }}">
         </div>
       </div>
