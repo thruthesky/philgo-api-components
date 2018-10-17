@@ -1,14 +1,14 @@
-<div class="w-100" >
+<div class="w-100 fs-small">
 
   <div class="rounded m-1 border-box pointer" [ngClass]="{ 'border': !show(post), 'mt-4': show(post) }" (click)=" View.emit( post ) ">
     <div class="flex-center of-hidden w-100 h-100px" [class.bg-secondary]="!show(post)">
       <img class="h-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}">
     </div>
-    <div class="py-2 px-1 text-center of-hidden fs-sm">
-      <div class="text-link truncate fs-md"> {{ post[ N.name ] }}</div>
-      <div class="text-muted my-1">( {{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) :
+    <div class="py-2 px-1 text-center of-hidden">
+      <div class="text-link truncate"> {{ post[ N.name ] }}</div>
+      <div class="text-muted my-1">{{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) :
         post[ N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }} / {{ _.getAge(post[ N.birthday ])
-        }} )
+        }}
       </div>
       <!-- <div>#{{ post.idx }}</div> -->
     </div>
@@ -18,66 +18,69 @@
 
     <div class="view-post-content">
       <div class="flex-center justify-content-around mx-minus-1">
-        <div class="flex-center w-33-percent max-h-200px of-hidden mx-1">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary">
           <img class="w-100" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
         </div>
-        <div class="flex-center w-33-percent max-h-200px of-hidden mx-1">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.bodyPhoto ) }}">
         </div>
-        <div class="flex-center w-33-percent max-h-200px of-hidden mx-1">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail bg-secondary">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.idPhoto ) }}">
         </div>
       </div>
 
-      <div class="my-3 fs-md text-md-center">{{ post[ N.intro ] }}</div>
+      <div class="d-md-flex align-items-center mt-4 mb-3">
+        <i class="d-none d-md-block material-icons ml-1 mr-3 fs-xl text-muted">record_voice_over</i>
+        {{ post[ N.intro ] }}
+      </div>
 
-      <div class="meta d-md-flex my-2 p-2 fs-md bg-light">
-        <div class="container-fluid p-0">
-          <div class="row no-gutters">
-            <div class="col-4">Name:</div>
-            <div class="col">{{ post[ N.name ] }}</div>
-          </div>
-          <div class="row no-gutters">
-            <div class="col-4">Gender:</div>
-            <div class="col">{{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) : post[
-              N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }}
+      <div class="meta d-md-flex mx-minus-1">
+        <div class="flex-grow-1">
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.name ] ">
+              <div class="w-25 fw-bold">Name:</div>
+              <div class="w-75">{{ post[ N.name ] }}</div>
             </div>
-          </div>
-          <div class="row no-gutters">
-            <div class="col-4">Age:</div>
-            <div class="col"> {{ _.getAge(post[ N.birthday ]) }}</div>
-          </div>
-          <div class="row no-gutters">
-            <div class="col-4">Mobile:</div>
-            <div class="col"> {{ post[ N.mobile ] }}</div>
-          </div>
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.gender ]">
+              <div class="w-25 fw-bold">Gender:</div>
+              <div class="w-75">{{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) : post[
+                N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }}
+              </div>
+            </div>
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="_.getAge(post[ N.birthday ])">
+              <div class="w-25 fw-bold">Age:</div>
+              <div class="w-75"> {{ _.getAge(post[ N.birthday ]) }}</div>
+            </div>
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.mobile ]">
+              <div class="w-25 fw-bold">Mobile:</div>
+              <div class="w-75"> {{ post[ N.mobile ] }}</div>
+            </div>
         </div>
 
-        <div class="container-fluid p-0">
-          <div class="row no-gutters">
-            <div class="col-4">Email:</div>
-            <div class="col">{{ post[ N.email ] }}</div>
-          </div>
-          <div class="row no-gutters">
-            <div class="col-4">Province:</div>
-            <div class="col">{{ post[ N.province ] }}</div>
-          </div>
-          <div class="row no-gutters">
-            <div class="col-4">City:</div>
-            <div class="col"> {{ post[ N.city ] }}</div>
-          </div>
-          <div class="row no-gutters">
-            <div class="col-4">Link:</div>
-            <div class="col"><a class="text-link" href="{{post[ N.link ]}}" (click)="onClickLink($event)">{{
-              post[ N.link ] }}</a></div>
-          </div>
+        <div class="flex-grow-1">
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.email ]">
+              <div class="w-25 fw-bold">Email:</div>
+              <div class="w-75">{{ post[ N.email ] }}</div>
+            </div>
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.province ] ">
+              <div class="w-25 fw-bold">Province:</div>
+              <div class="w-75">{{ post[ N.province ] }}</div>
+            </div>
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.city ]">
+              <div class="w-25 fw-bold">City:</div>
+              <div class="w-75"> {{ post[ N.city ] }}</div>
+            </div>
+            <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.link ]">
+              <div class="w-25 fw-bold">Link:</div>
+              <div class="w-75"><a class="text-link" href="{{post[ N.link ]}}" (click)="onClickLink($event)">{{
+                post[ N.link ] }}</a></div>
+            </div>
         </div>
       </div>
 
     </div>
 
 
-    <div class="flex-center my-3 mt-md-4">
+    <div class="flex-center mb-5 mt-3">
       <button class="flex-center mx-2" mat-button (click)=" Edit.emit( post ) " *ngIf="philgo.isMyPost( post )">
         <i class="material-icons fs-lg text-link">rate_review</i>
         <span class="ml-1">Edit</span>

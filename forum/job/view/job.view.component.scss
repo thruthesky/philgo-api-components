@@ -1,7 +1,8 @@
  @import './../../../../../projects/pwa/src/styles/variables.scss';
- .meta {
-     word-break: break-all;
-    .row>div{
-        padding: .5rem .75rem;
-    }
- }
+.fs-small{
+    font-size: .83rem!important;
+}
+
+.meta{
+    word-break: break-all;
+}
