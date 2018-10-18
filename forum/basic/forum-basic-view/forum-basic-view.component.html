@@ -22,8 +22,8 @@
   <div class="post-content pt-0" *ngIf=" show(post) ">
 
     <!-- <div (click)="a.openImages( $event, post.files )"> -->
-    <div>
-      <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold" [innerHTML]=" componentService.safeHtml( content ) "></div>
+    <div id="p-remove ">
+      <div class="post-text-content child-image-mw-100 child-image-mb-2 child-caption-center-bold" [innerHTML]=" componentService.safeHtml( content ) "></div>
     </div>
 
     <div class="post-buttons border-top">

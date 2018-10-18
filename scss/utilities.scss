@@ -103,7 +103,11 @@
     margin-bottom: 1rem;
   }
 }
-
+.child-image-mb-2 {
+  img {
+    margin-bottom: .5rem;
+  }
+}
 .child-figure-m-0{
   figure{
     margin: 0;
