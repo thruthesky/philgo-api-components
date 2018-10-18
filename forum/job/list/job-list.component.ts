@@ -8,11 +8,13 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 import { Subscription } from 'rxjs';
 import { InfiniteScrollService } from '../../../../philgo-api/infinite-scroll';
 import { JobEditComponent } from '../edit/job-edit.component';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-job-list-component',
   templateUrl: 'job-list.component.html',
-  styleUrls: ['../../../scss/index.scss', './job-list.component.scss']
+  styleUrls: ['../../../scss/index.scss', './job-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class JobListComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {

@@ -5,6 +5,9 @@
 .size-64px {
     @include size-px(64, 64);
 }
+.size-74px {
+    @include size-px(74, 74);
+}
 .size-100px {
     @include size-px(100, 100);
 }
