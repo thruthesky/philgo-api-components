@@ -1,69 +1,70 @@
+<div class="flex-center p-1 mb-3 mt-2 fs-md rounded border pointer" (click)=" showSearch = !showSearch ">
+  <span>Search</span>
+  <i class="material-icons ml-1">search</i>
+</div>
 
-  <div class="flex-center p-1 mb-3 mt-2 fs-md rounded border pointer" (click)=" showSearch = !showSearch ">
-    <span>Search</span>
-    <i class="material-icons ml-1">search</i>
-  </div>
+<div class="my-4" *ngIf="showSearch">
+  <mat-form-field class="w-100">
+    <mat-label> {{ philgo.t({ en: 'Select Job Title', ko: '직책 선택' }) }}</mat-label>
+    <mat-select name="category" [(ngModel)]="category">
+      <mat-option value="housemaid">{{ philgo.t({ en: 'Housemaid', ko: '하녀' }) }}</mat-option>
+      <mat-option value="driver">{{ philgo.t({ en: 'Driver', ko: '운전사' }) }}</mat-option>
+      <mat-option value="englishtutor">{{ philgo.t({ en: 'English Tutor', ko: '영어 교사' }) }}</mat-option>
+      <mat-option value="carpenter">{{ philgo.t({ en: 'Carpenter', ko: '목수' }) }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <div class="my-4"  *ngIf="showSearch">
-    <mat-form-field class="w-100">
-        <mat-label> {{ philgo.t({ en: 'Select Job Title', ko: '직책 선택' }) }}</mat-label>
-        <mat-select name="category" [(ngModel)]="category">
-          <mat-option value="housemaid">{{ philgo.t({ en: 'Housemaid', ko: '하녀' }) }}</mat-option>
-          <mat-option value="driver">{{ philgo.t({ en: 'Driver', ko: '운전사' }) }}</mat-option>
-          <mat-option value="englishtutor">{{ philgo.t({ en: 'English Tutor', ko: '영어 교사' }) }}</mat-option>
-          <mat-option value="carpenter">{{ philgo.t({ en: 'Carpenter', ko: '목수' }) }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <mat-label>{{ philgo.t({ en: 'Gender', ko: '성별' }) }}</mat-label>
-      <mat-select [(ngModel)]="form[N.gender]">
-        <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
-        <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-label>{{ philgo.t({ en: 'Gender', ko: '성별' }) }}</mat-label>
+    <mat-select [(ngModel)]="form[N.gender]">
+      <mat-option value="F">{{ philgo.t({ en: 'Female', ko: '여자' }) }}</mat-option>
+      <mat-option value="M">{{ philgo.t({ en: 'Male', ko: '남자' }) }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
 
-    <div class="d-flex flex-wrap justify-content-between align-items-center w-100">
-      <div class="py-2">Most Search</div>
-      <mat-chip-list>
-        <mat-chip class="pointer my-1 mr-2" *ngFor="let k of _.keys(mostSearch)"
+  <div class="d-flex flex-wrap justify-content-between align-items-center w-100">
+    <div class="py-2">Most Search</div>
+    <mat-chip-list>
+      <mat-chip class="pointer my-1 mr-2" *ngFor="let k of _.keys(mostSearch)"
                 (click)="onClickProvince(mostSearch[k])">{{k}}
-        </mat-chip>
-      </mat-chip-list>
-    </div>
-
-    <mat-form-field class="w-100">
-      <mat-label>{{ philgo.t({ en: 'Province', ko: '주' }) }}</mat-label>
-      <mat-select [(ngModel)]=" province " (selectionChange)="onClickProvince()">
-        <mat-option *ngFor=" let province of provinces" [value]="province">{{province}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="w-100" *ngIf=" showCities ">
-      <mat-label>{{ philgo.t({ en: 'City', ko: '도시' }) }}</mat-label>
-      <mat-select [(ngModel)]=" city " (selectionChange)="onClickCity()">
-        <mat-option *ngFor=" let key of cityKeys" [value]="key">{{cities[key]}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <button mat-flat-button class="w-100 my-3" size="normal" (click)="onSearch()">Submit</button>
+      </mat-chip>
+    </mat-chip-list>
   </div>
+
+  <mat-form-field class="w-100">
+    <mat-label>{{ philgo.t({ en: 'Province', ko: '주' }) }}</mat-label>
+    <mat-select [(ngModel)]=" province " (selectionChange)="onClickProvince()">
+      <mat-option *ngFor=" let province of provinces" [value]="province">{{province}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" *ngIf=" showCities ">
+    <mat-label>{{ philgo.t({ en: 'City', ko: '도시' }) }}</mat-label>
+    <mat-select [(ngModel)]=" city " (selectionChange)="onClickCity()">
+      <mat-option *ngFor=" let key of cityKeys" [value]="key">{{cities[key]}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button class="w-100 my-3" size="normal" (click)="onSearch()">Submit</button>
+</div>
 
 <section class="job-list">
 
 
   <div class="row no-gutters mx-minus-1">
-      <div class="col-12" *ngIf=" postView?.idx ">
-        <app-job-view [post]=" postView " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
-        <span class="flex-center pb-3" *ngIf="loader.delete">
+    <div class="col-12" *ngIf=" postView?.idx ">
+      <app-job-view [post]=" postView " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) "
+                    (Delete)=" onDelete( $event ) "></app-job-view>
+      <span class="flex-center pb-3" *ngIf="loader.delete">
             <mat-spinner class="d-inline-block" [diameter]="24"></mat-spinner><span class="ml-2">{{philgo.t({ko: '소식 삭제 중...', en: 'Deleting post...' })}}</span>
         </span>
-      </div>
+    </div>
 
-      <div class="col-4 col-md-2" [ngClass]="{ 'col-12': post.show, 'col-md-12': post.show }" *ngFor="let post of posts">
-        <app-job-view [post]=" post " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) " (Delete)=" onDelete( $event ) "></app-job-view>
-      </div>
+    <div class="col-4 col-md-2" [ngClass]="{ 'col-12': post.show, 'col-md-12': post.show }" *ngFor="let post of posts">
+      <app-job-view [post]=" post " (View)=" onView( $event ) " (Edit)=" onEdit( $event ) "
+                    (Delete)=" onDelete( $event ) "></app-job-view>
+    </div>
   </div>
 
   <div class="m-3 p-5 flex-center" *ngIf=" loading ">
