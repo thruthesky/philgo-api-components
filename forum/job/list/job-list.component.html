@@ -55,7 +55,7 @@
         <i class="material-icons red">clear</i>
         <span class="ml-1">Cancel</span>
       </button>
-      <button class="flex-center mx-2 bg-primary" mat-flat-button (click)="onSearch()">
+      <button class="flex-center mx-2 bg-primary" mat-flat-button (click)="onSearch(); showSearch = !showSearch ">
         <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
       </button>
     </div>
