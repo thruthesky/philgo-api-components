@@ -1,6 +1,6 @@
 <div class="w-100 fs-small">
-  <div *ngIf="!show(post) || show(post) && !post?.files.length" class="rounded m-1 border-box pointer" [ngClass]="{ 'border': !show(post), 'mt-4': show(post) }" (click)=" View.emit( post ) ">
-    <div class="flex-center of-hidden w-100 h-100px">
+  <div *ngIf="!show(post) || show(post) && !post?.files.length" class="m-1 border-box pointer" [ngClass]="{  'mt-4': show(post) }" (click)=" View.emit( post ) ">
+    <div class="flex-center m-auto of-hidden circle size-90px">
       <img class="h-100 mw-100" src="{{  philgo.getPostPhotoUrl( post, N.profilePhoto, 120, 120 )}}" (error)="a.onErrorGetAnonymousPhoto($event)">
     </div>
     <div class="py-2 px-1 text-center of-hidden">
