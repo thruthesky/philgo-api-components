@@ -51,12 +51,12 @@
     <button mat-flat-button class="w-100 my-3" size="normal" (click)="onSearch()">Submit</button> -->
 
 
-  <div class="list-row mt-4 mb-5 text-center">
-      <button class="mx-2 bg-white black bg-light" mat-flat-button (click)=" showSearch = !showSearch ">
+  <div class="list-row mt-4 mb-5 text-center"  (click)=" showSearch = !showSearch ">
+      <button class="mx-2 bg-white black bg-light" mat-flat-button>
         <i class="material-icons red">clear</i>
         <span class="ml-1">Cancel</span>
       </button>
-      <button class="flex-center mx-2 bg-primary" mat-flat-button (click)="onSearch(); showSearch = !showSearch ">
+      <button class="flex-center mx-2 bg-primary" mat-flat-button (click)="onSearch()">
         <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
       </button>
     </div>
