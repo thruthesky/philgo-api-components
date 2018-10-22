@@ -23,13 +23,13 @@
 
     <div class="view-post-content">
       <div class="flex-center justify-content-around mx-minus-1" *ngIf=" post?.files?.length " (click)=" View.emit( post ) ">
-        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail" *ngIf=" philgo.getSrc( post.files, N.profilePhoto )">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail pointer" *ngIf=" philgo.getSrc( post.files, N.profilePhoto )">
           <img class="w-100" src="{{  philgo.getSrc( post.files, N.profilePhoto )}}">
         </div>
-        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail" *ngIf=" philgo.getSrc( post.files, N.bodyPhoto )">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail pointer" *ngIf=" philgo.getSrc( post.files, N.bodyPhoto )">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.bodyPhoto ) }}">
         </div>
-        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail" *ngIf="philgo.getSrc( post.files, N.idPhoto )">
+        <div class="flex-center w-33-percent h-100px h-md-200px of-hidden mx-1 img-thumbnail pointer" *ngIf="philgo.getSrc( post.files, N.idPhoto )">
           <img class="w-100" src="{{ philgo.getSrc( post.files, N.idPhoto ) }}">
         </div>
       </div>
