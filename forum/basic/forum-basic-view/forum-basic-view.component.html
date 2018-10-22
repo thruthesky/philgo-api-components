@@ -8,9 +8,11 @@
       <h2 class="d-flex align-items-center mr-2 of-hidden">
         <div class="truncate ">
             {{ post.subject }}
-            <span class="mx-1" *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
+            <span class="d-inline-flex align-items-center ml-1 text-dark" *ngIf="post.no_of_comment != '0' ">
+              ( {{ post.no_of_comment }} <i class="material-icons mx-1 fs-md"> mode_comment </i>)
+            </span>
         </div>
-        <i class="material-icons fs-lg" *ngIf="post.no_of_first_image != '0' ">photo</i>
+        <i class="material-icons ml-1 fs-lg text-secondary" *ngIf="post.no_of_first_image != '0' ">photo</i>
       </h2>
       <div class="fs-sm">
         <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
