@@ -1,10 +1,10 @@
 
-  <div class="flex-center p-1 mb-3 mt-2 fs-md rounded bg-light border pointer" (click)=" showSearch = !showSearch ">
+  <div class="flex-center p-1 mb-3 mt-2 fs-md rounded border bg-light pointer" [class.text-primary]="showSearch" (click)=" showSearch = !showSearch ">
     <span>Search</span>
     <i class="material-icons ml-1">search</i>
   </div>
 
-  <div class="mb-4 mt-2"  *ngIf="showSearch">
+  <div class="mb-4 mt-2 fade-in"  *ngIf="showSearch">
     <mat-form-field appearance="outline" class="mat-pb-0 fs-80 w-100">
         <mat-label> {{ philgo.t({ en: 'Select Job Title', ko: '직책 선택' }) }}</mat-label>
         <mat-select name="category" [(ngModel)]="category">
@@ -31,7 +31,7 @@
                 (click)="onClickProvince(mostSearch[k])">{{k}}
       </mat-chip>
     </mat-chip-list>
-  </div>
+    </div>
 
 
     <mat-form-field appearance="outline" class="mat-pb-0 fs-80 w-100">
@@ -47,11 +47,9 @@
         <mat-option *ngFor=" let key of cityKeys" [value]="key">{{cities[key]}}</mat-option>
       </mat-select>
     </mat-form-field>
-<!--
-    <button mat-flat-button class="w-100 my-3" size="normal" (click)="onSearch()">Submit</button> -->
 
 
-  <div class="flex-center mt-4 mb-5 text-center"  (click)=" showSearch = !showSearch ">
+    <div class="flex-center mt-4 mb-5 text-center"  (click)=" showSearch = !showSearch ">
       <button class="mx-2 bg-white black bg-light" mat-flat-button>
         <i class="material-icons red">clear</i>
         <span class="ml-1">Cancel</span>
@@ -60,6 +58,8 @@
         <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
       </button>
     </div>
+
+
   </div>
 
 <section class="job-list">

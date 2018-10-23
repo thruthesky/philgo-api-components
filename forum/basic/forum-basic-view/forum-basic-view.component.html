@@ -12,7 +12,7 @@
               ( {{ post.no_of_comment }} <i class="material-icons mx-1 fs-md"> mode_comment </i>)
             </span>
         </div>
-        <i class="material-icons ml-1 fs-lg text-secondary" *ngIf="post.no_of_first_image != '0' ">photo</i>
+        <i class="material-icons ml-1 fs-lg" *ngIf="post.no_of_first_image != '0' ">photo</i>
       </h2>
       <div class="fs-sm">
         <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
