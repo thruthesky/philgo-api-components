@@ -1,6 +1,6 @@
 
   <div class="flex-center p-1 mb-3 mt-2 fs-md rounded border bg-light pointer" [class.text-primary]="showSearch" (click)=" showSearch = !showSearch ">
-    <span>Search</span>
+    <span>{{ philgo.t({ en: 'Search', ko: '수색' }) }}</span>
     <i class="material-icons ml-1">search</i>
   </div>
 
@@ -25,7 +25,7 @@
 
 
     <div class="d-flex flex-wrap justify-content-between align-items-center my-3 w-100">
-      <div class="py-2 px-1 text-dark">Most Search</div>
+      <div class="py-2 px-1 text-dark"> {{ philgo.t({ en: 'Most Search', ko: '대부분의 검색' }) }}</div>
       <mat-chip-list >
         <mat-chip class="my-1 mr-2 pointer" *ngFor="let k of _.keys(mostSearch)"
                 (click)="onClickProvince(mostSearch[k])">{{k}}
@@ -52,10 +52,10 @@
     <div class="flex-center mt-4 mb-5 text-center"  (click)=" showSearch = !showSearch ">
       <button class="mx-2 bg-white black bg-light" mat-flat-button>
         <i class="material-icons red">clear</i>
-        <span class="ml-1">Cancel</span>
+        <span class="ml-1"> {{ philgo.t({ en: 'Cancel', ko: '취소' }) }}</span>
       </button>
       <button class="flex-center mx-2 bg-primary" mat-flat-button (click)="onSearch()">
-        <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+        <span class="flex-center" *ngIf="!loader.submit">{{ philgo.t({ en: 'Submit', ko: '보내다' }) }} <i class="ml-2 material-icons">send</i></span>
       </button>
     </div>
 

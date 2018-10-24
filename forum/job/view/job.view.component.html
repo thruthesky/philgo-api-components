@@ -18,7 +18,9 @@
 
     <button class="top-right flex-center mx-2" mat-button (click)=" View.emit( post ) ">
       <i class="material-icons fs-lg text-danger">clear</i>
-      <span class="ml-1">Close</span>
+      <span class="ml-1">
+          {{ philgo.t({ en: 'Close ', ko: '닫기' }) }}
+      </span>
     </button>
 
     <div class="view-post-content">
@@ -53,40 +55,40 @@
       <div class="meta d-md-flex mx-minus-1">
         <div class="flex-grow-1">
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.name ] ">
-            <div class="w-25 fw-bold">Name:</div>
-            <div class="w-75">{{ post[ N.name ] }}</div>
+            <div class="w-30 fw-bold">{{ philgo.t({ en: 'Name:', ko: '이름:' }) }}</div>
+            <div class="w-70">{{ post[ N.name ] }}</div>
           </div>
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.gender ]">
-            <div class="w-25 fw-bold">Gender:</div>
-            <div class="w-75">{{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) : post[
+            <div class="w-30 fw-bold">{{ philgo.t({ en: 'Gender:', ko: '성별:' }) }}</div>
+            <div class="w-70">{{ post[ N.gender ] == 'F' ? philgo.t({ en: 'Female', ko: '여자' }) : post[
               N.gender ] == 'M' ? philgo.t({ en: 'Male', ko: '남자' }) : '' }}
             </div>
           </div>
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="_.getAge(post[ N.birthday ])">
-            <div class="w-25 fw-bold">Age:</div>
-            <div class="w-75"> {{ _.getAge(post[ N.birthday ]) }}</div>
+            <div class="w-30 fw-bold"> {{ philgo.t({ en: 'Age:', ko: '나이:' }) }}</div>
+            <div class="w-70"> {{ _.getAge(post[ N.birthday ]) }}</div>
           </div>
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.mobile ]">
-            <div class="w-25 fw-bold">Mobile:</div>
-            <div class="w-75"> {{ post[ N.mobile ] }}</div>
+            <div class="w-30 fw-bold"> {{ philgo.t({ en: 'Mobile:', ko: '변하기 쉬운:' }) }}</div>
+            <div class="w-70"> {{ post[ N.mobile ] }}</div>
           </div>
         </div>
 
         <div class="flex-grow-1">
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.email ]">
-            <div class="w-25 fw-bold">Email:</div>
+            <div class="w-25 fw-bold"> {{ philgo.t({ en: 'Email:', ko: '이메일:' }) }}</div>
             <div class="w-75">{{ post[ N.email ] }}</div>
           </div>
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.province ] ">
-            <div class="w-25 fw-bold">Province:</div>
+            <div class="w-25 fw-bold"> {{ philgo.t({ en: 'Province:', ko: '지방:' }) }}</div>
             <div class="w-75">{{ post[ N.province ] }}</div>
           </div>
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.city ]">
-            <div class="w-25 fw-bold">City:</div>
+            <div class="w-25 fw-bold"> {{ philgo.t({ en: 'City:', ko: '시티:' }) }}</div>
             <div class="w-75"> {{ post[ N.city ] }}</div>
           </div>
           <div class="d-flex p-2 mx-1 my-2 bg-light rounded" *ngIf="post[ N.link ]">
-            <div class="w-25 fw-bold">Link:</div>
+            <div class="w-25 fw-bold"> {{ philgo.t({ en: 'Link:', ko: '링크:' }) }}</div>
             <div class="w-75"><a class="text-link" href="{{post[ N.link ]}}" (click)="onClickLink($event)">{{
               post[ N.link ] }}</a></div>
           </div>
@@ -99,11 +101,11 @@
     <div class="flex-center mb-5 mt-3"  *ngIf="philgo.isMyPost( post )">
       <button class="flex-center mx-2" mat-button (click)=" Edit.emit( post ) ">
         <i class="material-icons fs-lg text-link">rate_review</i>
-        <span class="ml-1">Edit</span>
+        <span class="ml-1"> {{ philgo.t({ en: 'Edit', ko: '편집하다' }) }}</span>
       </button>
       <button class="flex-center mx-2" mat-button (click)=" Delete.emit( post ) ">
         <i class="material-icons fs-lg text-danger">delete</i>
-        <span class="ml-1">Delete</span>
+        <span class="ml-1">{{ philgo.t({ en: 'Delete', ko: '지우다' }) }}</span>
       </button>
     </div>
 

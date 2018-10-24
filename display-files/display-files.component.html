@@ -47,11 +47,12 @@
         </div>
         <div class="fs-sm">
             <div class="flex-center fs-sm rounded text-darkgreen" *ngIf=" photo.code == 'featured' ">
-              Featured
+              {{ philgo.t({ en:"Featured", ko:'추천' }) }}
+              
               <i class="material-icons fs-md ml-1">check_circle </i>
             </div>
             <div class="flex-center pointer text-primary" *ngIf=" photo.code != 'featured' " (click)="onClickFeature( photo )">
-              Set as featured
+              {{ philgo.t({ en:"Set as featured", ko:'추천 광고로 설정' }) }}
               <i class="material-icons fs-md ml-1 text-dark">wallpaper</i>
             </div>
         </div>

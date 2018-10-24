@@ -16,7 +16,7 @@
       </h2>
       <div class="fs-sm">
         <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
-        <span>Date: {{ philgo.shortDate(post.stamp ) }}</span>
+        <span>{{ a.t({ en:'Date', ko: '날짜'}) }}: {{ philgo.shortDate(post.stamp ) }}</span>
       </div>
     </div>
   </div>
@@ -39,12 +39,12 @@
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
-      <button (click)=" edit.emit( post ) " *ngIf=" philgo.isMyPost(post) ">Edit</button>
+      <button (click)=" edit.emit( post ) " *ngIf=" philgo.isMyPost(post) ">{{ a.t({en:'Edit',ko:'편집하다'}) }}</button>
       <button (click)=" onDelete( post ) " *ngIf=" philgo.isMyPost(post) ">
-        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderDelete']"></mat-spinner>Delete
+        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderDelete']"></mat-spinner>{{ a.t({en:'Delete',ko:'지우다'}) }}
       </button>
       <button (click)=" onReport( post ) " *ngIf=" ! philgo.isMyPost(post) ">
-        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderReport']"></mat-spinner>Report
+        <mat-spinner class="mr-1" [diameter]="14" *ngIf="post['loaderReport']"></mat-spinner>{{ a.t({ en:'Report' , ko:'보고서' }) }}
       </button>
     </div>
   </div>
@@ -89,15 +89,15 @@
             </button>
             <button (click)=" comment['reply'] = true ">
               <i class="material-icons">reply</i>
-              <span>Reply</span>
+              <span>{{ a.t({en:'Reply',ko:'댓글'}) }}</span>
             </button>
-            <button (click)=" philgo.isMyPost(comment); comment['edit'] = true; " *ngIf=" philgo.isMyPost(comment) ">Edit</button>
+            <button (click)=" philgo.isMyPost(comment); comment['edit'] = true; " *ngIf=" philgo.isMyPost(comment) ">{{ a.t({en:'Edit',ko:'편집하다'}) }}</button>
             <button (click)=" onDelete( comment ) " *ngIf=" philgo.isMyPost(comment) ">
-              <mat-spinner class="mr-1" [diameter]="14" *ngIf=" comment['loaderDelete']"></mat-spinner>Delete
+              <mat-spinner class="mr-1" [diameter]="14" *ngIf=" comment['loaderDelete']"></mat-spinner>{{ a.t({en:'Delete',ko:'지우다'}) }}
             </button>
 
             <button (click)=" onReport( comment ) " *ngIf=" ! philgo.isMyPost(comment) ">
-              <mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>Report
+              <mat-spinner class="mr-1" [diameter]="14" *ngIf="comment['loaderReport']"></mat-spinner>{{ a.t({ en:'Report' , ko:'보고서' }) }}
             </button>
 
           </div>
